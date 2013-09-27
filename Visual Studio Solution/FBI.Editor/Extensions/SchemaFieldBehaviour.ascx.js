@@ -4,8 +4,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
 {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldBehaviour");
     this.addInterface("Tridion.DisposableObject");
-    var p = this.properties;
-    
+    var p = this.properties;    
+    p.checkBoxesFields = ["visible", "readonly"];
+    p.checkBoxes = [];
+
     var c = p.controls = {};
 
     c.fieldReadOnlyCheckbox;
@@ -54,14 +56,36 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
             c.fieldDesigner = $controls.getControl($("#MetadataDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
             break;
     }   
+    c.fieldReadOnlyCheckbox.checked = "false";
+    c.fieldVisibleCheckbox.checked = "false";
+    
     
     $evt.addEventHandler($display.getItem(), "change", Function.getDelegate(this, this.onSchemaChanged));
     $evt.addEventHandler(c.fieldReadOnlyCheckbox, "click", Function.getDelegate(this, this.onReadOnlyCheckboxClick));
+    $evt.addEventHandler(c.UpperList, "click", Function.getDelegate(this, this._updateBehaviours));
     //$evt.addEventHandler(c.fieldVisibleCheckbox, "click", Function.getDelegate(this, this.onVisibleCheckboxClick));
     $evt.addEventHandler(c.fieldDesigner, "updateview", Function.getDelegate(this, this.onUpdateView));
 
     this.initializeGroups();
     this.onSchemaChanged();
+};
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._updateBehaviours = function SchemaFieldBehaviour$_updateBehaviours()
+{
+    var p = this.properties;
+    var c = p.controls;
+    var groups = this._getSelectedGroups();
+    for (var i = 0; i < groups.length; i++) {
+        var groupId = groups[i];
+        for (var j = 0; j < p.checkBoxesFields; j++) {
+            groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@id='" + groupId + "']/" + p.checkBoxesFields[j]);
+            if (groupNode) {
+
+            }
+        }
+        
+    }
+    
+    c.fieldReadOnlyCheckbox.checked = this.isGroupChecked(groupId);
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initializeGroups = function SchemaFieldBehaviour$initializeGroups() {
