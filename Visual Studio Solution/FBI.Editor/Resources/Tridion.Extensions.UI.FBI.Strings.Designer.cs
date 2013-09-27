@@ -61,7 +61,7 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read Only Bithes!.
+        ///   Looks up a localized string similar to Read Only.
         /// </summary>
         internal static string ReadOnlyLabel {
             get {
