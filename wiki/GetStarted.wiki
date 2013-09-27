@@ -1,11 +1,20 @@
 #summary Get Started as a Contributor
 
- 1. Get latest.
+= First-time Setup =
+ 
+ 1. *[https://code.google.com/p/tridion-field-behavior-injection/source/checkout Get latest ]*.
+ 1. *Fix References*. Copy the dlls mentioned in the files.txt to fix references from %TRIDION_HOME%\web\WebUI\WebRoot\bin to the Resource folder. 
+   * Tridion.Web.UI.Core.dll
+   * Tridion.Web.UI.Editors.CME.dll
+   * The first two are optional on a CMS (they'll be in the GAC)
  1. Install extension.
+
+= Create New Functionality =
+ 1. First decide if your tool fits into an existing .ascx control. Based on this do the following.
  1. Copy example and update:
   1. Editor files
   1. Model files
  1. Clear browser cache and open schema.
 
 
-Tip: right-click on Google's refresh icon to clear browser cache and re-run a page.
+Tip: with Chrome's console open, right-click on the refresh icon to clear browser cache and re-run a page.
