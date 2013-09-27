@@ -1,8 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Tridion.Extensions.UI.FieldBehaviorExtension.SchemaFieldBehaviour" %>
 <hr />
 
-<c:Panel runat="server" id="SchemaDesignFieldSecurity" class="stack-calc stack horizontal fixed" label="Field Behaviour">
-    
+<c:Panel runat="server" id="SchemaDesignFieldSecurity" class="stack-calc stack horizontal fixed" label="Field Behaviour">    
     <div id="FBISettings">
 	    <div id="Permissions">
 		    <div class="fbiLeftPanel">
@@ -10,7 +9,7 @@
 				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
 			    </div>
 			    <div class="middle">
-				    <c:List runat="server" MultiSelect="false" ID="UpperList" TabIndex="2" />
+				    <c:List runat="server" MultiSelect="true" ID="UpperList" TabIndex="2" />
 			    </div>
 			    <div class="footer">
 				    <input type="checkbox" id="UpperShowAll" tabindex="3" />
@@ -46,6 +45,7 @@
                 --%>
 		    </div>
 	    </div>
+
         <%-- 
 	    <div id="Exceptions">
 		    <div id="ExceptionsLabel">
@@ -73,7 +73,9 @@
 			    </div>
 			    <div class="middle securityInfo" id="LowerSecurityInfo"></div>
 		    </div>
-	    </div>
+	    
+        </div>
         --%>
+        </div>
     </div>
 </c:Panel>
