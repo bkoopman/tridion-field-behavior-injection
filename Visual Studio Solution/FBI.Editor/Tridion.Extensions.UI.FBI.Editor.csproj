@@ -60,10 +60,12 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Tridion.Web.UI.Core">
-      <HintPath>..\..\..\..\Tridion\web\WebUI\WebRoot\bin\Tridion.Web.UI.Core.dll</HintPath>
+      <HintPath>..\..\..\_References\SDL Tridion 2013\WebUI\Tridion.Web.UI.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.Web.UI.Editors.CME">
-      <HintPath>..\..\..\..\Tridion\web\WebUI\WebRoot\bin\Tridion.Web.UI.Editors.CME.dll</HintPath>
+      <HintPath>..\..\..\_References\SDL Tridion 2013\WebUI\Tridion.Web.UI.Editors.CME.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +140,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)Resources\*.resx" "C:\Program Files (x86)\Tridion\web\WebUI\WebRoot\App_GlobalResources"</PostBuildEvent>
+    <PostBuildEvent>REM copy /Y "$(TargetDir)Resources\*.resx" "C:\Program Files (x86)\Tridion\web\WebUI\WebRoot\App_GlobalResources"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

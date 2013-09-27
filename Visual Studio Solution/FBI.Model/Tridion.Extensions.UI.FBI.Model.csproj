@@ -62,9 +62,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Tridion.Extensions.UI.Base">
-      <HintPath>..\..\..\..\Tridion\web\WebUI\WebRoot\bin\Tridion.Extensions.UI.Base.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Services\FBI\FBIServices.svc" />
@@ -90,9 +87,15 @@
     <Content Include="Configuration\model.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FBI.Base\Tridion.Extensions.UI.FBI.Base.csproj">
+      <Project>{832b4b6a-5a0a-4977-b5e3-d591555f2e39}</Project>
+      <Name>Tridion.Extensions.UI.FBI.Base</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FBI.Validators\Tridion.Extensions.UI.FBI.Validators.csproj">
       <Project>{38611CD5-8D67-4EC2-8B56-B68C50D1D521}</Project>
       <Name>Tridion.Extensions.UI.FBI.Validators</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
