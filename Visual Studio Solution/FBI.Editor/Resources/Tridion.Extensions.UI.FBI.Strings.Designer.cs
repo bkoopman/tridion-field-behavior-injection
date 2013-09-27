@@ -61,6 +61,15 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Behaviour.
+        /// </summary>
+        internal static string BehaviourLabel {
+            get {
+                return ResourceManager.GetString("BehaviourLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read Only.
         /// </summary>
         internal static string ReadOnlyLabel {
