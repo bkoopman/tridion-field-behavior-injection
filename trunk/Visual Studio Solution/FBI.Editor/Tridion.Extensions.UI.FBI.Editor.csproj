@@ -69,11 +69,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Extensions\SchemaFieldBehaviour.ascx.css" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
-    <Content Include="Extensions\SchemaFieldBehaviour.ascx.js" />
+    <Content Include="Extensions\SchemaFieldBehaviour.ascx.css">
+	      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
+    </Content>
+    <Content Include="Extensions\SchemaFieldBehaviour.ascx.js">
+	      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
+    </Content>
     <Content Include="Extensions\SchemaFieldValidation.ascx" />
-    <Content Include="Extensions\SchemaFieldValidation.ascx.js" />
+    <Content Include="Extensions\SchemaFieldValidation.ascx.js">
+	      <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
+    </Content>
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
