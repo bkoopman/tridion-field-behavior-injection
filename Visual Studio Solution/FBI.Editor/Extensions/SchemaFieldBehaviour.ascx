@@ -9,7 +9,7 @@
 				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
 			    </div>
 			    <div class="middle">
-				    <c:List runat="server" MultiSelect="false" ID="UpperList" TabIndex="2" />
+				    <c:List runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
 			    </div>
 			    <div class="footer">
 				    <input type="checkbox" id="UpperShowAll" tabindex="3" />
@@ -24,8 +24,10 @@
 			    </div>
 			    <div class="middle securityInfo" id="UpperSecurityInfo">
                     <div id="Div1" class="list stack horizontal" tabindex="-1" c:multiselect="false" c:textlookup="true" style="outline: 0px;">							                    
-                    
-                    <!-- Behaviours come here -->
+                        <!-- Behaviours come here -->
+                        <c:ExtendableArea id="BehavioursArea" runat="server" />
+
+                    <%--  
                     <div class="fbi_feature_wrapper">
                         <input type="checkbox" id="<%=this.ClientID %>_ReadOnlyCheckbox"/>                    
                         <label for="<%=this.ClientID %>_ReadOnlyCheckbox"><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ReadOnlyLabel %>"/>
@@ -34,6 +36,7 @@
                         <input type="checkbox" id="<%=this.ClientID %>_VisibleCheckbox"/>    
                         <label for="<%=this.ClientID %>_VisibleCheckbox"><asp:Literal ID="Literal1" runat="server" Text="Visible" />
                     </div>
+                        --%>
 			    </div>
                 <%-- 
 			    <div class="footer">				    

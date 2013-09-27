@@ -6,7 +6,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;    
     p.checkBoxesFields = ["visible", "readonly"];
-    p.checkBoxes = [];
 
     var c = p.controls = {};
 
@@ -27,18 +26,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     //Todo: close panel by default 
     //c.fieldsSecurityPanel.close();
 
-    var element = $("#FBISettings");
-    //c.UpperShowAll = $("#UpperShowAll", element);
-    //c.LowerShowAll = $("#LowerShowAll", element);
-    //c.ShowExceptions = $("#ShowExceptions", element);
-    c.UpperList = $controls.getControl($("#UpperList"), "Tridion.Controls.List");
-    //c.LowerList = $controls.getControl($("#LowerList"), "Tridion.Controls.List");
-    //c.UpperSecurityInfo = $("#UpperSecurityInfo", element);
-    //c.LowerSecurityInfo = $("#LowerSecurityInfo", element);
-
-    
-
-
+    var element = $("#FBISettings");    
+    c.UsersAndGroupsList = $controls.getControl($("#UsersAndGroupsList"), "Tridion.Controls.List");
+    /*
     var ns = Tridion.Constants.Namespaces;
     ns["fbi"] = p.ns;
 
@@ -62,12 +52,13 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     
     $evt.addEventHandler($display.getItem(), "change", Function.getDelegate(this, this.onSchemaChanged));
     $evt.addEventHandler(c.fieldReadOnlyCheckbox, "click", Function.getDelegate(this, this.onReadOnlyCheckboxClick));
-    $evt.addEventHandler(c.UpperList, "click", Function.getDelegate(this, this._updateBehaviours));
+    $evt.addEventHandler(c.UsersAndGroupsList, "click", Function.getDelegate(this, this._updateBehaviours));
     //$evt.addEventHandler(c.fieldVisibleCheckbox, "click", Function.getDelegate(this, this.onVisibleCheckboxClick));
     $evt.addEventHandler(c.fieldDesigner, "updateview", Function.getDelegate(this, this.onUpdateView));
-
+    
     this.initializeGroups();
     this.onSchemaChanged();
+    */
 };
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._updateBehaviours = function SchemaFieldBehaviour$_updateBehaviours()
 {
@@ -79,7 +70,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._updateBehaviours = fun
         for (var j = 0; j < p.checkBoxesFields; j++) {
             groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@id='" + groupId + "']/" + p.checkBoxesFields[j]);
             if (groupNode) {
-
             }
         }
         
@@ -91,7 +81,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._updateBehaviours = fun
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initializeGroups = function SchemaFieldBehaviour$initializeGroups() {
     var p = this.properties;
     var c = p.controls;
-    var listControl = c.UpperList;
+    var listControl = c.UsersAndGroupsList;
 
     var self = this;
 
@@ -153,7 +143,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._renderList = function 
 
     var p = this.properties;
     var c = p.controls;
-    var control = c.UpperList;    
+    var control = c.UsersAndGroupsList;    
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
     
     //control.setLoading(true);
@@ -214,7 +204,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onUpdateView = function
     if (fieldNode)
     {
         var readonly = $xml.getInnerText(fieldNode, "/tcm:*/tcm:ExtensionXml/fbi:configuration/fbi:field/fbi:readonly");        
-        c.UpperList.clearSelection();
+        c.UsersAndGroupsList.clearSelection();
         c.fieldReadOnlyCheckbox.checked = "false";
         c.fieldVisibleCheckbox.checked = "false";
         c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;
@@ -287,13 +277,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onReadOnlyCheckboxClick
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype._getSelectedGroups = function SchemaFieldBehaviour$_getSelectedGroups() {
     var p = this.properties;
     var c = p.controls;
-    var list = c.UpperList;
+    var list = c.UsersAndGroupsList;
     var selection = list.getSelection();
     
     return selection.getItems();
 };
-
-
-
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldBehaviour);
 Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldBehaviour);

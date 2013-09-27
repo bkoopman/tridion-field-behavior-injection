@@ -70,6 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
+    <Content Include="Extensions\SchemaFieldReadOnly.ascx" />
+    <Content Include="Extensions\SchemaFieldReadOnly.ascx.js">
+      <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
+    </Content>
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.css">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
@@ -91,6 +95,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SchemaFieldReadOnly.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Resources\Tridion.Extensions.UI.FBI.Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
