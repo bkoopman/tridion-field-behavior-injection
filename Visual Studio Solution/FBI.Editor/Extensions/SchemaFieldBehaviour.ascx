@@ -7,7 +7,7 @@
     <label for="<%=this.ClientID %>_ReadOnlyCheckbox"><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ReadOnlyLabel %>"/>
     <input type="checkbox" id="<%=this.ClientID %>_VisibleCheckbox"/>    
     <label for="<%=this.ClientID %>_VisibleCheckbox"><asp:Literal ID="Literal1" runat="server" Text="Visible" />
-    <p class="fbi_default">jaime</p>
+    
     <hr />
     <div id="FBISettings">
 	    <div id="Permissions">
