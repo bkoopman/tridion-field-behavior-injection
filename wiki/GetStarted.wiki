@@ -1,3 +1,3 @@
-#summary Get Started
-
 #sidebar Navigation
+
+#summary Get Started
