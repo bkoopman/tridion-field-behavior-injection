@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Extensions\SchemaFieldBehaviour.ascx.css" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.js" />
     <Content Include="Extensions\SchemaFieldValidation.ascx" />
