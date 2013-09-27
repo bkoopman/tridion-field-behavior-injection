@@ -14,4 +14,10 @@
     float:left;
 }
 
+.fbi_label {
+    margin-bottom: 10px;
+}
 
+.fbi_feature_wrapper {
+    padding:5px;
+}
