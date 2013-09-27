@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Services\FBI\FBIServices.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
