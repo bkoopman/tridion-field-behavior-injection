@@ -1,0 +1,4 @@
+Tridion.Common.dll
+Tridion.ContentManager.CoreService.Client.dll
+Tridion.Web.UI.Core.dll
+Tridion.Web.Ui.Editors.CME.dll
