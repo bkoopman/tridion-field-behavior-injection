@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tridion.Extensions.UI.FBI.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tridion.Extensions.UI.FBI.Validators", "FBI.Validators\Tridion.Extensions.UI.FBI.Validators.csproj", "{38611CD5-8D67-4EC2-8B56-B68C50D1D521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "..\UI.Model.Base\Base.csproj", "{832B4B6A-5A0A-4977-B5E3-D591555F2E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "Base\Base.csproj", "{832B4B6A-5A0A-4977-B5E3-D591555F2E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

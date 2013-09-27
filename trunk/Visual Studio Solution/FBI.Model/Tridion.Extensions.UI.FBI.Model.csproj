@@ -90,7 +90,7 @@
     <Content Include="Configuration\model.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FV.Validators\Tridion.Extensions.UI.FBI.Validators.csproj">
+    <ProjectReference Include="..\FBI.Validators\Tridion.Extensions.UI.FBI.Validators.csproj">
       <Project>{38611CD5-8D67-4EC2-8B56-B68C50D1D521}</Project>
       <Name>Tridion.Extensions.UI.FBI.Validators</Name>
     </ProjectReference>
