@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.css">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>

@@ -1,0 +1,5 @@
+﻿<editor name="FBI" xmlns="http://www.sdltridion.com/2009/GUI/Configuration">
+  <installpath xmlns="http://www.sdltridion.com/2009/GUI/Configuration">PATH_TO_EDITOR (FBI.Editor)</installpath>
+  <configuration xmlns="http://www.sdltridion.com/2009/GUI/Configuration">Configuration\editor.config</configuration>
+  <vdir xmlns="http://www.sdltridion.com/2009/GUI/Configuration">FBI</vdir>
+</editor>
