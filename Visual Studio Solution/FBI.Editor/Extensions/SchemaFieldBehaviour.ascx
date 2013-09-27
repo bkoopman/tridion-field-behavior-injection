@@ -11,7 +11,7 @@
     <hr />
     <div id="FBISettings">
 	    <div id="Permissions">
-		    <div class="leftPanel">
+		    <div class="fbiLeftPanel">
 			    <div class="label">
 				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
 			    </div>
@@ -25,10 +25,10 @@
 				    </label>
 			    </div>
 		    </div>
-		    <div class="rightPanel">
+		    <div class="fbiRightPanel">
 			    <div class="label">
-				    <span class="PermissionsLabel"><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, Permissions %>" />:</span>
-				    <span class="RightsLabel"><asp:Literal ID="Literal6" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, Rights %>" />:</span>
+				    <span class="PermissionsLabel"><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, BehaviourLabel %>"/>:</span>
+				    
 			    </div>
 			    <div class="middle securityInfo" id="UpperSecurityInfo"></div>
 			    <div class="footer">
@@ -39,10 +39,11 @@
 			    </div>
 		    </div>
 	    </div>
+        <%-- 
 	    <div id="Exceptions">
 		    <div id="ExceptionsLabel">
 			    <span class="PermissionsLabel"><asp:Literal ID="Literal8" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, PermissionsExceptionsLabel %>" /></span>
-			    <span class="RightsLabel"><asp:Literal ID="Literal9" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, RightsExceptionsLabel %>" /></span>
+			    
 		    </div>
 		    <div class="leftPanel">
 			    <div class="label">
@@ -66,5 +67,6 @@
 			    <div class="middle securityInfo" id="LowerSecurityInfo"></div>
 		    </div>
 	    </div>
+        --%>
     </div>
 </c:Panel>

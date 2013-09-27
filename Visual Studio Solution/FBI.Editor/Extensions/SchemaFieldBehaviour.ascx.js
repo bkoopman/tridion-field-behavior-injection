@@ -24,12 +24,12 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
 
     var element = $("#FBISettings");
     c.UpperShowAll = $("#UpperShowAll", element);
-    c.LowerShowAll = $("#LowerShowAll", element);
-    c.ShowExceptions = $("#ShowExceptions", element);
+    //c.LowerShowAll = $("#LowerShowAll", element);
+    //c.ShowExceptions = $("#ShowExceptions", element);
     c.UpperList = $controls.getControl($("#UpperList"), "Tridion.Controls.List");
-    c.LowerList = $controls.getControl($("#LowerList"), "Tridion.Controls.List");
-    c.UpperSecurityInfo = $("#UpperSecurityInfo", element);
-    c.LowerSecurityInfo = $("#LowerSecurityInfo", element);
+    //c.LowerList = $controls.getControl($("#LowerList"), "Tridion.Controls.List");
+    //c.UpperSecurityInfo = $("#UpperSecurityInfo", element);
+    //c.LowerSecurityInfo = $("#LowerSecurityInfo", element);
 
     
 
