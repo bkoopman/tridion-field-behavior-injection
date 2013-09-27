@@ -1,3 +1,11 @@
-#sidebar Navigation
+#summary Get Started as a Contributor
 
-#summary Get Started
+ 1. Get latest.
+ 1. Install extension.
+ 1. Copy example and update:
+  1. Editor files
+  1. Model files
+ 1. Clear browser cache and open schema.
+
+
+Tip: right-click on Google's refresh icon to clear browser cache and re-run a page.
