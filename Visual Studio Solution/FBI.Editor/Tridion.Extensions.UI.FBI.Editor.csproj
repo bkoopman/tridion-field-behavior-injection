@@ -118,7 +118,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="postbuild.cmd" />
+    <None Include="postbuild.bat" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -151,7 +151,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>postbuild.cmd "$(TargetDir)" "$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>"$(ProjectDir)postbuild.bat" "$(TargetDir)" "$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
