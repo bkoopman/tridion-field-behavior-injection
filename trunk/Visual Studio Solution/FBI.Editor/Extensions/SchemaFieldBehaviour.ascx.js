@@ -189,10 +189,12 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onUpdateView = function
 
     if (fieldNode)
     {
-        var readonly = $xml.getInnerText(fieldNode, "/tcm:*/tcm:ExtensionXml/fbi:configuration/fbi:field/fbi:readonly");
-        
-        c.fieldReadOnlyCheckbox.checked = (readonly != "false");
+        var readonly = $xml.getInnerText(fieldNode, "/tcm:*/tcm:ExtensionXml/fbi:configuration/fbi:field/fbi:readonly");        
+        c.UpperList.clearSelection();
+        c.fieldReadOnlyCheckbox.checked = "false";
+        c.fieldVisibleCheckbox.checked = "false";
         c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;
+        c.fieldVisibleCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;
     }
 };
 
