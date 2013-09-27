@@ -71,14 +71,14 @@
   <ItemGroup>
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.css">
-	      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
+      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.js">
-	      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
+      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldValidation.ascx" />
     <Content Include="Extensions\SchemaFieldValidation.ascx.js">
-	      <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
+      <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
     </Content>
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />
@@ -116,6 +116,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="postbuild.cmd" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -147,7 +150,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>REM copy /Y "$(TargetDir)Resources\*.resx" "C:\Program Files (x86)\Tridion\web\WebUI\WebRoot\App_GlobalResources"</PostBuildEvent>
+    <PostBuildEvent>postbuild.cmd "$(TargetDir)" "$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
