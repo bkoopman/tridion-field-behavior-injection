@@ -7,13 +7,14 @@
    * Tridion.Web.UI.Core.dll
    * Tridion.Web.UI.Editors.CME.dll
    * The first two are optional on a CMS (they'll be in the GAC)
- 1. Install extension.
+ 1. *Install extension*.
 
 = Create New Functionality =
  1. First decide if your tool fits into an existing .ascx control. Based on this do the following.
- 1. Copy example and update:
+ 1. Copy example and update/create new:
   1. Editor files
   1. Model files
+ 1. Build (script copies dlls and resource files--update the postbuild.bat file as needed)
  1. Clear browser cache and open schema.
 
 
