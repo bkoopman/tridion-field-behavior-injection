@@ -14,8 +14,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
 
     //Extension Initialization    
     $fbi = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(deckPage);
-    $fbi.Namespace = "http://www.sdltridion.com/2013/FieldBehaviorInjector";
+    $fbi.Namespace = $fbi.properties.ns;
     $fbi.init(deckPage);
+    var ns = Tridion.Constants.Namespaces;
+    ns["fbi"] = $fbi.Namespace;
     
 };
 
@@ -28,6 +30,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper = function SchemaFieldBehav
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper");
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
+    p.ns = "http://www.sdltridion.com/2013/FieldBehaviourInjection";
     
 };
 
@@ -36,6 +39,15 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.init = function S
     var c = p.controls = {};
     c.fieldDesigner;    
     c.fieldsSecurityPanel = $controls.getControl($("#SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
+
+    switch (deckPage) {
+        case "SchemaDesignTab":            
+            c.fieldDesigner = $controls.getControl($("#SchemaDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
+            break;
+        case "MetadataDesignTab":            
+            c.fieldDesigner = $controls.getControl($("#MetadataDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
+            break;
+    }
 
     //Todo: close panel by default 
     //c.fieldsSecurityPanel.close();
@@ -259,12 +271,45 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onUpdateView = function
     }
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onReadOnlyCheckboxClick = function SchemaFieldBehaviour$onReadOnlyCheckboxClick() {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.removeConfigurationValue = function SchemaFieldBehaviourHelper$removeConfigurationValue(groupId, behaviourName) {
+    var p = this.properties;
+    var c = p.controls;
+    var fieldXml = c.fieldDesigner.getFieldXml();
+    
+    if (fieldXml) {
+        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
+        if (extensionXmlElement) {
+            $fieldXml = fieldXml;
+            var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
+            //[@xlink:href='tcm:0-4-65568']
+            console.debug(configurationNode);
+            var groupNode = $xml.selectSingleNode(configurationNode, "fbi:group[@xlink:href='" + groupId + "']");
+            console.debug("Deleting Group Config for Group: " + groupId);
+            console.debug(groupNode);
+            if (configurationNode && groupNode) {
+                console.debug("Getting value node");
+                var valueNode = $xml.selectSingleNode(groupNode, "fbi:" + behaviourName)
+                console.debug(valueNode);
+                if (valueNode) {
+                    groupNode.removeChild(valueNode);                    
+                    if (!groupNode.hasChildNodes()) {
+                        configurationNode.removeChild(groupNode);
+                    }
+                    c.fieldDesigner.setFieldXml(fieldXml);
+                }
+
+            }
+        }       
+    }
+    
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationValue = function SchemaFieldBehaviourHelper$setConfigurationValue(groupId, behaviourName, value) {
     var p = this.properties;
     var c = p.controls;
     
     var fieldXml = c.fieldDesigner.getFieldXml();
-    $fd = c.fieldDesigner;
+    
     if (fieldXml) {
         var fieldDocument = fieldXml.ownerDocument;
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
@@ -282,42 +327,26 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onReadOnlyCheckboxClick
             extensionXmlElement.appendChild(configurationNode);
         }
 
+        groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@xlink:href='" + groupId + "']");
+        console.debug("Group Node: " + groupNode);
+                   
+        if (!groupNode) {
+            console.debug("Group Doesn't Exist: " + groupId);
+            groupNode = $xml.createElementNS(fieldDocument, p.ns, "group");
+            var attIdNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:href");
+            attIdNode.value = groupId;
+            var attTypeNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:type");
+            attTypeNode.value = "simple";
+            $xml.setAttributeNodeNS(groupNode, attIdNode, "");
+            $xml.setAttributeNodeNS(groupNode, attTypeNode, "");
+            $xml.setInnerXml(groupNode, "<{0} xmlns=\"{1}\">{2}</{0}>".format(behaviourName, p.ns, value));
+            console.debug(groupNode);
+            configurationNode.appendChild(groupNode);
+            console.debug(configurationNode);
+            console.debug(fieldXml);
+            c.fieldDesigner.setFieldXml(fieldXml);
+        } 
         
-        
-        var groups = this._getSelectedGroups();
-        var checked = c.fieldReadOnlyCheckbox.checked;
-        var groupNode;
-
-        if (groups && groups.length && groups.length > 0) {
-
-            for (var i = 0; i < groups.length; i++) {
-                var groupId = groups[i];
-                groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@id='" + groupId + "']");
-                console.debug("Group Node: " + groupNode);
-                if (checked) {
-                    console.debug("Checked...");
-                    if (!groupNode) {
-                        console.debug("Group Doesn't Exist: " + groupId);
-                        groupNode = $xml.createElementNS(fieldDocument, p.ns, "group");
-                        var attIdNode = $xml.createAttributeNS(fieldDocument, p.ns, "id");
-                        attIdNode.value = groupId;
-                        $xml.setAttributeNodeNS(groupNode, attIdNode, "");
-                        $xml.setInnerXml(groupNode, "<readonly xmlns=\"{0}\">{1}</readonly>".format(p.ns, c.fieldReadOnlyCheckbox.checked ? "true" : "false"));
-                        console.debug(groupNode);
-                        configurationNode.appendChild(groupNode);
-                        console.debug(configurationNode);
-                        c.fieldDesigner.setFieldXml(fieldXml);
-                    } 
-                    
-                }else{
-                    if(groupNode){
-                        console.debug("Deleting Group Already Exist: " + groupId);
-                        configurationNode.removeChild(groupNode);
-                        console.debug(configurationNode);
-                    }
-                }
-            }
-        }
     }
 };
 
