@@ -11,6 +11,8 @@ Script to install this and other SDL Tridion GUI Extensions.
 = How to Use =
 Save the text file here as a .ps1 file and run with PowerShell console on the Tridion CMS Server
 
+= CODE =
+{{{
 Write-Host "***************************************************************"
 Write-Host "*           Tridion GUI Extensions Installer 1.0              *"
 Write-Host "*                                                             *"
@@ -80,3 +82,4 @@ Copy-Item -Path ".\" $destination -recurse -exclude "\dlls"
 	
 Write-Host "============================================"
 Write-Host "Done"
+}}}
