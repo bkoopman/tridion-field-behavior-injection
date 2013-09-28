@@ -13,9 +13,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {    
 
     //Extension Initialization    
-    $fbi = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(deckPage);
-    $fbi.Namespace = $fbi.properties.ns;
-    $fbi.init(deckPage);
+    $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(deckPage);
+    $fbiConfig.Namespace = $fbi.properties.ns;
+    $fbiConfig.init(deckPage);
     var ns = Tridion.Constants.Namespaces;
     ns["fbi"] = $fbi.Namespace;
     
