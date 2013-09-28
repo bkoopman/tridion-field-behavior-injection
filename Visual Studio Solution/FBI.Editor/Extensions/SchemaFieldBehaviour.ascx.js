@@ -28,6 +28,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
 
     var element = $("#FBISettings");    
     c.UsersAndGroupsList = $controls.getControl($("#UsersAndGroupsList"), "Tridion.Controls.List");
+    this.initializeGroups();
+
     /*
     var ns = Tridion.Constants.Namespaces;
     ns["fbi"] = p.ns;
@@ -56,7 +58,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     //$evt.addEventHandler(c.fieldVisibleCheckbox, "click", Function.getDelegate(this, this.onVisibleCheckboxClick));
     $evt.addEventHandler(c.fieldDesigner, "updateview", Function.getDelegate(this, this.onUpdateView));
     
-    this.initializeGroups();
+    
     this.onSchemaChanged();
     */
 };
