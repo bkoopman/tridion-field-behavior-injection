@@ -85,6 +85,10 @@
     <Content Include="Extensions\SchemaFieldValidation.ascx.js">
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
     </Content>
+    <Content Include="Extensions\SchemaFieldVisible\SchemaFieldVisible.ascx" />
+    <Content Include="Extensions\SchemaFieldVisible\SchemaFieldVisible.ascx.js">
+      <DependentUpon>SchemaFieldVisible.ascx</DependentUpon>
+    </Content>
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
