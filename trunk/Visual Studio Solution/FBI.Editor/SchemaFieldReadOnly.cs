@@ -3,7 +3,7 @@ using Tridion.Web.UI.Core.Controls;
 
 namespace Tridion.Extensions.UI.FieldBehaviorExtension
 {
-    [ControlResources("Tridion.Extensions.UI.FBI.SchemaFieldReadonly")]
+    [ControlResources("Tridion.Extensions.UI.FBI.")]
     public class SchemaFieldReadOnly : TridionUserControl
     {
     }
