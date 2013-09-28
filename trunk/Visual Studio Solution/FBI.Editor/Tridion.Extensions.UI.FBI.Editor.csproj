@@ -71,7 +71,12 @@
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx" />
-    <Content Include="Extensions\ComponentTab\ComponentTab.ascx.js" />
+    <Content Include="Extensions\ComponentTab\ComponentTab.ascx.js">
+      <DependentUpon>ComponentTab.ascx</DependentUpon>
+    </Content>
+    <Content Include="Extensions\ComponentTab\ComponentTab.ascx.css">
+      <DependentUpon>ComponentTab.ascx</DependentUpon>
+    </Content>
     <Content Include="Extensions\SchemaFieldReadOnly.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
@@ -101,8 +106,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ComponentTab\ComponentTab.cs">
+    <Compile Include="Extensions\ComponentTab\ComponentTab.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ComponentTab.ascx</DependentUpon>
     </Compile>
     <Compile Include="SchemaFieldReadOnly.cs">
       <SubType>ASPXCodeBehind</SubType>
