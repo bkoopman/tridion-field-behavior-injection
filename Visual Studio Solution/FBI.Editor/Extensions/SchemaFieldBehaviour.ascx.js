@@ -169,6 +169,87 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype._getSelectedGroup
 
     return selection.getItems();
 };
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.removeConfigurationValue = function SchemaFieldBehaviourHelper$removeConfigurationValue(groupId, behaviourName) {
+    var p = this.properties;
+    var c = p.controls;
+    var fieldXml = c.fieldDesigner.getFieldXml();
+
+    if (fieldXml) {
+        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
+        if (extensionXmlElement) {
+            $fieldXml = fieldXml;
+            var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
+            //[@xlink:href='tcm:0-4-65568']
+            console.debug(configurationNode);
+            var groupNode = $xml.selectSingleNode(configurationNode, "fbi:group[@xlink:href='" + groupId + "']");
+            console.debug("Deleting Group Config for Group: " + groupId);
+            console.debug(groupNode);
+            if (configurationNode && groupNode) {
+                console.debug("Getting value node");
+                var valueNode = $xml.selectSingleNode(groupNode, "fbi:" + behaviourName)
+                console.debug(valueNode);
+                if (valueNode) {
+                    groupNode.removeChild(valueNode);
+                    if (!groupNode.hasChildNodes()) {
+                        configurationNode.removeChild(groupNode);
+                    }
+                    c.fieldDesigner.setFieldXml(fieldXml);
+                }
+
+            }
+        }
+    }
+
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationValue = function SchemaFieldBehaviourHelper$setConfigurationValue(groupId, behaviourName, value) {
+    var p = this.properties;
+    var c = p.controls;
+
+    var fieldXml = c.fieldDesigner.getFieldXml();
+
+    if (fieldXml) {
+        var fieldDocument = fieldXml.ownerDocument;
+        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
+        if (!extensionXmlElement) {
+            //no extension xml point available so we need to add it
+            extensionXmlElement = $xml.createElementNS(fieldDocument, $const.Namespaces.tcm, "tcm:ExtensionXml");
+            fieldXml.appendChild(extensionXmlElement);
+        }
+
+        // set the xml value to yes
+        var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
+        var appendConfig = false;
+        if (!configurationNode) {
+            configurationNode = $xml.createElementNS(fieldDocument, p.ns, "configuration");
+            extensionXmlElement.appendChild(configurationNode);
+        }
+
+        groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@xlink:href='" + groupId + "']");
+        console.debug("Group Node: " + groupNode);
+
+        if (!groupNode) {
+            console.debug("Group Doesn't Exist: " + groupId);
+            groupNode = $xml.createElementNS(fieldDocument, p.ns, "group");
+            var attIdNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:href");
+            attIdNode.value = groupId;
+            var attTypeNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:type");
+            attTypeNode.value = "simple";
+            $xml.setAttributeNodeNS(groupNode, attIdNode, "");
+            $xml.setAttributeNodeNS(groupNode, attTypeNode, "");
+            $xml.setInnerXml(groupNode, "<{0} xmlns=\"{1}\">{2}</{0}>".format(behaviourName, p.ns, value));
+            console.debug(groupNode);
+            configurationNode.appendChild(groupNode);
+            console.debug(configurationNode);
+            console.debug(fieldXml);
+            c.fieldDesigner.setFieldXml(fieldXml);
+        }
+
+    }
+};
+
+
 //#END.....................
 
 
@@ -271,84 +352,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.onUpdateView = function
     }
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.removeConfigurationValue = function SchemaFieldBehaviourHelper$removeConfigurationValue(groupId, behaviourName) {
-    var p = this.properties;
-    var c = p.controls;
-    var fieldXml = c.fieldDesigner.getFieldXml();
-    
-    if (fieldXml) {
-        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
-        if (extensionXmlElement) {
-            $fieldXml = fieldXml;
-            var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
-            //[@xlink:href='tcm:0-4-65568']
-            console.debug(configurationNode);
-            var groupNode = $xml.selectSingleNode(configurationNode, "fbi:group[@xlink:href='" + groupId + "']");
-            console.debug("Deleting Group Config for Group: " + groupId);
-            console.debug(groupNode);
-            if (configurationNode && groupNode) {
-                console.debug("Getting value node");
-                var valueNode = $xml.selectSingleNode(groupNode, "fbi:" + behaviourName)
-                console.debug(valueNode);
-                if (valueNode) {
-                    groupNode.removeChild(valueNode);                    
-                    if (!groupNode.hasChildNodes()) {
-                        configurationNode.removeChild(groupNode);
-                    }
-                    c.fieldDesigner.setFieldXml(fieldXml);
-                }
 
-            }
-        }       
-    }
-    
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationValue = function SchemaFieldBehaviourHelper$setConfigurationValue(groupId, behaviourName, value) {
-    var p = this.properties;
-    var c = p.controls;
-    
-    var fieldXml = c.fieldDesigner.getFieldXml();
-    
-    if (fieldXml) {
-        var fieldDocument = fieldXml.ownerDocument;
-        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
-        if (!extensionXmlElement) {
-            //no extension xml point available so we need to add it
-            extensionXmlElement = $xml.createElementNS(fieldDocument, $const.Namespaces.tcm, "tcm:ExtensionXml");
-            fieldXml.appendChild(extensionXmlElement);
-        }
-        
-        // set the xml value to yes
-        var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
-        var appendConfig = false;
-        if (!configurationNode) {
-            configurationNode = $xml.createElementNS(fieldDocument, p.ns, "configuration");
-            extensionXmlElement.appendChild(configurationNode);
-        }
-
-        groupNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration/fbi:group[@xlink:href='" + groupId + "']");
-        console.debug("Group Node: " + groupNode);
-                   
-        if (!groupNode) {
-            console.debug("Group Doesn't Exist: " + groupId);
-            groupNode = $xml.createElementNS(fieldDocument, p.ns, "group");
-            var attIdNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:href");
-            attIdNode.value = groupId;
-            var attTypeNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:type");
-            attTypeNode.value = "simple";
-            $xml.setAttributeNodeNS(groupNode, attIdNode, "");
-            $xml.setAttributeNodeNS(groupNode, attTypeNode, "");
-            $xml.setInnerXml(groupNode, "<{0} xmlns=\"{1}\">{2}</{0}>".format(behaviourName, p.ns, value));
-            console.debug(groupNode);
-            configurationNode.appendChild(groupNode);
-            console.debug(configurationNode);
-            console.debug(fieldXml);
-            c.fieldDesigner.setFieldXml(fieldXml);
-        } 
-        
-    }
-};
 
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldBehaviour);
