@@ -71,7 +71,7 @@
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx" />
-    <Content Include="Extensions\ComponentTab\ComponentTab.js" />
+    <Content Include="Extensions\ComponentTab\ComponentTab.ascx.js" />
     <Content Include="Extensions\SchemaFieldReadOnly.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
