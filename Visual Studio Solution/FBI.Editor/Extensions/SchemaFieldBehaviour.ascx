@@ -25,18 +25,7 @@
                     <div id="Div1" class="list stack horizontal" tabindex="-1" c:multiselect="false" c:textlookup="true" style="outline: 0px;">							                    
                         <!-- Behaviours come here -->
                         <c:ExtendableArea id="BehavioursArea" runat="server" />
-
-                    <%--  
-                    <div class="fbi_feature_wrapper">
-                        <input type="checkbox" id="<%=this.ClientID %>_ReadOnlyCheckbox"/>                    
-                        <label for="<%=this.ClientID %>_ReadOnlyCheckbox"><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ReadOnlyLabel %>"/>
-                    </div>
-                    <div class="fbi_feature_wrapper">
-                        <input type="checkbox" id="<%=this.ClientID %>_VisibleCheckbox"/>    
-                        <label for="<%=this.ClientID %>_VisibleCheckbox"><asp:Literal ID="Literal1" runat="server" Text="Visible" />
-                    </div>
-                        --%>
-			    </div>
+			        </div>
                 <%-- 
 			    <div class="footer">				    
                     <input type="checkbox" id="ShowExceptions" tabindex="5" />
