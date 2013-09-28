@@ -10,8 +10,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
     this.addInterface("Tridion.DisposableObject");
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {
-    
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {    
 
     //Extension Initialization    
     $fbi = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(deckPage);
