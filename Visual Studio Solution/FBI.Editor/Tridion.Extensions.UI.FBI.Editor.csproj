@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
+    <Content Include="Extensions\ComponentTab\ComponentTab.ascx" />
+    <Content Include="Extensions\ComponentTab\ComponentTab.js" />
     <Content Include="Extensions\SchemaFieldReadOnly.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
@@ -99,6 +101,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ComponentTab\ComponentTab.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="SchemaFieldReadOnly.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
