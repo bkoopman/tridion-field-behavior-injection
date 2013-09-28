@@ -14,10 +14,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
 
     //Extension Initialization    
     $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(deckPage);
-    $fbiConfig.Namespace = $fbi.properties.ns;
+    $fbiConfig.Namespace = $fbiConfig.properties.ns;
     $fbiConfig.init(deckPage);
     var ns = Tridion.Constants.Namespaces;
-    ns["fbi"] = $fbi.Namespace;
+    ns["fbi"] = $fbiConfig.Namespace;
     
 };
 
