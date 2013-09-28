@@ -1,0 +1,15 @@
+#summary PowerShell Script
+
+= Introduction =
+
+Script to install this and other SDL Tridion extensions.
+
+= How to Use =
+
+Load file to...
+
+= Commands =
+
+ * ...
+ * ...
+ * ...
