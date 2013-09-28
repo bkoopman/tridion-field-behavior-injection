@@ -1,11 +1,11 @@
 ﻿﻿using Tridion.Web.UI.Controls;
 using Tridion.Web.UI.Core.Controls;
 
-namespace Tridion.Extensions.UI.FBI.Editor.Extensions.ComponentTab.ComponentTab
+namespace Tridion.Extensions.UI.FBI.Editor.Extensions.ComponentTab
 {
-    [ControlResources("TODO: Put a name here")]
+    [ControlResources("Tridion.Extensions.UI.FBI.ComponentTab")]
     [ControlResourcesDependency(typeof(TabControl))]
-    public class ItemXmlTab : Tridion.Web.UI.Controls.TridionUserControl
+    public class ComponentTab : Tridion.Web.UI.Controls.TridionUserControl
     {
     }
 }
