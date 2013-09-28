@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Tridion.Extensions.UI.FieldBehaviorExtension.SchemaFieldBehaviour" %>
 <hr />
-
 <c:Panel runat="server" id="SchemaDesignFieldSecurity" class="stack-calc stack horizontal fixed" label="Field Behaviour">    
     <div id="FBISettings">
 	    <div id="Permissions">
