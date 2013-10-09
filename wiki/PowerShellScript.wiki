@@ -2,14 +2,14 @@
 
 = Introduction =
 
-Script to install this and other SDL Tridion GUI Extensions.
-
-* Creates Virtual Directory in IIS
-* Copies DLL folders to WebRoot/bin.  Folder must be called 'dlls'
-* Copies all other folders to the GUI Extension root folder
-
+*Script to install a GUI Extension to Tridion 2011 or 2013*
 = How to Use =
-Save the text file here as a .ps1 file and run with PowerShell console on the Tridion CMS Server
+  # Save text file here as InstallExtension.ps1 in same folder as GUI Extension source
+  # Create a folder for the editor called 'Editor' and if needed, a Model and dlls folder in the folder with this script
+  # Open PowerShell editor on CMS Server and run code
+  # Script will copy all files to correct folder, update System.config, and also add items to IIS
+
+
 
 = CODE =
 {{{
