@@ -12,8 +12,7 @@ Script to install this and other SDL Tridion GUI Extensions.
 Save the text file here as a .ps1 file and run with PowerShell console on the Tridion CMS Server
 
 = CODE =
-{{{
-Write-Host "***************************************************************"
+{{{Write-Host "***************************************************************"
 Write-Host "*           Tridion GUI Extensions Installer 1.0              *"
 Write-Host "*                                                             *"
 Write-Host "*  Create a folder called 'Configuration'                     *"
@@ -37,7 +36,7 @@ $tridionInstallLocationUser = Read-Host "Where is Tridion installed? (Default is
 
 if($tridionInstallLocationUser -ne "")
 {
-	$tridionInstallLocation = $tridionInstallLocationUser
+        $tridionInstallLocation = $tridionInstallLocationUser
 }
 
 [string]$destination = $tridionInstallLocation + "web\WebUI\Editors\" + $name
@@ -60,7 +59,7 @@ $editorConfigFile = "Configuration\editor.config"
   $tridionVersion = Read-Host "Which version of Tridion do you use? (2011 or 2013.  Default is 2013)"
   if(($tridionVersion -ne "2011") -and($tridionVersion -ne "2013"))
   {
-	$tridionVersion = "2013"
+        $tridionVersion = "2013"
   }
   
   $vdirPath = 'IIS:\Sites\SDL Tridion ' + $tridionVersion + '\WebUI\Editors\' + $name 
@@ -70,16 +69,16 @@ $editorConfigFile = "Configuration\editor.config"
 # Copy dll files
 if(Test-Path dlls -pathType container)
 {
-	$webRootBin = $tridionInstallLocation + "\web\WebUI\WebRoot\bin"	
-	Write-Host "Copying items to " + $webRoot
-	Copy-Item -Path "dlls\*" $webRootBin -recurse
+        $webRootBin = $tridionInstallLocation + "\web\WebUI\WebRoot\bin"        
+        Write-Host "Copying items to " + $webRoot
+        Copy-Item -Path "dlls\*" $webRootBin -recurse
 }
   
 #Copy all other files to GUI Extension root except dlls
 # ToDo, Use different code to copy the folders.  Exclude option not working here
 # http://stackoverflow.com/questions/731752/exclude-list-in-powershell-copy-item-does-not-appear-to-be-working
 Copy-Item -Path ".\" $destination -recurse -exclude "\dlls"
-	
+        
 Write-Host "============================================"
 Write-Host "Done"
 }}}
