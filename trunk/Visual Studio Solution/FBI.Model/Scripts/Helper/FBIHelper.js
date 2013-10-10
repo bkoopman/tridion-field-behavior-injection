@@ -11,6 +11,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper = function SchemaFieldBehav
     var p = this.properties;
     var c = p.controls = {};
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
+    var ns = Tridion.Constants.Namespaces;
+    ns["fbi"] = this.Namespace;
 
 };
 
@@ -68,13 +70,14 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.removeConfigurati
 };
 
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$getConfigurationValueFromFieldXml(groupId, behaviourName) {
-    var xmlNode = this.getConfigurationValueNodeFromFieldXml(groupId, behaviourName);
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$getConfigurationValueFromFieldXml(fieldXml, groupId, behaviourName) {
+    var xmlNode = this.getConfigurationValueNodeFromFieldXml(fieldXml, groupId, behaviourName);
     return $xml.getInnerText(xmlNode);
 };
 
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationValueNodeFromFieldXml = function SchemaFieldBehaviourHelper$getConfigurationValueNodeFromFieldXml(fieldXml, groupId, behaviourName) {
+    console.debug(fieldXml);
     if (fieldXml) {
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
         if (extensionXmlElement) {
@@ -89,6 +92,31 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationV
         }
     }
     return null;
+};
+
+
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$hasConfigurationValueNodeFromFieldXml(fieldXml, behaviourName) {
+    console.debug(fieldXml);
+    if (fieldXml) {
+        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
+        if (extensionXmlElement) {
+            var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
+            console.debug("Config:");
+            console.debug(configurationNode);
+            $configNode = configurationNode;
+            var xpath = "*/fbi:" + behaviourName;
+            console.debug("XPath:" + xpath);
+            var valueNode = $xml.selectSingleNode(configurationNode, xpath);
+            console.debug("Value: ");
+            console.debug(valueNode);
+            if (valueNode) {
+                return true;
+            }
+            
+        }
+    }
+    return false;
 };
 
 
@@ -107,8 +135,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationV
         console.warn("This method is meant to be called on the 'SchemaView' only.");
         return null;
     }
-
-
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationValue = function SchemaFieldBehaviourHelper$setConfigurationValue(groupId, behaviourName, value) {

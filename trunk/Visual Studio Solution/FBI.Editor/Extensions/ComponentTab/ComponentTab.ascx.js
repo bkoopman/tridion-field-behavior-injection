@@ -58,12 +58,21 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     if (editor) {
         var confXml = $xml.getNewXmlDocument(editor);
         var confObj = $xml.toJson(confXml);
-        for (var i = 0; i < confObj.length; i++) {
+
+        if (confObj.length) { //IsArray
+            for (var i = 0; i < confObj.length; i++) {
+                var handler = {};
+                handler.name = confObj[i]["@name"];
+                handler.handler = confObj[i]["@handler"];
+                p.behaviourHandlers.push(handler);
+            }
+        } else {
             var handler = {};
-            handler.name = confObj[i]["@name"];
-            handler.handler = confObj[i]["@handler"];
+            handler.name = confObj["behaviour"]["@name"];
+            handler.handler = confObj["behaviour"]["@handler"];
             p.behaviourHandlers.push(handler);
         }
+        
     }
     
     //Add Event Handlers
@@ -124,9 +133,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
     var schema = $models.getItem(schemaId);
     
     function FBIHandler$onSchemaReady() {
-        console.debug("On Schema Ready");
         var fbiConfig = self.getFieldsConfiguration(schema);
-
         var arguments = {
             id: id,
             schemaId: schemaId,
@@ -161,12 +168,18 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(schema) {
+    var p = this.properties;
     var fieldsDoc = $xml.getNewXmlDocument(schema.getFields());
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
     for (var j = 0; j < fields.length; j++) {
-        console.debug(fields[j]);
-        console.debug("0000000000000000000000000000000");
-        console.debug($fbi.helper.getConfigurationValueFromFieldXml(fields[j],"tcm:0-7-65552", "readonly"));
+        for (var i = 0; i < p.behaviourHandlers.length; i++) {
+            var handler = p.behaviourHandlers[i];
+            var configValue = $fbi.helper.hasConfigurationValueFromFieldXml(fields[j], handler.name);
+            if (configValue) {
+                //TODO: Add Field to the list
+            }
+        }
+        
     }
     return fields;
 };
