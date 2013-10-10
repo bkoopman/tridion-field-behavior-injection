@@ -17,7 +17,8 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.initialize = function FBITab$ini
     var c = p.controls;
     $fbi = new Tridion.Extensions.UI.FBI.Handler(c.tabControl);
     $fbi.initialize();
-    
+    $fbi.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
+
 };
 
 
@@ -110,40 +111,64 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(id, fieldBuilder) {    
+Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(id, fieldBuilder) {
     var p = this.properties;
     var c = p.controls;
     var schemaId = c.schemaControl.getValue();
-    
+
     //2. Group Membership
     //3. User Name & Id
     //4. Fields Configuration
     var user = $models.getItem(Tridion.UI.UserSettings.getJsonUserSettings()["User"]["@ID"]);
-    var fbiConfig = this.getFieldsConfiguration(schemaId);
-        
-    var arguments = {
-        id : id,
-        schemaId : schemaId,
-        fieldBuilder: fieldBuilder,
-        groups: user.getGroupMemberships(),
-        user: user.getId(),
-        config: fbiConfig
-    };
+    var self = this;
+    var schema = $models.getItem(schemaId);
+    
+    function FBIHandler$onSchemaReady() {
+        console.debug("On Schema Ready");
+        var fbiConfig = self.getFieldsConfiguration(schema);
 
-    for (var i = 0; i < p.behaviourHandlers.length; i++) {
-        var handlerDefinition = p.behaviourHandlers[i];
-        try {
-            var handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
-            handlerImpl.apply(arguments);
-        } catch(e) {
-            console.warn("Invalid Handler Implementation ["+handlerDefinition.name+"]: " + handlerDefinition.handler);
+        var arguments = {
+            id: id,
+            schemaId: schemaId,
+            fieldBuilder: fieldBuilder,
+            groups: user.getGroupMemberships(),
+            user: user.getId(),
+            config: fbiConfig
+        };
+
+        for (var i = 0; i < p.behaviourHandlers.length; i++) {
+            var handlerDefinition = p.behaviourHandlers[i];
+            try {
+                var handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
+                handlerImpl.apply(arguments);
+            } catch (e) {
+                console.warn("Invalid Handler Implementation [" + handlerDefinition.name + "]: " + handlerDefinition.handler);
+            }
+
         }
-
     }
+
+
+    
+    if (schema.isLoaded()) {
+        //$evt.removeEventHandler(schema, "load", FBIHandler$onDisplayReady);
+        FBIHandler$onSchemaReady();
+    } else {
+        $evt.addEventHandler(schema, "start", FBIHandler$onSchemaReady);
+        schema.load(true);
+    }
+
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(schemaId) {
-    
+Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(schema) {
+    var fieldsDoc = $xml.getNewXmlDocument(schema.getFields());
+    var fields = $xml.selectNodes(fieldsDoc, "*/*");
+    for (var j = 0; j < fields.length; j++) {
+        console.debug(fields[j]);
+        console.debug("0000000000000000000000000000000");
+        console.debug($fbi.helper.getConfigurationValueFromFieldXml(fields[j],"tcm:0-7-65552", "readonly"));
+    }
+    return fields;
 };
 
 

@@ -1,6 +1,5 @@
 ﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
-
 //###########################################################################################################
 //Schema Field Behaviour
 //###########################################################################################################
@@ -18,9 +17,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     var ns = Tridion.Constants.Namespaces;
     ns["fbi"] = $fbiConfig.Namespace;
 };
-
-
-
 //###########################################################################################################
 //Schema Field Behaviour Configuration
 //###########################################################################################################
