@@ -77,8 +77,8 @@
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx.css">
       <DependentUpon>ComponentTab.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldReadOnly.ascx" />
-    <Content Include="Extensions\SchemaFieldReadOnly.ascx.js">
+    <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx" />
+    <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
@@ -96,6 +96,7 @@
     <Content Include="Extensions\SchemaFieldVisible\SchemaFieldVisible.ascx.js">
       <DependentUpon>SchemaFieldVisible.ascx</DependentUpon>
     </Content>
+    <Content Include="Scripts\Behaviours\ReadOnlyBehaviour.js" />
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
