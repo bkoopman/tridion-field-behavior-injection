@@ -1,5 +1,5 @@
 ﻿Type.registerNamespace("Tridion.Extensions.UI.FBI.Tabs");
-Tridion.Extensions.UI.FBI.Tabs.FBITab = function ComponentTab(element) {
+Tridion.Extensions.UI.FBI.Tabs.FBITab = function FBITab(element) {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Tabs.FBITab");
     this.addInterface("Tridion.Controls.DeckPage", [element]);
 };
@@ -16,9 +16,9 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.select = function select() {
 
 Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.updateView = function updateView() {
     if (this.isSelected()) {
-        alert('hello');
+        alert('hell2o');
 
     }
 };
 
-Tridion.Controls.Deck.registerPageType(Tridion.Extensions.UI.FBI.Tabs.FBITab, "FBITab");
+Tridion.Controls.Deck.registerPageType(Tridion.Extensions.UI.FBI.Tabs.FBITab, "FBIComponentTab");
