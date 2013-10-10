@@ -113,19 +113,21 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
 Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(id, fieldBuilder) {    
     var p = this.properties;
     var c = p.controls;
-    var schemaId = p.schemaId;
-    //1. Field Builer
+    var schemaId = c.schemaControl.getValue();
+    
     //2. Group Membership
     //3. User Name & Id
     //4. Fields Configuration
-    
+    var user = $models.getItem(Tridion.UI.UserSettings.getJsonUserSettings()["User"]["@ID"]);
+    var fbiConfig = this.getFieldsConfiguration(schemaId);
+        
     var arguments = {
         id : id,
-        schemaId : c.schemaControl.getValue(),
+        schemaId : schemaId,
         fieldBuilder: fieldBuilder,
-        group: "",
-        user: "",
-        config: ""
+        groups: user.getGroupMemberships(),
+        user: user.getId(),
+        config: fbiConfig
     };
 
     for (var i = 0; i < p.behaviourHandlers.length; i++) {
@@ -136,9 +138,12 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         } catch(e) {
             console.warn("Invalid Handler Implementation ["+handlerDefinition.name+"]: " + handlerDefinition.handler);
         }
-        
 
     }
+};
+
+Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(schemaId) {
+    
 };
 
 
