@@ -96,7 +96,7 @@
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisible.ascx.js">
       <DependentUpon>SchemaFieldVisible.ascx</DependentUpon>
     </Content>
-    <Content Include="Scripts\Behaviours\ReadOnlyBehaviour.js" />
+    <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviour.js" />
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
