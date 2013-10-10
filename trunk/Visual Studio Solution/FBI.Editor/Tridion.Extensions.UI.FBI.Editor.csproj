@@ -88,8 +88,8 @@
     <Content Include="Extensions\SchemaFieldBehaviour.ascx.js">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldValidation.ascx" />
-    <Content Include="Extensions\SchemaFieldValidation.ascx.js">
+    <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx" />
+    <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx.js">
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldVisible\SchemaFieldVisible.ascx" />
