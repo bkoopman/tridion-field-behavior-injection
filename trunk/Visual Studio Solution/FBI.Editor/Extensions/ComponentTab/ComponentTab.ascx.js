@@ -4,7 +4,6 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab = function FBITab(element) {
     this.properties = {};
     this.properties.controls = {};
     this.properties.controls.tabControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
-
     this.initialize();
     //Remove it when done
     $dom.removeNode($("#FBIComponentTab_switch"));
@@ -40,14 +39,21 @@ Type.registerNamespace("Tridion.Extensions.UI.FBI");
 Tridion.Extensions.UI.FBI.Handler = function FBIHandler(tabControl) {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Handler");
     this.properties = {};
-    this.properties.tabControl = tabControl;
+    this.properties.controls =
+    {
+        tabControl: tabControl
+    };
+
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$initialize() {
     var p = this.properties;
+    var c = p.controls;
     p.behaviourHandlers = [];
     
+    //Load handlers from configuration
     var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
+    
     if (editor) {
         var confXml = $xml.getNewXmlDocument(editor);
         var confObj = $xml.toJson(confXml);
@@ -57,14 +63,82 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
             handler.handler = confObj[i]["@handler"];
             p.behaviourHandlers.push(handler);
         }
-
     }
-    //$evt.addEventHandler(p.tabControl, "select", this.applyBehaviours);
+    
+    //Add Event Handlers
+    var self = this;
+    
+    function FBIHandler$onFieldBuilderLoad(e) {
+        var builder = e.source;
+        self.applyBehaviours(builder.getId(),builder);
+    }
+
+
+    function FBIHandler$onDisplayReady() {
+        $evt.removeEventHandler($display,"start", FBIHandler$onDisplayReady);
+        var viewId = $display.getView().getId();
+        switch (viewId) {
+            //Component View
+            case "ComponentView":
+                //Schema
+                self.properties.controls.schemaControl = $controls.getControl($("#Schema"), "Tridion.Controls.Dropdown");
+                
+                //Content Fields
+                var fb = $display.getView().properties.controls.fieldBuilder;
+                if (fb) {
+                    $evt.addEventHandler(fb, "load", FBIHandler$onFieldBuilderLoad);
+                }
+
+                //Metadata Fieds
+                if (c.tabControl.getPage("MetadataTab")) {
+                    var tab = c.tabControl.getPage("MetadataTab");
+                    var fbmd = tab.properties.controls.fieldBuilder;
+                    $evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
+                }
+            break;    
+            default:
+               
+        }
+
+        
+        
+    }
+
+    //We have to wait until the display is ready
+    $evt.addEventHandler($display, "start", FBIHandler$onDisplayReady);
+    
+    
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(e) {
-    var selectedPage = e.source;
-    //console.debug("ApplyBehaviours for: " + selectedPage.getId());
+Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(id, fieldBuilder) {    
+    var p = this.properties;
+    var c = p.controls;
+    var schemaId = p.schemaId;
+    //1. Field Builer
+    //2. Group Membership
+    //3. User Name & Id
+    //4. Fields Configuration
+    
+    var arguments = {
+        id : id,
+        schemaId : c.schemaControl.getValue(),
+        fieldBuilder: fieldBuilder,
+        group: "",
+        user: "",
+        config: ""
+    };
+
+    for (var i = 0; i < p.behaviourHandlers.length; i++) {
+        var handlerDefinition = p.behaviourHandlers[i];
+        try {
+            var handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
+            handlerImpl.apply(arguments);
+        } catch(e) {
+            console.warn("Invalid Handler Implementation ["+handlerDefinition.name+"]: " + handlerDefinition.handler);
+        }
+        
+
+    }
 };
 
 
