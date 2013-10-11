@@ -48,10 +48,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 
     c.fieldReadOnlyCheckbox.disabled = false;
     var selectedGroups = $fbiConfig.getSelectedGroups();
-    console.debug("Selected Groups: ");
-    console.debug(p.selectedGroups);
     if (selectedGroups) {
-        console.debug("Group ["+selectedGroups[0]+"] Set!");
         p.selectedGroup = selectedGroups[0];
     }
     var configValue = this.getConfigurationValue();
@@ -90,17 +87,14 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.getConfigurationValue = function SchemaFieldReadOnly$getConfigurationValue() {
     var p = this.properties;
-    console.debug("Getting Configuration ["+this.key+"]: " + p.selectedGroup);
-    var value = $fbiConfig.Helper.getConfigurationValue(p.selectedGroup, this.key);
-    console.debug("Value: " + value);
+    var value = $fbiConfig.getConfigurationHelper().getConfigurationValue(p.selectedGroup, this.key);
     return value;
 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.setConfigurationValue = function SchemaFieldReadOnly$setConfigurationValue(value) {
     var p = this.properties;
-    console.debug("Setting Configuration [" + this.key + "]["+p.selectedGroup+"]: " + value);
-    $fbiConfig.Helper.setConfigurationValue(p.selectedGroup, this.key, value);
+    $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
     
 };
 
