@@ -47,7 +47,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.removeConfigurati
             var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
             if (extensionXmlElement) {
                 var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
-                console.debug(configurationNode);
+                
                 var groupNode = $xml.selectSingleNode(configurationNode, "fbi:group[@xlink:href='" + groupId + "']");
                 if (configurationNode && groupNode) {
                     var valueNode = $xml.selectSingleNode(groupNode, "fbi:" + behaviourName);
@@ -77,7 +77,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationV
 
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationValueNodeFromFieldXml = function SchemaFieldBehaviourHelper$getConfigurationValueNodeFromFieldXml(fieldXml, groupId, behaviourName) {
-    console.debug(fieldXml);
+    
     if (fieldXml) {
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
         if (extensionXmlElement) {
@@ -97,7 +97,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationV
 
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$hasConfigurationValueNodeFromFieldXml(fieldXml, behaviourName) {
-    console.debug(fieldXml);
+    
     if (fieldXml) {
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
         if (extensionXmlElement) {
@@ -118,11 +118,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
                     };
                     result.groups.push(groupData);
                 }
-                //TODO: Comment Out
-                console.debug(result);
                 return result;
             }
-            
         }
     }
     return false;
@@ -189,7 +186,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationV
 
             $xml.setInnerXml(valueNode, value);
             c.fieldDesigner.setFieldXml(fieldXml);
-            console.debug(fieldXml);
+            
 
         }
     } else {

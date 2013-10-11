@@ -1,10 +1,19 @@
-﻿using Tridion.Web.UI.Controls;
+﻿using System;
+using Tridion.Web.UI.Controls;
 using Tridion.Web.UI.Core.Controls;
+using Tridion.Web.UI.Editors.CME.Views;
 
 namespace Tridion.Extensions.UI.FieldBehaviorExtension
 {
     [ControlResources("Tridion.Extensions.UI.FBI.SchemaFieldBehaviour")]
     public class SchemaFieldBehaviour : TridionUserControl
     {
+        public Tridion.Web.UI.Controls.List UsersAndGroupsList { get; set; }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            UsersAndGroupsList.ID = this.ClientID + "_" + UsersAndGroupsList.ID;
+        }
     }
 }

@@ -173,10 +173,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
     var fieldConfigurations = [];
     
-
-    
-
-    
     for (var j = 0; j < fields.length; j++) {
         
         var fieldConfig = {
@@ -189,15 +185,13 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
             var configValue = $fbi.Helper.hasConfigurationValueFromFieldXml(fields[j], handler.name);
             if (configValue) {
                 
-                $field = fields[j];
                 fieldConfig.behavioursConfig.push(configValue);
             }
         }
         fieldConfigurations.push(fieldConfig);
 
     }
-    console.debug("Field Configurations");
-    console.debug(fieldConfigurations);
+    
     return fieldConfigurations;
 };
 
