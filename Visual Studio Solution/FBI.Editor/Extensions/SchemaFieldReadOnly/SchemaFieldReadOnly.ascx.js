@@ -25,8 +25,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function Sc
             c.fieldReadOnlyCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_SchemaFieldReadOnly_checkbox");
             break;
     }
-
-    $evt.addEventHanlder($fbiConfig.getUsersAndGroupsList(), "change", Function.getDelegate(this, this.onSelectionChange));
+    
+    $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldReadOnlyCheckbox, "click", Function.getDelegate(this, this.onReadOnlyCheckboxClick));
     this.onSchemaChanged();
@@ -37,18 +37,26 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick 
     var p = this.properties;
     var c = p.controls;
     var checked = c.fieldReadOnlyCheckbox.checked ? "true" : "false";
-    this.setConfigurationValue();
+    this.setConfigurationValue(checked);
 };
 
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = function SchemaFieldReadOnly$onSelectionChange() {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange");
     var p = this.properties;
+    var c = p.controls;
+
+    c.fieldReadOnlyCheckbox.disabled = false;
     var selectedGroups = $fbiConfig.getSelectedGroups();
+    console.debug("Selected Groups: ");
+    console.debug(p.selectedGroups);
     if (selectedGroups) {
+        console.debug("Group ["+selectedGroups[0]+"] Set!");
         p.selectedGroup = selectedGroups[0];
     }
-    this.onUpdateView();
+    var configValue = this.getConfigurationValue();
+    c.fieldReadOnlyCheckbox.checked = configValue == "true";
+    
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSchemaChanged = function SchemaFieldReadOnly$onSchemaChanged() {
@@ -68,30 +76,32 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView");
     var p = this.properties;
     var c = p.controls;
+    var schema = $fbiConfig.getSchema();
+    c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
+
     if (p.selectedGroup) {
-        
         var readonly = this.getConfigurationValue();
-        c.fieldReadOnlyCheckbox.checked = (readonly != "false");
-        
+        c.fieldReadOnlyCheckbox.checked = readonly == "true";
     } else {
         c.fieldReadOnlyCheckbox.checked = false;
     }
-    var schema = $fbiConfig.getSchema();
-    c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;
-    
-    
+
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.getConfigurationValue = function SchemaFieldReadOnly$getConfigurationValue() {
     var p = this.properties;
-    return $fbiConfig.Helper.getConfigurationValue(p.groupId, this.key);
+    console.debug("Getting Configuration ["+this.key+"]: " + p.selectedGroup);
+    var value = $fbiConfig.Helper.getConfigurationValue(p.selectedGroup, this.key);
+    console.debug("Value: " + value);
+    return value;
 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.setConfigurationValue = function SchemaFieldReadOnly$setConfigurationValue(value) {
     var p = this.properties;
+    console.debug("Setting Configuration [" + this.key + "]["+p.selectedGroup+"]: " + value);
     $fbiConfig.Helper.setConfigurationValue(p.selectedGroup, this.key, value);
-
+    
 };
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
