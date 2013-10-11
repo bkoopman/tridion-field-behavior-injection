@@ -94,7 +94,5 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.setConfigurationValue = 
 
 };
 
-
-
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
 Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
