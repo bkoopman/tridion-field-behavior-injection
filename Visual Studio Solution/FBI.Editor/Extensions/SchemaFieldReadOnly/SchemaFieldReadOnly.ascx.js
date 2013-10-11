@@ -28,6 +28,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function Sc
             c.fieldDesigner = $controls.getControl($("#MetadataDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
             break;
     }
+    
     /*c.fieldReadOnlyCheckbox.checked = "false";*/
 
 
