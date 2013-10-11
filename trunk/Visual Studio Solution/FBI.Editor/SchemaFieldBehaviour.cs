@@ -1,7 +1,6 @@
 ﻿using System;
 using Tridion.Web.UI.Controls;
 using Tridion.Web.UI.Core.Controls;
-using Tridion.Web.UI.Editors.CME.Views;
 
 namespace Tridion.Extensions.UI.FieldBehaviorExtension
 {
