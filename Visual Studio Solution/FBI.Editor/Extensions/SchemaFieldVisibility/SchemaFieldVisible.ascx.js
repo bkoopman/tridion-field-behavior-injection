@@ -15,6 +15,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.initialize");
+    
+    
 };
 
 

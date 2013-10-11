@@ -8,7 +8,7 @@
 				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
 			    </div>
 			    <div class="middle">
-				    <c:List runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
+				    <c:List  runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
 			    </div>
 			    <div class="footer">
 				    <input type="checkbox" id="UpperShowAll" tabindex="3" />
