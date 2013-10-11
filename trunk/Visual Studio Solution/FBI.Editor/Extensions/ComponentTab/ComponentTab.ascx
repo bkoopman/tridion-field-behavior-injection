@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Tridion.Extensions.UI.FBI.Editor.Extensions.ComponentTab.ComponentTab" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Tridion.Extensions.UI.FBI.Editor.Extensions.Tabs.ComponentTab" %>
 <div id="FBITabWrapper">
     <div id="FBITabContent">
         <img src="https://tridion-field-behavior-injection.googlecode.com/svn/wiki/tridion-FBI-Logo.png"/>

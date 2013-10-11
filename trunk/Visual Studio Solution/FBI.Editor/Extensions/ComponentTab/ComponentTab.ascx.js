@@ -90,7 +90,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
         switch (viewId) {
             //Component View
             case "ComponentView":
-                //Schema
+                /*//Schema
                 self.properties.controls.schemaControl = $controls.getControl($("#Schema"), "Tridion.Controls.Dropdown");
                 
                 //Content Fields
@@ -104,7 +104,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     var tab = c.tabControl.getPage("MetadataTab");
                     var fbmd = tab.properties.controls.fieldBuilder;
                     $evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
-                }
+                }*/
             break;    
             default:
                
