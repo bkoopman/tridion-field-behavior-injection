@@ -56,11 +56,33 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.init = function S
     //Event Handlers
     $evt.addEventHandler($display.getItem(), "change", this.onSchemaChanged);
     $evt.addEventHandler(c.fieldDesigner, "updateview", this.onUpdateView);
-    console.debug("Jaime: ");
-    console.debug(this.properties);
     this.onSchemaChanged();
     
 
+};
+
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getFieldDeisgner = function SchemaFieldBehaviourConfig$getFieldDeisgner() {
+    var p = this.properties;
+    var c = p.controls;
+    return c.fieldDesigner;
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getUsersAndGroupsList = function SchemaFieldBehaviourConfig$getUsersAndGroupsList() {
+    var p = this.properties;
+    var c = p.controls;
+    return c.UsersAndGroupsList;
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getBehavioursPanel = function SchemaFieldBehaviourConfig$getBehavioursPanel() {
+    var p = this.properties;
+    var c = p.controls;
+    return c.fieldsSecurityPanel;
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSchema = function SchemaFieldBehaviourConfig$getSchema() {
+    var p = this.properties;
+    return p.schema;
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.onSchemaChanged = function SchemaFieldBehaviourConfig$onSchemaChanged() {
@@ -94,25 +116,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._hidePanel = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.onUpdateView = function SchemaFieldBehaviourConfig$onUpdateView() {
-    console.debug("Updating view...");
-    var p = this.properties;
-    var c = p.controls;
-    console.debug(c);
-    var fieldNode = c.fieldDesigner.getFieldXml();
-    
-    if (fieldNode) {
-        console.debug(fieldNode);
-/*
-
-        var readonly = $xml.getInnerText(fieldNode, "/tcm:#2#tcm:ExtensionXml/fbi:configuration/fbi:field/fbi:readonly");
-        c.UsersAndGroupsList.clearSelection();
-        c.fieldReadOnlyCheckbox.checked = "false";
-        c.fieldVisibleCheckbox.checked = "false";
-        c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;
-        c.fieldVisibleCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false;*/
-    } else {
-        $css.display(c.fieldsSecurityPanel.parentNode);
-    }
+    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.onUpdateView");
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.initializeGroups = function SchemaFieldBehaviourConfig$initializeGroups() {
@@ -183,7 +187,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._getStaticTrustee
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = function SchemaFieldBehaviourConfig$_renderList(bodyXml) {
     $assert.isString(bodyXml);
-    console.debug("3");
+    
     var p = this.properties;
     var c = p.controls;
     var control = c.UsersAndGroupsList;
@@ -196,9 +200,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     //var self = this;
 
     function FieldBehaviour$_drawControl(definitionDocument) {
-        console.debug("Drawing list...");
-        $xmlDoc = xmlDoc;
-        $xmlDef = definitionDocument;
         control.draw(xmlDoc, definitionDocument);
         control.setLoading(false);
         control.clearSelection();
