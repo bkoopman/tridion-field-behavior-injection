@@ -1,7 +1,5 @@
 ﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
-
-
 //###########################################################################################################
 //Schema Field Behaviour Helper
 //###########################################################################################################
@@ -9,27 +7,15 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper = function SchemaFieldBehav
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper");
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
-    var c = p.controls = {};
-    this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
+    p.controls = {};
     var ns = Tridion.Constants.Namespaces;
-    ns["fbi"] = this.Namespace;
+    this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
+    ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
 
 };
 
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.overloadMethod = function SchemaFieldBehaviourHelper$overloadMethod(object, name, fn) {
-    var old = object[ name ];
-    object[ name ] = function() {
-        if (fn.length == arguments.length) {
-            return fn.apply(this, arguments);
-        } else if (typeof old == 'function') {
-            return old.apply(this, arguments);
-        } else {
-            console.warn("Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.overloadMethod: Unexpected Method")
-            return null;
-        }
-    };
-};
+
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setFieldDesigner = function SchemaFieldBehaviourHelper$setFieldDesigner(fieldDesigner) {
     var p = this.properties;
