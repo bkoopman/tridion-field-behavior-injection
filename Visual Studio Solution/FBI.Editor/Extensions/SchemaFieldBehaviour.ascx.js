@@ -26,7 +26,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     var p = this.properties;
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
     this.Namespace = p.ns = "http://www.sdltridion.com/2013/FieldBehaviourInjection";
-     
+    this.Helper = p.helper;
+
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.init = function SchemaFieldBehaviourConfig$init(deckPage) {
