@@ -102,16 +102,25 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
         if (extensionXmlElement) {
             var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
-            console.debug("Config:");
-            console.debug(configurationNode);
-            $configNode = configurationNode;
             var xpath = "*/fbi:" + behaviourName;
-            console.debug("XPath:" + xpath);
-            var valueNode = $xml.selectSingleNode(configurationNode, xpath);
-            console.debug("Value: ");
-            console.debug(valueNode);
+            var valueNode = $xml.selectNodes(configurationNode, xpath);
             if (valueNode) {
-                return true;
+                var result = {
+                    behaviour: behaviourName,
+                    groups: []
+                };
+                 
+                for (var i = 0; i < valueNode.length; i++) {
+                    var groupData =
+                    {
+                        groupId: $xml.selectStringValue(valueNode[i].parentNode, "@xlink:href", $const.Namespaces),
+                        value: $xml.getInnerXml(valueNode[i])
+                    };
+                    result.groups.push(groupData);
+                }
+                //TODO: Comment Out
+                console.debug(result);
+                return result;
             }
             
         }
@@ -165,16 +174,22 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationV
                 groupNode = $xml.createElementNS(fieldDocument, p.ns, "group");
                 configurationNode.appendChild(groupNode);
             }
-            
             var attIdNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:href");
             attIdNode.value = groupId;
-            var attTypeNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "xlink:type");
+            var attTypeNode = $xml.createAttributeNS(fieldDocument, $const.Namespaces.xlink, "type");
             attTypeNode.value = "simple";
-            $xml.setAttributeNodeNS(groupNode, attIdNode, "");
-            $xml.setAttributeNodeNS(groupNode, attTypeNode, "");
-            $xml.setInnerXml(groupNode, "<{0} xmlns=\"{1}\">{2}</{0}>".format(behaviourName, p.ns, value));
+            $xml.setAttributeNodeNS(groupNode, attIdNode, $const.Namespaces.xlink);
+            //$xml.setAttributeNodeNS(groupNode, attTypeNode, $const.Namespaces["xlink"]);
+
+            var valueNode = $xml.selectSingleNode(groupNode, "fbi:" + behaviourName);
+            if (!valueNode) {
+                valueNode = $xml.createElementNS(fieldDocument, p.ns, behaviourName);
+                groupNode.appendChild(valueNode);
+            }
+
+            $xml.setInnerXml(valueNode, value);
             c.fieldDesigner.setFieldXml(fieldXml);
-            console.debug($xml.getOuterXml(fieldXml));
+            console.debug(fieldXml);
 
         }
     } else {

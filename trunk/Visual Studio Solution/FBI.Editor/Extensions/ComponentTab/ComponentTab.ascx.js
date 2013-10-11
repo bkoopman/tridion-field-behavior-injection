@@ -17,7 +17,7 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.initialize = function FBITab$ini
     var c = p.controls;
     $fbi = new Tridion.Extensions.UI.FBI.Handler(c.tabControl);
     $fbi.initialize();
-    $fbi.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
+    $fbi.Helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
 
 };
 
@@ -171,17 +171,34 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
     var p = this.properties;
     var fieldsDoc = $xml.getNewXmlDocument(schema.getFields());
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
+    var fieldConfigurations = [];
+    
+
+    
+
+    
     for (var j = 0; j < fields.length; j++) {
+        
+        var fieldConfig = {
+            fieldName: fields[j].nodeName,
+            behavioursConfig: []
+        };
+        
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handler = p.behaviourHandlers[i];
-            var configValue = $fbi.helper.hasConfigurationValueFromFieldXml(fields[j], handler.name);
+            var configValue = $fbi.Helper.hasConfigurationValueFromFieldXml(fields[j], handler.name);
             if (configValue) {
-                //TODO: Add Field to the list
+                
+                $field = fields[j];
+                fieldConfig.behavioursConfig.push(configValue);
             }
         }
-        
+        fieldConfigurations.push(fieldConfig);
+
     }
-    return fields;
+    console.debug("Field Configurations");
+    console.debug(fieldConfigurations);
+    return fieldConfigurations;
 };
 
 
