@@ -1,4 +1,6 @@
-﻿//###########################################################################################################
+﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
+
+//###########################################################################################################
 //Schema Field Behaviour Configuration
 //###########################################################################################################
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehaviourConfig(masterTabControl) {
@@ -36,7 +38,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getControls = fun
         case "MetadataDesignTab":
             controls = p.metadata.controls;
             break;
-
     }
     if (typeof controls === "undefined") {
         controls = {};
