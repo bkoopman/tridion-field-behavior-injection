@@ -87,7 +87,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getUsersAndGroups
                 c.usersAndGroupsList = $controls.getControl($("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_UsersAndGroupsList"), "Tridion.Controls.List");
                 break;
             case "MetadataDesignTab":
-                c.usersAndGroupsList = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_UsersAndGroupsList"), "Tridion.Controls.List");
+                c.usersAndGroupsList = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_MDSchemaFieldBehaviour_UsersAndGroupsList"), "Tridion.Controls.List");
                 break;
         }
     }
@@ -103,7 +103,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getBehavioursPane
                 c.fieldsSecurityPanel = $controls.getControl($("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
                 break;
             case "MetadataDesignTab":
-                c.fieldsSecurityPanel = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
+                c.fieldsSecurityPanel = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_MDSchemaFieldBehaviour_SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
                 break;
         }
     }
