@@ -82,7 +82,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getConfigurationV
 
 
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$hasConfigurationValueNodeFromFieldXml(fieldXml, behaviourName) {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationValueFromFieldXml = function SchemaFieldBehaviourHelper$hasConfigurationValueNodeFromFieldXml(fieldXml, behaviourName, user) {
     
     if (fieldXml) {
         var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
@@ -90,21 +90,40 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
             var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fbi:configuration");
             var xpath = "*/fbi:" + behaviourName;
             var valueNode = $xml.selectNodes(configurationNode, xpath);
-            if (valueNode) {
+            
+            if (valueNode.length>0) {
                 var result = {
-                    behaviour: behaviourName,
-                    groups: []
+                    behaviourName: behaviourName,
+                    groupValues: []
                 };
                  
                 for (var i = 0; i < valueNode.length; i++) {
-                    var groupData =
-                    {
-                        groupId: $xml.selectStringValue(valueNode[i].parentNode, "@xlink:href", $const.Namespaces),
-                        value: $xml.getInnerXml(valueNode[i])
-                    };
-                    result.groups.push(groupData);
+                    var groupId = $xml.selectStringValue(valueNode[i].parentNode, "@xlink:href", $const.Namespaces);
+                    //TODO: Remove when done, shows the group memeberships.
+                    //console.debug("Group [" + groupId + "] : Memberships: [" + user.getGroupMemberships() + "] : "+ user.getGroupMemberships().indexOf(groupId));
+                    if (user.getGroupMemberships().indexOf(groupId) >= 0 || groupId == user.getId()) {
+                        var configValue = $xml.getInnerXml(valueNode[i]);
+                        var value;
+                        if (typeof configValue === "undefined") {
+                            value = false;
+                        } else {
+                            value = 
+                            {
+                                groupId: groupId,
+                                value: configValue
+                            };
+                        }
+
+                        if (value) {
+                            result.groupValues.push(value);
+                        }
+                        
+                    } 
                 }
+                
                 return result;
+                
+
             }
         }
     }
@@ -178,4 +197,4 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationV
     } else {
         console.warn("This method is meant to be called on the 'SchemaView' only.");
     }
-}; 
+};
