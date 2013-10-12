@@ -34,32 +34,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     /*this.onSchemaChanged();*/
 };
 
-/*Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.init = function SchemaFieldBehaviourConfig$init() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.init");
-    /*var p = this.properties;
-    var c = p.controls;
-    
-    switch (deckPage) {
-        case "SchemaDesignTab":
-            c.fieldsSecurityPanel = $controls.getControl($("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
-            c.fieldDesigner = $controls.getControl($("#SchemaDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
-            c.UsersAndGroupsList = $controls.getControl($("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_UsersAndGroupsList"), "Tridion.Controls.List");
-            break;
-        case "MetadataDesignTab":
-            c.fieldsSecurityPanel = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_SchemaDesignFieldSecurity"), "Tridion.Controls.Panel");
-            c.UsersAndGroupsList = $controls.getControl($("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_UsersAndGroupsList"), "Tridion.Controls.List");
-            c.fieldDesigner = $controls.getControl($("#MetadataDesignFieldDesigner"), "Tridion.Controls.FieldDesigner");
-            break;
-    }
-    p.helper.setFieldDesigner(c.fieldDesigner);
-    //TODO: close panel by default 
-    //c.fieldsSecurityPanel.close();
-    this.initializeGroups();
-
-    //Event Handlers
-    //$evt.addEventHandler($display.getItem(), "change", this.onSchemaChanged);
-    //this.onSchemaChanged();#1#
-};*/
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getTab = function SchemaFieldBehaviourConfig$getTab() {
     return this.MasterTabControl.getSelectedItem().getId();
 };
