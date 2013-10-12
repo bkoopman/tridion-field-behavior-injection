@@ -65,7 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
+    <Content Include="Scripts\Configuration\FBIConfig.js" />
     <Content Include="Scripts\Constants\FBIConstants.js" />
+    <Content Include="Scripts\Handler\FBIHandler.js" />
     <Content Include="Scripts\Helper\FBIHelper.js" />
     <Content Include="Services\FBI\FBIServices.svc" />
     <Content Include="Web.config" />
