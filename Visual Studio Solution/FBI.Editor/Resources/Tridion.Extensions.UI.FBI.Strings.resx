@@ -126,4 +126,7 @@
   <data name="ReadOnlyLabel" xml:space="preserve">
     <value>Read Only</value>
   </data>
+  <data name="ValidationLabel" xml:space="preserve">
+    <value>Validation Rule</value>
+  </data>
 </root>
