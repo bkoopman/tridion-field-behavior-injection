@@ -11,11 +11,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper = function SchemaFieldBehav
     var ns = Tridion.Constants.Namespaces;
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
     ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
-
 };
-
-
-
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setFieldDesigner = function SchemaFieldBehaviourHelper$setFieldDesigner(fieldDesigner) {
     var p = this.properties;
