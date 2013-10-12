@@ -1,4 +1,7 @@
-﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
+﻿/// <reference path="../Helper/FBIHelper.js" />
+Type.registerNamespace("Tridion.Extensions.UI.FBI");
+var a = Tridoin.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
+
 
 //###########################################################################################################
 //Schema Field Behaviour Configuration
@@ -8,11 +11,11 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
     this.MasterTabControl = masterTabControl;
-    p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(masterTabControl);
     this.Namespace = p.ns = "http://www.sdltridion.com/2013/FieldBehaviourInjection";
     this.properties.data = {};
     this.properties.metadata = {};
 
+    p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(masterTabControl);
     p.schema = $display.getItem();
     this.initializeGroups();
     /*this.onSchemaChanged();*/
