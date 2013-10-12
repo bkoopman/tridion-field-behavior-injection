@@ -93,10 +93,10 @@
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx.js">
-      <DependentUpon>SchemaFieldVisiblility.ascx</DependentUpon>
+      <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviour.js" />
-    <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblility.ascx" />
+    <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviour.js" />
     <Content Include="Scripts\Commands.js" />
     <Content Include="Web.config" />

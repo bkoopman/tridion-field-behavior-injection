@@ -22,7 +22,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function Sc
             c.fieldReadOnlyCheckbox = $("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_SchemaFieldReadOnly_checkbox");
             break;
         case "MetadataDesignTab":
-            c.fieldReadOnlyCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_SchemaFieldReadOnly_checkbox");
+            c.fieldReadOnlyCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_MDSchemaFieldReadOnly_checkbox");
             break;
     }
     
