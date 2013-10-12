@@ -86,5 +86,14 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
                 return ResourceManager.GetString("ReadOnlyLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation Rule.
+        /// </summary>
+        internal static string ValidationLabel {
+            get {
+                return ResourceManager.GetString("ValidationLabel", resourceCulture);
+            }
+        }
     }
 }

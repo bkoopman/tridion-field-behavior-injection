@@ -1,7 +1,5 @@
 ﻿/// <reference path="../Helper/FBIHelper.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
-var a = Tridoin.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
-
 
 //###########################################################################################################
 //Schema Field Behaviour Configuration

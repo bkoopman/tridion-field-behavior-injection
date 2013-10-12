@@ -9,7 +9,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 
 	var p = this.properties;
     p.controls = {};
-    p.ns = "http://www.sdltridion.com/2011/FieldValidation";
+    
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
@@ -41,26 +41,27 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick 
     this.setConfigurationValue(checked);
 };
 
-
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = function SchemaFieldReadOnly$onSelectionChange() {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange");
     var p = this.properties;
     var c = p.controls;
-
     c.fieldReadOnlyCheckbox.disabled = false;
     var selectedGroups = $fbiConfig.getSelectedGroups();
+    
     if (selectedGroups) {
         p.selectedGroup = selectedGroups[0];
     }
+    
     var configValue = this.getConfigurationValue();
     c.fieldReadOnlyCheckbox.checked = configValue == "true";
+    
     
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSchemaChanged = function SchemaFieldReadOnly$onSchemaChanged() {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSchemaChanged");
     var c = this.properties.controls;
-    var schema = $display.getItem();
+    var schema = $fbiConfig.getSchema();
     
     if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
         $css.undisplay(c.fieldReadOnlyCheckbox.parentNode);

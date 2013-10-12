@@ -6,12 +6,14 @@
     width:50%;
     display:inline;
     float:left;
+    height: 250px;
 }
 
 .fbiRightPanel {
     width:50%;
     display:inline;
     float:left;
+    height: 250px;
 }
 
 .fbi_label {
@@ -20,4 +22,5 @@
 
 .fbi_feature_wrapper {
     padding:5px;
+    border-bottom: solid 1px #a1a9b2;
 }
