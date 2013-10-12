@@ -21,7 +21,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function 
             c.fieldHiddenCheckbox = $("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_SchemaFieldVisibility_checkbox");
             break;
         case "MetadataDesignTab":
-            c.fieldHiddenCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_metadata_SchemaFieldBehaviour_MDSchemaFieldVisibility_checkbox");
+            c.fieldHiddenCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_MDSchemaFieldBehaviour_MDSchemaFieldVisibility_checkbox");
             break;
     }
 
