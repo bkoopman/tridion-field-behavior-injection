@@ -120,6 +120,9 @@
   <data name="BehaviourLabel" xml:space="preserve">
     <value>Behaviour</value>
   </data>
+  <data name="HiddenLabel" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
   <data name="ReadOnlyLabel" xml:space="preserve">
     <value>Read Only</value>
   </data>

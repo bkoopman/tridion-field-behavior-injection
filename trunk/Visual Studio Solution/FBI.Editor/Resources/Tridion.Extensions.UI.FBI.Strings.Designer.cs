@@ -70,6 +70,15 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hidden.
+        /// </summary>
+        internal static string HiddenLabel {
+            get {
+                return ResourceManager.GetString("HiddenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read Only.
         /// </summary>
         internal static string ReadOnlyLabel {
