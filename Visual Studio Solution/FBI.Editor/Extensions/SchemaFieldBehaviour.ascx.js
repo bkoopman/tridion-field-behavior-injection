@@ -15,6 +15,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
     var masterControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
     $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig(masterControl);
+    $fbiConfig.getBehavioursPanel().close();
 };
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldBehaviour);
