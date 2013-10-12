@@ -7,9 +7,15 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(params) {
     console.debug("Applying ReadOnlyBehaviour");
     console.debug(params);
-    if (this.isReadOnly(params.groupValues)) {
-        var element = $fbi.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
-        element.readOnly = true;
+    
+    switch (params.fieldType) {
+        case "tcm:SingleLineTextField":
+            if (this.isReadOnly(params.groupValues)) {
+                var element = $fbi.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
+                element.readOnly = true;
+            }
+        default:            
+            console.warn("Behaviour [" + this.getTypeName() + "] not implemented for field type: " + params.fieldType);
     }
 };
 

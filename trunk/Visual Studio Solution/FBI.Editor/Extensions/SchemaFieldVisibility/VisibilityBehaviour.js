@@ -7,9 +7,15 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBe
 Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(params) {
     console.debug("Applying VisibilityBehaviour");
     console.debug(params);
-    if (this.isReadOnly(params.groupValues)) {
-        var element = $fbi.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
-        element.readOnly = true;
+    
+    switch (params.fieldType) {
+        case "tcm:SingleLineTextField":
+            if (this.isHidden(params.groupValues)) {
+                var element = $fbi.getFieldContainer(params.fieldType, params.fieldName, params.fieldBuilder);
+                $css.undisplay(element);
+            }
+        default:
+            console.warn("Behaviour [" + this.getTypeName() + "] not implemented for field type: " + params.fieldType);
     }
 };
 
