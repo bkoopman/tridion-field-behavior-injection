@@ -98,7 +98,11 @@
     <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviour.js" />
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviour.js" />
-    <Content Include="Scripts\Commands.js" />
+    <Content Include="Scripts\ValidationCommands.js" />
+    <Content Include="Scripts\FBICommands.js" />
+    <Content Include="Theme\FBICommands.css" />
+    <Content Include="Theme\Icons\EnableFBI16x16.png" />
+    <Content Include="Theme\Icons\EnableFBI32x32.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -147,6 +151,7 @@
   <ItemGroup>
     <None Include="postbuild.bat" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
