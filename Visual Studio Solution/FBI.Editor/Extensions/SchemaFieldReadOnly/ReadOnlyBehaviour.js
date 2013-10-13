@@ -1,4 +1,5 @@
-﻿Type.registerNamespace("Tridion.Extensions.UI.FBI.Behaviours");
+﻿/// <reference path="../../../FBI.Model/Scripts/Costants/FBIConstants.js" />
+Type.registerNamespace("Tridion.Extensions.UI.FBI.Behaviours");
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehaviour() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour");
     this.addInterface("Tridion.DisposableObject");
@@ -10,13 +11,19 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
     console.debug(params);
     
     switch (params.fieldType) {
-        case "tcm:SingleLineTextField":
+        case $fbiConst.SINGLE_LINE_TEXT_FIELD:
             if (this.isReadOnly(params.groupValues)) {
                 var element = this.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
-                element.readOnly = true;
+                element.disabled = true;
             }
+            break;
+        case $fbiConst.MULTILINE_TEXT_FIELD:
+        case $fbiConst.KEYWORD_FIELD:
+        case $fbiConfig.XHTML_FIELD:
+            console.warn("TODO: Field [" + params.fieldName + "] Behaviour [" + this.getTypeName() + "] type: " + params.fieldType);
+            break;
         default:            
-            console.warn("Behaviour [" + this.getTypeName() + "] not implemented for field type: " + params.fieldType);
+            console.warn("Field ["+params.fieldName+"] Behaviour [" + this.getTypeName() + "] not implemented for field type: " + params.fieldType);
     }
 };
 

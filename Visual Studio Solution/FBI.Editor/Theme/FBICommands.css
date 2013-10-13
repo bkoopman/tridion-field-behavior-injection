@@ -1,0 +1,20 @@
+﻿
+.ribbontoolbar .button.EnableFBI .image {
+width: 32px;
+height: 32px;
+background-image: url("{ThemePath}/Icons/EnableFBI32x32.png");
+}   
+
+.ribbontoolbar.minimized .button.EnableFBI .image {
+width: 16px;
+height: 16px;
+background-image: url("{ThemePath}/Icons/EnableFBI16x16.png");
+}
+
+/* Context Menu */
+.contextmenu .item.EnableFBI .image {
+width: 16px;
+height: 16px;
+background-image: url("{ThemePath}/Icons/EnableFBI16x16.png");
+
+}
