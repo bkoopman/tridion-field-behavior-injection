@@ -2,18 +2,21 @@
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation = function SchemaFieldValidation()
 {
-	Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldValidation");
+    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation");
+    Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldValidation");
+    this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
+    this.addInterface("Tridion.DisposableObject");
+    
 	this.key = "validation";
-	this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
-    p.validationReady = false;
     p.controls = {};
-    
-    
+
+    p.validationReady = false;
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize = function SchemaFieldValidation$initialize(deckPage) {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize");
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;
 
@@ -102,7 +105,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onUpdateView = functio
     }
 };
 
-
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setValidation = function SchemaFieldValidation$setValidation(textToFind) {
     var c = this.properties.controls;
     var dd = c.fieldValidatorList;
@@ -113,19 +115,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setValidation = functi
             break;
         }
     }
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.getConfigurationValue = function SchemaFieldValidation$getConfigurationValue() {
-    var p = this.properties;
-    var value = $fbiConfig.getConfigurationHelper().getConfigurationValue(p.selectedGroup, this.key);
-    return value;
-
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setConfigurationValue = function SchemaFieldValidation$setConfigurationValue(value) {
-    var p = this.properties;
-    $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
-    
 };
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldValidation);

@@ -1,18 +1,20 @@
 ﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
-Tridion.Extensions.UI.FBI.SchemaFieldVisibility = function SchemaFieldVisibility() {
+Tridion.Extensions.UI.FBI.SchemaFieldVisibility = function SchemaFieldVisibility()
+{
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldVisibility");
-    this.key = "hidden";
+    this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
-
+    
+    this.key = "hidden";
     var p = this.properties;
     p.controls = {};
-    p.ns = "http://www.sdltridion.com/2011/FieldValidation";
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function SchemaFieldVisibility$initialize(deckPage) {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.initialize");
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;
 
@@ -38,7 +40,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onVisibilityCheckboxCl
     var checked = c.fieldHiddenCheckbox.checked ? "true" : "false";
     this.setConfigurationValue(checked);
 };
-
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange = function SchemaFieldVisibility$onSelectionChange() {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange");
@@ -81,19 +82,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = functio
     } else {
         c.fieldHiddenCheckbox.checked = false;
     }
-
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.getConfigurationValue = function SchemaFieldVisibility$getConfigurationValue() {
-    var p = this.properties;
-    var value = $fbiConfig.getConfigurationHelper().getConfigurationValue(p.selectedGroup, this.key);
-    return value;
-
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.setConfigurationValue = function SchemaFieldVisibility$setConfigurationValue(value) {
-    var p = this.properties;
-    $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
 
 };
 

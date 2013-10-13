@@ -8,7 +8,5 @@
             <option value="none">None</option>
         </select>
     </div>
-    
-    
 </div>
 
