@@ -211,12 +211,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
     /// <param name="schema">The <see cref="Tridion.ContentManager.Schema"/> object </param>
     /// <param name="schema">The <see cref="Tridion.ContentManager.User"/> object </param>
     /// <returns type="custom"> 
-    /// var fieldConfig = {
-    ///     fieldType: fields[j].nodeName,
-    ///     fieldName: $xml.selectStringValue(fields[j], "tcm:Name"),
-    ///     behavioursConfig: []
-    /// }; 
-    /// where behavioursConifg is an array of configurations per group, {groupId: "", value: ""}
     ///</returns>
     var p = this.properties;
     var fieldsDoc;
@@ -236,8 +230,10 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
 
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
     for (var j = 0; j < fields.length; j++) {
+        console.debug(fields[j]);
         var fieldType = fields[j].nodeName;
         var fieldName = $xml.selectStringValue(fields[j], "tcm:Name");
+        var isMultivalue = ($xml.selectStringValue(fields[j], "tcm:MaxOccurs") != "1");
         
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerName = p.behaviourHandlers[i];
@@ -252,6 +248,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
                     handler.fields.push(fieldName);
                     handler.fields[fieldName].fieldName = fieldName;
                     handler.fields[fieldName].fieldType = fieldType;
+                    handler.fields[fieldName].isMultivalue = isMultivalue;
                     handler.fields[fieldName].values = configValue;
                 }
             }
