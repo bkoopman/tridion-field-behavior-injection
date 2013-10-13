@@ -14,6 +14,8 @@ Tridion.Extensions.FBI.Commands.DisableFBI = function FBICommands$DisableFBI() {
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isAvailable = function DisableFBI$_isAvailable(selection, pipeline) {
+    console.debug(Tridion.Runtime["IsAdministrator"]);
+    console.debug(Tridion.Runtime["IsAdministrator"] == "1");
     return Tridion.Runtime["IsAdministrator"] == "1";
 };
 
