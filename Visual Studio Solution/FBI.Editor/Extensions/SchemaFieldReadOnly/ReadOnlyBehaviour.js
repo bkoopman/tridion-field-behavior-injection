@@ -2,6 +2,7 @@
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehaviour() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour");
     this.addInterface("Tridion.DisposableObject");
+    this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(params) {
@@ -11,7 +12,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
     switch (params.fieldType) {
         case "tcm:SingleLineTextField":
             if (this.isReadOnly(params.groupValues)) {
-                var element = $fbi.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
+                var element = this.getFieldElement(params.fieldType, params.fieldName, params.fieldBuilder);
                 element.readOnly = true;
             }
         default:            
