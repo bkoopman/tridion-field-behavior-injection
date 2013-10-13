@@ -39,6 +39,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                 handler.name = confObj[i]["@name"];
                 handler.handler = confObj[i]["@handler"];
                 handler.enabled = confObj[i]["@enabled"];
+                handler.fields = [];
                 p.behaviourHandlers[handler.name] = handler;
                 p.behaviourHandlers.push(handler.name);
             }
@@ -46,6 +47,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
             handler.name = confObj["behaviour"]["@name"];
             handler.handler = confObj["behaviour"]["@handler"];
             handler.handler = confObj["behaviour"]["@enabled"];
+            handler.fields = [];
             p.behaviourHandlers[handler.name] = handler;
             p.behaviourHandlers.push(handler.name);
         }
@@ -119,43 +121,40 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         fieldBuilder = this.getCurrentFieldBuilder();
     }
 
-    function FBIHandler$onSchemaReady() {
-        $evt.removeEventHandler(schema, "load", FBIHandler$onSchemaReady);
-        var fbiConfig = self.getFieldsConfiguration(id, schema, user);
 
+    function FBIHandler$onUserReady() {
+        $evt.removeEventHandler(user, "load", FBIHandler$onUserReady);
+        self.loadFieldsConfiguration(id, schema, user);
         //TODO: Consider Caching the configuration
-        var parameters = {
-            id: id,
-            user: user,
-            fieldBuilder: fieldBuilder,
-            fieldName: "",
-            fieldType: "",
-            groupValues: []
-        };
 
-        //TODO: A more efficient way to execute the handlers
-        if (fbiConfig.length && fbiConfig.length > 0) {
-            //Iterate over relevant configured behaviours
-            for (var i = 0; i < fbiConfig.length; i++) {
-                var config = fbiConfig[i];
-                //Iterate per field (You already are in the right context, i.e. Content vs. Metadata
-                parameters.fieldName = config.fieldName;
-                parameters.fieldType = config.fieldType;
-                for (var j = 0; j < config.behavioursConfig.length; j++) {
-                    var behaviourConfig = config.behavioursConfig[j];
-                    var handlerDefinition = p.behaviourHandlers[behaviourConfig.behaviourName];
-                    var handlerImpl = handlerDefinition.instance;
-                    if (typeof handlerImpl === "undefined") {
-                        console.debug("New...");
-                        handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
-                        handlerDefinition.instance = handlerImpl;
-                    }
-                    parameters.groupValues = behaviourConfig.groupValues;
-                    handlerImpl.apply(parameters);
-                }
+        var time = Date.getTimer();
+
+        for (var i = 0; i < p.behaviourHandlers.length; i++) {
+            var handlerId = p.behaviourHandlers[i];
+            var handlerDefinition = p.behaviourHandlers[handlerId];
+            var handlerImpl = handlerDefinition.instance;
+            if (typeof handlerImpl === "undefined") {
+                handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
+                handlerDefinition.instance = handlerImpl;
             }
+            if (handlerDefinition.enabled == "true") {
+                handlerImpl.apply(handlerDefinition.fields);
+            }
+            
         }
 
+        console.debug("Time taken to apply behaviours: {0}ms".format((Date.getTimer() - time)));
+    }
+    
+
+    function FBIHandler$onSchemaReady() {
+        $evt.removeEventHandler(schema, "load", FBIHandler$onSchemaReady);
+        if (user.isLoaded()) {
+            FBIHandler$onUserReady();
+        } else {
+            $evt.addEventHandler(user, "load", FBIHandler$onUserReady);
+            user.load();
+        }
     }
 
     if (schema.isLoaded()) {
@@ -201,15 +200,12 @@ Tridion.Extensions.UI.FBI.Handler.prototype.ceaseBehaviours = function FBIHandle
         if (isDefined) {
             handlerDefinition.instance.cease();
         }
-        
-
-
     }
     
 
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(id, schema, user) {
+Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function FBIHandler$loadFieldsConfiguration(id, schema, user) {
     /// <summary>Gets the relevant configuration based on the parameters.</summary>
     /// <param name="id">The behaviour id (unique key)</param>
     /// <param name="schema">The <see cref="Tridion.ContentManager.Schema"/> object </param>
@@ -239,30 +235,30 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
 
 
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
-
-    var fieldConfigurations = [];
     for (var j = 0; j < fields.length; j++) {
-        var fieldConfig = {
-            fieldType: fields[j].nodeName,
-            fieldName: $xml.selectStringValue(fields[j], "tcm:Name"),
-            behavioursConfig: []
-        };
+        var fieldType = fields[j].nodeName;
+        var fieldName = $xml.selectStringValue(fields[j], "tcm:Name");
         
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerName = p.behaviourHandlers[i];
             var handler = p.behaviourHandlers[handlerName];
+            
             if (handler.enabled == "true") {
                 var configValue = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fields[j], handler.name, user);
-                if (configValue && configValue.groupValues.length > 0) {
-                    fieldConfig.behavioursConfig.push(configValue);
+                if (configValue && configValue.length > 0) {
+                    if (typeof handler.fields[fieldName]  === "undefined") {
+                        handler.fields[fieldName] = [];
+                    }
+                    handler.fields.push(fieldName);
+                    handler.fields[fieldName].fieldName = fieldName;
+                    handler.fields[fieldName].fieldType = fieldType;
+                    handler.fields[fieldName].values = configValue;
                 }
             }
             
         }
-        fieldConfigurations.push(fieldConfig);
+        
     }
-
-    return fieldConfigurations;
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getCurrentId = function FBIHandler$getCurrentId() {

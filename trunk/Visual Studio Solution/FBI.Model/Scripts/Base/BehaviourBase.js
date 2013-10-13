@@ -33,7 +33,7 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype._getPathTo = function Behaviou
     return "";
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(fieldType, fieldName, builder) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(fieldType, fieldName) {
     /// <summary>Gets the field html element.</summary>
     /// <param name="fieldType">The field type</param>
     /// <param name="fieldName">The field name</param>
@@ -41,14 +41,14 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function Beh
     /// <returns type="element">The field html element</returns>
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-            return builder.getField(fieldName).getElement().firstChild;
+            return $fbi.getCurrentFieldBuilder().getField(fieldName).getElement().firstChild;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(fieldType, fieldName, builder) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(fieldType, fieldName) {
     /// <summary>Gets the field container html element.</summary>
     /// <param name="fieldType">The field type</param>
     /// <param name="fieldName">The field name</param>
@@ -56,7 +56,7 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function B
     /// <returns type="element">The field container html element</returns>
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-            var element = builder.getField(fieldName).getElement();
+            var element = $fbi.getCurrentFieldBuilder().getField(fieldName).getElement();
             return element.parentElement;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);

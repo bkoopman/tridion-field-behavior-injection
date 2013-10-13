@@ -120,11 +120,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
             var valueNode = $xml.selectNodes(configurationNode, xpath);
             
             if (valueNode.length>0) {
-                var result = {
-                    behaviourName: behaviourName,
-                    groupValues: []
-                };
-                 
+                var result = [];
                 for (var i = 0; i < valueNode.length; i++) {
                     var groupId = $xml.selectStringValue(valueNode[i].parentNode, "@xlink:href", $const.Namespaces);
                     //TODO: Remove when done, shows the group memeberships.
@@ -135,7 +131,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
                         if (typeof configValue === "undefined") {
                             value = false;
                         } else {
-                            value = 
+                            value =
                             {
                                 groupId: groupId,
                                 value: configValue
@@ -143,12 +139,11 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.hasConfigurationV
                         }
 
                         if (value) {
-                            result.groupValues.push(value);
+                            result.push(value);
                         }
                         
                     } 
                 }
-                
                 return result;
                 
 
