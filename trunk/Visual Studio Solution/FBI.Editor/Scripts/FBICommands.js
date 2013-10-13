@@ -41,7 +41,6 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function Disable
     }
 
     if (this.isFBILoaded()) {
-        $fbiConfig.disabled = !$fbiConfig.disabled;
         if ($fbiConfig.disabled) {
             c.fbiButton.toggleOff();
             $fbi.applyBehaviours();
@@ -49,6 +48,7 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function Disable
             c.fbiButton.toggleOn();
             $fbi.ceaseBehaviours();
         }
+        $fbiConfig.disabled = !$fbiConfig.disabled;
     }
     
 };
