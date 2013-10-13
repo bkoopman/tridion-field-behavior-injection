@@ -13,8 +13,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
     //Extension Initialization    
     var ns = Tridion.Constants.Namespaces;
     ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
-    var masterControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
-    $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig(masterControl);
+    $fbiConfig.initializeGroups();
     $fbiConfig.getBehavioursPanel().close();
 };
 
