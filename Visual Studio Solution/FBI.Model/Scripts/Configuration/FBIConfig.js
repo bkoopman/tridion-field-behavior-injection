@@ -263,3 +263,5 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSelectedGroups
     var selection = this.getUsersAndGroupsList().getSelection();
     return selection.getItems();
 };
+
+$fbiConfig = Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig;
