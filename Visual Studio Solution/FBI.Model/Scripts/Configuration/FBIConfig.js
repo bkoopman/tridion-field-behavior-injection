@@ -16,6 +16,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
     this.properties.data = {};
     this.properties.metadata = {};
+    this.enabled = true;
 
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(masterTabControl);
     p.schema = $display.getItem();

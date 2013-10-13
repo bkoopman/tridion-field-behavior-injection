@@ -38,12 +38,14 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                 handler = {};
                 handler.name = confObj[i]["@name"];
                 handler.handler = confObj[i]["@handler"];
+                handler.enabled = confObj[i]["@enabled"];
                 p.behaviourHandlers[handler.name] = handler;
                 p.behaviourHandlers.push(handler.name);
             }
         } else {
             handler.name = confObj["behaviour"]["@name"];
             handler.handler = confObj["behaviour"]["@handler"];
+            handler.handler = confObj["behaviour"]["@enabled"];
             p.behaviourHandlers[handler.name] = handler;
             p.behaviourHandlers.push(handler.name);
         }
@@ -147,7 +149,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         FBIHandler$onSchemaReady();
     } else {
         $evt.addEventHandler(schema, "start", FBIHandler$onSchemaReady);
-        schema.load(true);
+        schema.load(false);
     }
 
 };
@@ -194,10 +196,13 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerName = p.behaviourHandlers[i];
             var handler = p.behaviourHandlers[handlerName];
-            var configValue = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fields[j], handler.name, user);
-            if (configValue && configValue.groupValues.length > 0) {
-                fieldConfig.behavioursConfig.push(configValue);
+            if (handler.enabled == "true") {
+                var configValue = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fields[j], handler.name, user);
+                if (configValue && configValue.groupValues.length > 0) {
+                    fieldConfig.behavioursConfig.push(configValue);
+                }
             }
+            
         }
         fieldConfigurations.push(fieldConfig);
     }
