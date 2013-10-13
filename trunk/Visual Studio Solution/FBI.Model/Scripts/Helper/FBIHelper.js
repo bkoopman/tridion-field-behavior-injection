@@ -1,4 +1,5 @@
-﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
+﻿/// <reference path="../Costants/FBIConstants.js" />
+Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper = function SchemaFieldBehaviourHelper() {
     /// <summary>

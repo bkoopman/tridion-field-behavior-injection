@@ -1,8 +1,12 @@
-﻿//************************************************************************************************************
-// Generic Handler
-//************************************************************************************************************
+﻿/// <reference path="../Costants/FBIConstants.js" />
+/// <reference path="../Helper/FBIHelper.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
+
 Tridion.Extensions.UI.FBI.Handler = function FBIHandler(tabControl) {
+    /// <summary>
+    /// Handler class to deal with the behaviours configuration, and triggers them.
+    /// Moreover, it exposes a Helper class based on <see cref="Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper"/>
+    /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Handler");
     this.properties = {};
     this.properties.controls =
@@ -14,11 +18,15 @@ Tridion.Extensions.UI.FBI.Handler = function FBIHandler(tabControl) {
 
 };
 
-
 Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$initialize() {
+    /// <summary>
+    /// Initializes the handler by loading the configuration (i.e: configured handlers in the editor.config file)
+    /// Moreover, it exposes a Helper class based on <see cref="Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper"/>
+    /// </summary>
     var p = this.properties;
     var c = p.controls;
     p.behaviourHandlers = [];
+    
     //Load handlers from configuration
     var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
     if (editor) {
@@ -74,7 +82,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                 }
                 break;
             default:
-
         }
     }
     //We have to wait until the display is ready
@@ -84,11 +91,16 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getConfigurationHelper = function FBIHandler$getConfigurationHelper() {
+    /// <summary>Gets the Helper object.</summary>
+    /// <returns type="string">The <see cref="Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper"> object</see></returns>
     var p = this.properties;
     return p.helper;
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandler$applyBehaviours(id, fieldBuilder) {
+    /// <summary>Apply the behaviours.</summary>
+    /// <param name="id">The behaviour id (unique key)</param>
+    /// <param name="fieldBuilder">The field builder object <see cref="Tridion.Controls.FieldBuilder"/></param>
     var p = this.properties;
     var c = p.controls;
     var schemaId = c.schemaControl.getValue();
@@ -111,10 +123,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
             groupValues: []
         };
 
-
-
+        //TODO: A more efficient way to execute the handlers
         if (fbiConfig.length && fbiConfig.length > 0) {
-
             //Iterate over relevant configured behaviours
             for (var i = 0; i < fbiConfig.length; i++) {
                 var config = fbiConfig[i];
@@ -143,6 +153,18 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FBIHandler$getFieldsConfiguration(id, schema, user) {
+    /// <summary>Gets the relevant configuration based on the parameters.</summary>
+    /// <param name="id">The behaviour id (unique key)</param>
+    /// <param name="schema">The <see cref="Tridion.ContentManager.Schema"/> object </param>
+    /// <param name="schema">The <see cref="Tridion.ContentManager.User"/> object </param>
+    /// <returns type="custom"> 
+    /// var fieldConfig = {
+    ///     fieldType: fields[j].nodeName,
+    ///     fieldName: $xml.selectStringValue(fields[j], "tcm:Name"),
+    ///     behavioursConfig: []
+    /// }; 
+    /// where behavioursConifg is an array of configurations per group, {groupId: "", value: ""}
+    ///</returns>
     var p = this.properties;
     var fieldsDoc;
 
@@ -168,7 +190,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
             fieldName: $xml.selectStringValue(fields[j], "tcm:Name"),
             behavioursConfig: []
         };
-        $node = fields[j];
+        
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerName = p.behaviourHandlers[i];
             var handler = p.behaviourHandlers[handlerName];
@@ -184,45 +206,3 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getFieldsConfiguration = function FB
 };
 
 
-Tridion.Extensions.UI.FBI.Handler.prototype.getFieldElement = function FBIHandler$getFieldElement(fieldName, builder) {
-
-};
-
-Tridion.Extensions.UI.FBI.Handler.prototype._getPathTo = function FBIHandler$_getPathTo(element) {
-    if (element.id !== '') {
-        return "";
-        //return 'id("' + element.id + '")';
-    }
-    if (element === document.body)
-        return element.tagName;
-
-    var ix = 0;
-    var siblings = element.parentNode.childNodes;
-    for (var i = 0; i < siblings.length; i++) {
-        var sibling = siblings[i];
-        if (sibling === element)
-            return this._getPathTo(element.parentNode) + '/' + element.tagName + '[' + (ix + 1) + ']';
-        if (sibling.nodeType === 1 && sibling.tagName === element.tagName)
-            ix++;
-    }
-    return "";
-};
-
-Tridion.Extensions.UI.FBI.Handler.prototype.getFieldElement = function FBIHandler$getFieldElement(fieldType, fieldName, builder) {
-    switch ((fieldType)) {
-        case "tcm:SingleLineTextField":
-            return builder.getField(fieldName).getElement().firstChild;
-        default:
-            return null;
-    }
-};
-
-Tridion.Extensions.UI.FBI.Handler.prototype.getFieldContainer = function FBIHandler$getFieldContainer(fieldType, fieldName, builder) {
-    switch ((fieldType)) {
-        case "tcm:SingleLineTextField":
-            var element = builder.getField(fieldName).getElement();
-            return element.parentElement;
-        default:
-            return null;
-    }
-};

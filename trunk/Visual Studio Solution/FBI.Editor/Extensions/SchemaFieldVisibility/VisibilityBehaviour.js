@@ -2,6 +2,7 @@
 Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBehaviour() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour");
     this.addInterface("Tridion.DisposableObject");
+    this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(params) {
@@ -11,7 +12,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = funct
     switch (params.fieldType) {
         case "tcm:SingleLineTextField":
             if (this.isHidden(params.groupValues)) {
-                var element = $fbi.getFieldContainer(params.fieldType, params.fieldName, params.fieldBuilder);
+                var element = this.getFieldContainer(params.fieldType, params.fieldName, params.fieldBuilder);
                 $css.undisplay(element);
             }
         default:
