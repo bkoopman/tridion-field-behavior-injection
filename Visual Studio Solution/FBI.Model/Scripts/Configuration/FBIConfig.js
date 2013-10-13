@@ -2,7 +2,7 @@
 /// <reference path="../Helper/FBIHelper.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehaviourConfig(masterTabControl) {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehaviourConfig() {
     /// <summary>
     /// Helper class to deal with the controls on the Schema View, such as <see cref="Tridion.Controls.List">Users and groups list</see>
     /// <see cref="Tridion.Controls.FieldDesigner">Field Deisginer</see> and <see cref="Tridion.Controls.Panel">behaviours panel</see>
@@ -12,21 +12,19 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig");
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
-    this.MasterTabControl = masterTabControl;
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
     this.properties.data = {};
     this.properties.metadata = {};
-    this.enabled = true;
-
-    p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper(masterTabControl);
-    p.schema = $display.getItem();
-    this.initializeGroups();
+    this.disabled = false;
+    p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
+    
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getTab = function SchemaFieldBehaviourConfig$getTab() {
     /// <summary>Gets the Master Tab Control on the view.</summary>
     /// <returns type="string">The <see cref="Tridion.Controls.Tab"> Control</see></returns>
-    return this.MasterTabControl.getSelectedItem().getId();
+    var tabControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
+    return tabControl.getSelectedItem().getId();
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getConfigurationHelper = function SchemaFieldBehaviourConfig$getConfigurartionHelper() {
@@ -111,6 +109,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSchema = funct
     /// <summary>Gets the Schema object.</summary>
     /// <returns type="string">The <see cref="Tridion.CotntentManager.Schema">object</see></returns>
     var p = this.properties;
+    if (typeof p.schema === "undefined") {
+        p.schema = $display.getItem();
+    }
     return p.schema;
 };
 
@@ -264,4 +265,4 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSelectedGroups
     return selection.getItems();
 };
 
-$fbiConfig = Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig;
+$fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig();

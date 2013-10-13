@@ -5,7 +5,8 @@
 Tridion.Extensions.FBI.Commands.DisableFBI = function FBICommands$DisableFBI() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.DisableFBI");
     this.addInterface("Tridion.Cme.Command", ["DisableFBI"]);
-    this.buttonId = "DisableFBIBtn";
+    this.buttonId = "#DisableFBIBtn";
+    this.properties.controls = {};
 };
 
 /**
@@ -14,8 +15,6 @@ Tridion.Extensions.FBI.Commands.DisableFBI = function FBICommands$DisableFBI() {
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isAvailable = function DisableFBI$_isAvailable(selection, pipeline) {
-    console.debug(Tridion.Runtime["IsAdministrator"]);
-    console.debug(Tridion.Runtime["IsAdministrator"] == "1");
     return Tridion.Runtime["IsAdministrator"] == "1";
 };
 
@@ -25,12 +24,7 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isAvailable = function Dis
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isEnabled = function DisableFBI$_isEnabled(selection, pipeline) {
-    if ($fbiConfig && !$fbiConfig.enabled) {
-        var p = this.properties;
-        var c = p.controls;
-        c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
-        c.fbiButton.toggleOn();
-    }
+    
     return this._isAvailable(selection, pipeline);
 };
 
@@ -42,19 +36,26 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isEnabled = function Disab
 Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function DisableFBI$_execute(selection, pipeline) {
     var p = this.properties;
     var c = p.controls;
-    c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
-    var btn = c.fbiButton;
-    
-    
-    if (btn.isOn()) {
-        //Is disabled, need to enable
-        btn.toggleOff();
-        $fbiConfig.enabled = true;
-        alert('enable');
-    } else {
-        //Is enabled, need to disable
-        btn.toggleOn();
-        $fbiConfig.enabled = false;
-        alert('disable');
+    if (typeof c.fbiButton === "undefined") {
+        c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
     }
+
+    if (this.isFBILoaded()) {
+        $fbiConfig.disabled = !$fbiConfig.disabled;
+        if ($fbiConfig.disabled) {
+            c.fbiButton.toggleOff();
+            $fbi.applyBehaviours();
+        } else {
+            c.fbiButton.toggleOn();
+            $fbi.ceaseBehaviours();
+        }
+    }
+    
+};
+
+
+Tridion.Extensions.FBI.Commands.DisableFBI.prototype.isFBILoaded = function DisableFBI$isFBILoaded() {
+    var fbiConfigDefined = !(typeof $fbiConfig === "undefined");
+    var fbiDefined = !(typeof $fbi === "undefined");
+    return fbiConfigDefined && fbiDefined;
 };
