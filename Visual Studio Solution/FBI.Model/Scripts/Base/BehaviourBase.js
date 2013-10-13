@@ -41,6 +41,7 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function Beh
     /// <returns type="element">The field html element</returns>
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
+        case $fbiConst.MULTILINE_TEXT_FIELD:
             return $fbi.getCurrentFieldBuilder().getField(fieldName).getElement().firstChild;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);
@@ -56,12 +57,16 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function B
     /// <returns type="element">The field container html element</returns>
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-            var element = $fbi.getCurrentFieldBuilder().getField(fieldName).getElement();
-            return element.parentElement;
+        case $fbiConst.MULTILINE_TEXT_FIELD:
+            return this.getFieldElement(fieldType, fieldName).parentElement;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
+};
+
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourBase$getField(fieldName) {
+    return $fbi.getCurrentFieldBuilder().getField(fieldName);
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease = function BehaviourBase$cease() {
@@ -75,11 +80,10 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease = function BehaviourBase
     }
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourBase$cease(field, callback) {
-    console.debug("Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField");
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourBase$cease(fieldName, field, callback) {
     var p = this.properties;
     var f = {
-        field: field,
+        fieldName: fieldName,
         restore: callback
     };
     p.fields.push(f);
