@@ -33,6 +33,11 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype._getPathTo = function Behaviou
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(fieldType, fieldName, builder) {
+    /// <summary>Gets the field html element.</summary>
+    /// <param name="fieldType">The field type</param>
+    /// <param name="fieldName">The field name</param>
+    /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
+    /// <returns type="element">The field html element</returns>
     switch ((fieldType)) {
         case "tcm:SingleLineTextField":
             return builder.getField(fieldName).getElement().firstChild;
@@ -42,6 +47,11 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function Beh
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(fieldType, fieldName, builder) {
+    /// <summary>Gets the field container html element.</summary>
+    /// <param name="fieldType">The field type</param>
+    /// <param name="fieldName">The field name</param>
+    /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
+    /// <returns type="element">The field container html element</returns>
     switch ((fieldType)) {
         case "tcm:SingleLineTextField":
             var element = builder.getField(fieldName).getElement();
