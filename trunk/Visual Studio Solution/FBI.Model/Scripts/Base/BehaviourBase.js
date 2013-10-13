@@ -39,9 +39,10 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function Beh
     /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
     /// <returns type="element">The field html element</returns>
     switch ((fieldType)) {
-        case "tcm:SingleLineTextField":
+        case $fbiConst.SINGLE_LINE_TEXT_FIELD:
             return builder.getField(fieldName).getElement().firstChild;
         default:
+            console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
 };
@@ -53,10 +54,11 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function B
     /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
     /// <returns type="element">The field container html element</returns>
     switch ((fieldType)) {
-        case "tcm:SingleLineTextField":
+        case $fbiConst.SINGLE_LINE_TEXT_FIELD:
             var element = builder.getField(fieldName).getElement();
             return element.parentElement;
         default:
+            console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
 };
