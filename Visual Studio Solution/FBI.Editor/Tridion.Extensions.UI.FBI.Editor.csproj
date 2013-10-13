@@ -101,8 +101,8 @@
     <Content Include="Scripts\ValidationCommands.js" />
     <Content Include="Scripts\FBICommands.js" />
     <Content Include="Theme\FBICommands.css" />
-    <Content Include="Theme\Icons\EnableFBI16x16.png" />
-    <Content Include="Theme\Icons\EnableFBI32x32.png" />
+    <Content Include="Theme\Icons\DisableFBI16x16.png" />
+    <Content Include="Theme\Icons\DisableFBI32x32.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

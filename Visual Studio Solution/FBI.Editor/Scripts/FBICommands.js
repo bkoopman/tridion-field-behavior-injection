@@ -2,9 +2,10 @@
 /**
 * Implements the <c>ValidationSave</c> command
 */
-Tridion.Extensions.FBI.Commands.EnableFBI = function FBICommands$EnableFBI() {
-    Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.EnableFBI");
-    this.addInterface("Tridion.Cme.Command", ["EnableFBI"]);
+Tridion.Extensions.FBI.Commands.DisableFBI = function FBICommands$DisableFBI() {
+    Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.DisableFBI");
+    this.addInterface("Tridion.Cme.Command", ["DisableFBI"]);
+    this.buttonId = "DisableFBIBtn";
 };
 
 /**
@@ -12,7 +13,7 @@ Tridion.Extensions.FBI.Commands.EnableFBI = function FBICommands$EnableFBI() {
 * @param {Tridion.Cme.Selection} selection The current selection.
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
-Tridion.Extensions.FBI.Commands.EnableFBI.prototype._isAvailable = function EnableFBI$_isAvailable(selection, pipeline) {
+Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isAvailable = function DisableFBI$_isAvailable(selection, pipeline) {
     return Tridion.Runtime["IsAdministrator"] == "1";
 };
 
@@ -21,7 +22,13 @@ Tridion.Extensions.FBI.Commands.EnableFBI.prototype._isAvailable = function Enab
 * @param {Tridion.Cme.Selection} selection The current selection.
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
-Tridion.Extensions.FBI.Commands.EnableFBI.prototype._isEnabled = function EnableFBI$_isEnabled(selection, pipeline) {
+Tridion.Extensions.FBI.Commands.DisableFBI.prototype._isEnabled = function DisableFBI$_isEnabled(selection, pipeline) {
+    if ($fbiConfig && !$fbiConfig.enabled) {
+        var p = this.properties;
+        var c = p.controls;
+        c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
+        c.fbiButton.toggleOn();
+    }
     return this._isAvailable(selection, pipeline);
 };
 
@@ -30,6 +37,22 @@ Tridion.Extensions.FBI.Commands.EnableFBI.prototype._isEnabled = function Enable
 * @param {Tridion.Cme.Selection} selection The current selection.
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
-Tridion.Extensions.FBI.Commands.ValidationSave.prototype._execute = function EnableFBI$_execute(selection, pipeline) {
-    alert('disable');
+Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function DisableFBI$_execute(selection, pipeline) {
+    var p = this.properties;
+    var c = p.controls;
+    c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
+    var btn = c.fbiButton;
+    
+    
+    if (btn.isOn()) {
+        //Is disabled, need to enable
+        btn.toggleOff();
+        $fbiConfig.enabled = true;
+        alert('enable');
+    } else {
+        //Is enabled, need to disable
+        btn.toggleOn();
+        $fbiConfig.enabled = false;
+        alert('disable');
+    }
 };
