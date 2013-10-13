@@ -124,11 +124,12 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
 
     function FBIHandler$onUserReady() {
         $evt.removeEventHandler(user, "load", FBIHandler$onUserReady);
+        
         self.loadFieldsConfiguration(id, schema, user);
         //TODO: Consider Caching the configuration
 
         var time = Date.getTimer();
-
+        
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerId = p.behaviourHandlers[i];
             var handlerDefinition = p.behaviourHandlers[handlerId];
@@ -230,8 +231,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
 
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
     for (var j = 0; j < fields.length; j++) {
-        console.debug(fields[j]);
-        var fieldType = fields[j].nodeName;
+        
+        var fieldType = $dom.getLocalName(fields[j]);
         var fieldName = $xml.selectStringValue(fields[j], "tcm:Name");
         var isMultivalue = ($xml.selectStringValue(fields[j], "tcm:MaxOccurs") != "1");
         
