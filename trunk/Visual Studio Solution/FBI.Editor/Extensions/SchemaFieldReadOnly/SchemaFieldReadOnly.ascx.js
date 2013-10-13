@@ -4,9 +4,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldReadOnly");
+    this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
+    this.addInterface("Tridion.DisposableObject");
+    
     this.key = "readonly";
-	this.addInterface("Tridion.DisposableObject");
-
 	var p = this.properties;
     p.controls = {};
     
@@ -14,6 +15,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.initialize");
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;
     
@@ -85,19 +87,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
         c.fieldReadOnlyCheckbox.checked = false;
     }
 
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.getConfigurationValue = function SchemaFieldReadOnly$getConfigurationValue() {
-    var p = this.properties;
-    var value = $fbiConfig.getConfigurationHelper().getConfigurationValue(p.selectedGroup, this.key);
-    return value;
-
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.setConfigurationValue = function SchemaFieldReadOnly$setConfigurationValue(value) {
-    var p = this.properties;
-    $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
-    
 };
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);

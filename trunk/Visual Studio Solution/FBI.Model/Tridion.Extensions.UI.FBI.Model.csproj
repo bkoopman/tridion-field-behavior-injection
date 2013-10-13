@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Scripts\Base\BehaviourBase.js" />
+    <Content Include="Scripts\Base\BehaviourConfigurationBase.js" />
     <Content Include="Scripts\Configuration\FBIConfig.js" />
     <Content Include="Scripts\Constants\FBIConstants.js" />
     <Content Include="Scripts\Handler\FBIHandler.js" />
