@@ -17,8 +17,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
             case $fbiConst.KEYWORD_FIELD:
-                this.disableElement(field);
-                this.addField(fieldName, Function.getDelegate(this, this.enableElement, [field]));
+                this.setReadOnly(field, true);
                 break;
                 
             default:
@@ -37,29 +36,43 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.isReadOnly = fu
     return false;
 };
 
-
-
-Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.disableElement = function ReadOnlyBehaviour$disableElement(field) {
+Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = function ReadOnlyBehaviour$setReadOnly(field, readonly) {
     var f = this.getField(field.fieldName);
-    f.getElement().control.applyReadOnly(true);
-    if (f.isMultivalued()) {
-        var f2 = f.getElement().control.getNextFieldSibling();
-        while (f2) {
-            f2.applyReadOnly(true);
-            f2 = f2.getNextFieldSibling();
+    var fieldState;
+    if (readonly) {
+        do {
+            var control = f.getElement().control;
+            control.applyReadOnly(readonly);
+            if (typeof field.previousStates === "undefined") {
+                field.previousStates = [];
+            }
+            fieldState = {
+                control: control,
+                canDelete: f.getCanDelete(),
+                canMove: f.getCanMove(),
+                canInsert: f.getCanInsert()
+            };
+            f.setCanDelete(false);
+            f.setCanMove(false);
+            f.setCanInsert(false);
+            field.previousStates.push(fieldState);
+            this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
+            f = f.getNextFieldSibling();
+        } while (f); 
+        
+    } else {
+        //Disable Behaviour
+        if (field.previousStates && field.previousStates.length > 0) {
+            for (var i = 0; i < field.previousStates.length; i++) {
+                fieldState = field.previousStates[i];
+                if (fieldState.control) {
+                    fieldState.control.applyReadOnly(readonly);
+                    fieldState.control.setCanDelete(fieldState.canDelete);
+                    fieldState.control.setCanMove(fieldState.canMove);
+                    fieldState.control.setCanInsert(fieldState.canInsert);
+                }
+            }
         }
-
-    }
-};
-Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.enableElement = function ReadOnlyBehaviour$enableElement(field) {
-    var f = this.getField(field.fieldName);
-    f.getElement().control.applyReadOnly(false);
-    if (f.isMultivalued()) {
-        var f2 = f.getElement().control.getNextFieldSibling();
-        while (f2) {
-            f2.applyReadOnly(false);
-            f2 = f2.getNextFieldSibling();
-        }
-
+        
     }
 };
