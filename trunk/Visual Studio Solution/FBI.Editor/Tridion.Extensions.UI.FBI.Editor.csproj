@@ -95,7 +95,7 @@
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx.js">
       <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviour.js" />
+    <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviour.js" />
     <Content Include="Scripts\ValidationCommands.js" />
@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ComponentTab\ComponentTab.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
