@@ -42,45 +42,46 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.isReadOnly = fu
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = function ReadOnlyBehaviour$setReadOnly(field, readonly) {
     var f = this.getField(field.fieldName);
     var fieldState;
+    var control;
+    
     if (readonly) {
+        var position = 0;
         do {
-            var control = f.getElement().control;
+            control = f.getElement().control;
             control.applyReadOnly(readonly);
             if (typeof field.previousStates === "undefined") {
                 field.previousStates = [];
             }
-            if (f.isMultivalued()) {
-                fieldState = {
-                    control: control,
-                    canDelete: f.getCanDelete(),
-                    canMove: f.getCanMove(),
-                    canInsert: f.getCanInsert()
-                };
-                f.setCanDelete(false);
-                f.setCanMove(false);
-                f.setCanInsert(false);
-                field.previousStates.push(fieldState);
-            }
-            this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
+            
+            fieldState = {
+                control: control,
+                canDelete: f.getCanDelete(),
+                canMove: f.getCanMove(),
+                canInsert: f.getCanInsert()
+            };
+            
+            f.setCanDelete(false);
+            f.setCanMove(false);
+            f.setCanInsert(false);
+            field.previousStates.push(fieldState);
+            this.addField("{0}-{1}".format(field.fieldName, position), Function.getDelegate(this, this.setReadOnly, [field, false]));
             f = f.getNextFieldSibling();
-            
-            
+            position++;
+
         } while (f); 
         
     } else {
         //Disable Behaviour
         if (field.previousStates && field.previousStates.length > 0) {
             for (var i = 0; i < field.previousStates.length; i++) {
+                f = this.getField(field.fieldName);
+                control = f.getElement().control;
+                control.applyReadOnly(readonly);
                 fieldState = field.previousStates[i];
                 if (fieldState.control) {
-                    f = this.getField(field.fieldName);
-                    f.applyReadOnly(readonly);
-                    if (f.isMultivalued()) {
-                        fieldState.control.setCanDelete(fieldState.canDelete);
-                        fieldState.control.setCanMove(fieldState.canMove);
-                        fieldState.control.setCanInsert(fieldState.canInsert);
-                    }
-                    
+                    fieldState.control.setCanDelete(fieldState.canDelete);
+                    fieldState.control.setCanMove(fieldState.canMove);
+                    fieldState.control.setCanInsert(fieldState.canInsert);
                 }
             }
         }

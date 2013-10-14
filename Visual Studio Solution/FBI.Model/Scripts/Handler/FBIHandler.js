@@ -260,11 +260,11 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
     }
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.getHanlders = function FBIHandler$getHandlers() {
+Tridion.Extensions.UI.FBI.Handler.prototype.getHandlers = function FBIHandler$getHandlers() {
     return this.properties.behaviourHandlers;
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.getHanlder = function FBIHandler$getHandler(name) {
+Tridion.Extensions.UI.FBI.Handler.prototype.getHandler = function FBIHandler$getHandler(name) {
     return this.properties.behaviourHandlers[name];
 };
 
