@@ -199,7 +199,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.ceaseBehaviours = function FBIHandle
         var name = p.behaviourHandlers[j];
         var handlerDefinition = p.behaviourHandlers[name];
         var isDefined = !(typeof handlerDefinition.instance === "undefined");
-        if (isDefined && handlerDefinition.enalbed == "true") {
+        if (isDefined && handlerDefinition.enabled == "true") {
             handlerDefinition.instance.cease();
         }
     }
