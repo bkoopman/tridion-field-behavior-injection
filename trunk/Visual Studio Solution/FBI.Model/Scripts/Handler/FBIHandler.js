@@ -224,7 +224,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
             fieldsDoc = $xml.getNewXmlDocument(schema.getMetadataFields());
             break;
         default:
-            return [];
+            break;
 
     }
 
@@ -259,10 +259,21 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
     }
 };
 
+Tridion.Extensions.UI.FBI.Handler.prototype.getHanlders = function FBIHandler$getHandlers() {
+    return this.properties.behaviourHandlers;
+};
+
+Tridion.Extensions.UI.FBI.Handler.prototype.getHanlder = function FBIHandler$getHandler(name) {
+    return this.properties.behaviourHandlers[name];
+};
+
 Tridion.Extensions.UI.FBI.Handler.prototype.getCurrentId = function FBIHandler$getCurrentId() {
     return this.getCurrentFieldBuilder().getId();
 };
 
+Tridion.Extensions.UI.FBI.Handler.prototype.getField = function FBIHandler$getField(name) {
+    return this.getCurrentFieldBuilder().getField(name);
+};
 Tridion.Extensions.UI.FBI.Handler.prototype.getCurrentFieldBuilder = function FBIHandler$getCurrentFieldBuilder() {
     var p = this.properties;
     return p.currentBuilder;
