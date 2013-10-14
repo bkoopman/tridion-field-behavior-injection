@@ -4,6 +4,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour");
     this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
+    this.callBase
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(fields) {
@@ -72,10 +73,9 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
             for (var i = 0; i < field.previousStates.length; i++) {
                 fieldState = field.previousStates[i];
                 if (fieldState.control) {
-                    
                     f = this.getField(field.fieldName);
                     f.applyReadOnly(readonly);
-                    if (f.isMultimalued()) {
+                    if (f.isMultivalued()) {
                         fieldState.control.setCanDelete(fieldState.canDelete);
                         fieldState.control.setCanMove(fieldState.canMove);
                         fieldState.control.setCanInsert(fieldState.canInsert);

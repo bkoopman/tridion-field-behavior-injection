@@ -133,12 +133,13 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerId = p.behaviourHandlers[i];
             var handlerDefinition = p.behaviourHandlers[handlerId];
-            var handlerImpl = handlerDefinition.instance;
-            if (typeof handlerImpl === "undefined") {
-                handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
-                handlerDefinition.instance = handlerImpl;
-            }
             if (handlerDefinition.enabled == "true") {
+                var handlerImpl = handlerDefinition.instance;
+                if (typeof handlerImpl === "undefined") {
+                    handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
+                    handlerDefinition.instance = handlerImpl;
+                }
+            
                 handlerImpl.apply(handlerDefinition.fields);
             }
             
@@ -198,7 +199,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.ceaseBehaviours = function FBIHandle
         var name = p.behaviourHandlers[j];
         var handlerDefinition = p.behaviourHandlers[name];
         var isDefined = !(typeof handlerDefinition.instance === "undefined");
-        if (isDefined) {
+        if (isDefined && handlerDefinition.enalbed == "true") {
             handlerDefinition.instance.cease();
         }
     }
