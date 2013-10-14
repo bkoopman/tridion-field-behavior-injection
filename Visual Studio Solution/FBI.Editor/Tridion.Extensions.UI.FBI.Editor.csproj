@@ -112,7 +112,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.cs">
+    <Compile Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.ascx.cs">
