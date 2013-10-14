@@ -12,5 +12,7 @@ Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
 
 Tridion.Extensions.UI.FBI.Constants.INPUT_ELEMENT = "input";
 Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";
+Tridion.Extensions.UI.FBI.Constants.RADIO_ELEMENT = "radio";
+Tridion.Extensions.UI.FBI.Constants.TREE_ELEMENT = "tree";
 
 var $fbiConst = Tridion.Extensions.UI.FBI.Constants;
