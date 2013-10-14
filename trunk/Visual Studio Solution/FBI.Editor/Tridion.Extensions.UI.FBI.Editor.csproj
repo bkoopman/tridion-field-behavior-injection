@@ -97,7 +97,7 @@
     </Content>
     <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
-    <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviour.js" />
+    <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviourHandler.js" />
     <Content Include="Scripts\ValidationCommands.js" />
     <Content Include="Scripts\FBICommands.js" />
     <Content Include="Themes\Carbon\FBICommands.css" />
