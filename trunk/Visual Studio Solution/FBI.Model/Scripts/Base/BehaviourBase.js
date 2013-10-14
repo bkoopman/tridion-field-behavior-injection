@@ -86,7 +86,6 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourB
         fieldName: fieldName,
         restore: callback
     };
-    //TODO: Make sure the field is not already there
     if (typeof p.fields == "undefined") {
         p.fields = [];
     }
@@ -95,8 +94,5 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourB
         p.fields[fieldName] = f;
         p.fields.push(fieldName);
     }
-    
-    
-    
 };
 
