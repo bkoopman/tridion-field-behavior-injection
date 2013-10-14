@@ -8,6 +8,8 @@ Tridion.Extensions.UI.FBI.Constants.MULTILINE_TEXT_FIELD = "MultiLineTextField";
 Tridion.Extensions.UI.FBI.Constants.KEYWORD_FIELD = "KeywordField";
 Tridion.Extensions.UI.FBI.Constants.XHTML_FIELD = "XHTMLField";
 
+Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
+
 Tridion.Extensions.UI.FBI.Constants.INPUT_ELEMENT = "input";
 Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";
 
