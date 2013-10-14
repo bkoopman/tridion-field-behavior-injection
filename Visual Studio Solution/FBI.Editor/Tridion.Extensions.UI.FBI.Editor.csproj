@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
