@@ -70,12 +70,11 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourB
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease = function BehaviourBase$cease() {
-    console.debug("Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease");
+    console.debug("Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease ["+this.key+"]");
     var p = this.properties;
-    
     if (p.fields.length > 0) {
         for (var i = 0; i < p.fields.length; i++) {
-            var f = p.fields[i];
+            var f = p.fields[p.fields[i]];
             f.restore();
         }
     }
@@ -88,6 +87,16 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourB
         restore: callback
     };
     //TODO: Make sure the field is not already there
-    p.fields.push(f);
+    if (typeof p.fields == "undefined") {
+        p.fields = [];
+    }
+
+    if (p.fields.indexOf(fieldName) < 0) {
+        p.fields[fieldName] = f;
+        p.fields.push(fieldName);
+    }
+    
+    
+    
 };
 
