@@ -81,11 +81,11 @@
     <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldBehaviour.ascx" />
-    <Content Include="Extensions\SchemaFieldBehaviour.ascx.css">
+    <Content Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx" />
+    <Content Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx.css">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldBehaviour.ascx.js">
+    <Content Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx.js">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx" />
@@ -130,8 +130,9 @@
       <DependentUpon>Tridion.Extensions.UI.FBI.Strings.resx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="SchemaFieldBehaviour.cs">
+    <Compile Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx.cs">
