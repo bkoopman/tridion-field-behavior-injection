@@ -17,7 +17,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function
     this.key = key;
 };
 
-
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
     /// <summary>
     /// Gets the configuration value
