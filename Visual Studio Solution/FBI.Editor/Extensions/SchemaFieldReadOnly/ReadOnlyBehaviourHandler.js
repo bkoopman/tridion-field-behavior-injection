@@ -48,18 +48,22 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
             if (typeof field.previousStates === "undefined") {
                 field.previousStates = [];
             }
-            fieldState = {
-                control: control,
-                canDelete: f.getCanDelete(),
-                canMove: f.getCanMove(),
-                canInsert: f.getCanInsert()
-            };
-            f.setCanDelete(false);
-            f.setCanMove(false);
-            f.setCanInsert(false);
-            field.previousStates.push(fieldState);
-            this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
+            if (f.isMultivalued()) {
+                fieldState = {
+                    control: control,
+                    canDelete: f.getCanDelete(),
+                    canMove: f.getCanMove(),
+                    canInsert: f.getCanInsert()
+                };
+                f.setCanDelete(false);
+                f.setCanMove(false);
+                f.setCanInsert(false);
+                field.previousStates.push(fieldState);
+                this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
+            }
             f = f.getNextFieldSibling();
+            
+            
         } while (f); 
         
     } else {
@@ -68,10 +72,15 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
             for (var i = 0; i < field.previousStates.length; i++) {
                 fieldState = field.previousStates[i];
                 if (fieldState.control) {
-                    fieldState.control.applyReadOnly(readonly);
-                    fieldState.control.setCanDelete(fieldState.canDelete);
-                    fieldState.control.setCanMove(fieldState.canMove);
-                    fieldState.control.setCanInsert(fieldState.canInsert);
+                    
+                    f = this.getField(field.fieldName);
+                    f.applyReadOnly(readonly);
+                    if (f.isMultimalued()) {
+                        fieldState.control.setCanDelete(fieldState.canDelete);
+                        fieldState.control.setCanMove(fieldState.canMove);
+                        fieldState.control.setCanInsert(fieldState.canInsert);
+                    }
+                    
                 }
             }
         }
