@@ -1,4 +1,5 @@
-﻿Type.registerNamespace("Tridion.Extensions.UI.FBI.Tabs");
+﻿/// <reference path="../../FBI.Model/Scripts/Handler/FBIHandler.js" />
+Type.registerNamespace("Tridion.Extensions.UI.FBI.Tabs");
 
 Tridion.Extensions.UI.FBI.Tabs.FBITab = function FBITab(element) {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Tabs.FBITab");

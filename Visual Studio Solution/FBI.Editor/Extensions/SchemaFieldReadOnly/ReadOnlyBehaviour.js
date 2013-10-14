@@ -7,6 +7,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(fields) {
+    console.debug(fields);
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -17,7 +18,9 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
             case $fbiConst.KEYWORD_FIELD:
-                this.setReadOnly(field, true);
+                if (this.isReadOnly(field.values)) {
+                    this.setReadOnly(field, true);
+                }
                 break;
                 
             default:

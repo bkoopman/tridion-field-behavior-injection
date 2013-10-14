@@ -69,7 +69,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
         var viewId = $display.getView().getId();
         switch (viewId) {
             //Component View
-            case "ComponentView":
+            case $fbiConst.COMPONENT_VIEW:
                 //Schema
                 self.properties.controls.schemaControl = $controls.getControl($("#Schema"), "Tridion.Controls.Dropdown");
 
