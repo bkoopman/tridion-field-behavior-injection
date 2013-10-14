@@ -60,8 +60,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
                 f.setCanMove(false);
                 f.setCanInsert(false);
                 field.previousStates.push(fieldState);
-                this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
             }
+            this.addField(field.fieldName, Function.getDelegate(this, this.setReadOnly, [field, false]));
             f = f.getNextFieldSibling();
             
             
