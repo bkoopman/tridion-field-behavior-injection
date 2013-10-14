@@ -7,7 +7,6 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(fields) {
-    console.debug(fields);
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;

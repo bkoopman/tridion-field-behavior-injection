@@ -6,27 +6,26 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBe
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(params) {
+Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(fields) {
     for (var i = 0; i < fields.length; i++) {
-        var fieldName = fields[i];
-        var field = fields[fieldName];
+        var field = fields[fields[i]];
+        var fieldName = field.fieldName;
+        var fieldType = field.fieldType;
 
-        switch (field.fieldType) {
+        switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
+            case $fbiConst.MULTILINE_TEXT_FIELD:
+            case $fbiConst.XHTML_FIELD:
+            case $fbiConst.KEYWORD_FIELD:
                 if (this.isHidden(field.values)) {
-                    var element = this.getFieldContainer(field.fieldType, field.fieldName);
-                    this.hideElement(element);
-                    this.addField(element, Function.getDelegate(this, this.showElement, [element]));
+                    this.setVisibility(field, true);
                 }
                 break;
-            case $fbiConst.MULTILINE_TEXT_FIELD:
-            case $fbiConst.KEYWORD_FIELD:
-            case $fbiConfig.XHTML_FIELD:
-                console.warn("TODO: Field [" + field.fieldName + "] Behaviour [" + this.getTypeName() + "] type: " + field.fieldType);
-                break;
+
             default:
-                console.warn("Field [" + field.fieldName + "] Behaviour [" + this.getTypeName() + "] not implemented for field type: " + field.fieldType);
+                console.warn("Field [" + fieldName + "] Behaviour [" + this.getTypeName() + "] not implemented for field type: [" + fieldType + "]");
         }
+
     }
 };
 
@@ -39,11 +38,18 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.isHidden = fu
     return false;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.hideElement = function VisibilityBehaviour$hideElement(element) {
-    $css.undisplay(element);
+Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.setVisibility = function VisibilityBehaviour$setVisibility(field, hidden) {
+    var container = this.getField(field.fieldName);
+    container = container.getElement().control;
+    container = container.getElement().parentElement;
+    if (hidden) {
+        $css.undisplay(container);
+        this.addField(field.fieldName, Function.getDelegate(this, this.setVisibility, [field, false]));
+    } else {
+        $css.display(container);
+    }
+
 };
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.showElement = function VisibilityBehaviour$showElement(element) {
-    $css.display(element);
-};
+
 
 
