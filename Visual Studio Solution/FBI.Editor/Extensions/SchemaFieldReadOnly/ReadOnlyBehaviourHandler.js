@@ -43,12 +43,16 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
     var f = this.getField(field.fieldName);
     var fieldState;
     var control;
+    var button;
+    var input;
+    var inputs;
+    var buttons;
     
     if (readonly) {
         var position = 0;
         do {
             control = f.getElement().control;
-            control.applyReadOnly(readonly);
+            f.applyReadOnly(readonly);
             if (typeof field.previousStates === "undefined") {
                 field.previousStates = [];
             }
@@ -66,6 +70,52 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
             field.previousStates.push(fieldState);
             this.addField("{0}-{1}".format(field.fieldName, position), Function.getDelegate(this, this.setReadOnly, [field, false]));
             f = f.getNextFieldSibling();
+
+
+            switch (field.fieldType) {
+                case $fbiConst.KEYWORD_FIELD:
+                    //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
+                    buttons = $("div.buttons", control.getElement());
+                    if (buttons) {
+                        $css(buttons, "visibility", "hidden");
+                    }
+                    switch (control.getListSettings().Type) {
+                        case $fbiConst.SELECT_ELEMENT:
+                            input = $($fbiConst.SELECT_ELEMENT, control.getElement());
+                            if (input) {
+                                input.disabled = readonly;}
+                            
+                        case $fbiConst.RADIO_ELEMENT:
+                            inputs = $$($fbiConst.INPUT_ELEMENT, control.getElement());
+                            if (inputs) {
+                                for (var k = 0; k < inputs.length; k++) {
+                                    inputs[k].disabled = readonly;
+                                }
+                            }
+                            
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
+                    button = $("#buttonAdd", control.getElement());
+                    if (button) {
+                        $css.removeClass(button, "disabled");
+                    }
+                    if (control.properties.input.properties.controls.buttons) {
+                        control.properties.input.properties.controls.buttons.add.disable();
+                        $css.addClass(control.properties.input.properties.controls.buttons.add.getElement(), "disabled");
+                    }
+                    
+                    
+                    break;
+
+                default:
+                    break;
+            }
+
+
             position++;
 
         } while (f); 
@@ -74,14 +124,47 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
         //Disable Behaviour
         if (field.previousStates && field.previousStates.length > 0) {
             for (var i = 0; i < field.previousStates.length; i++) {
-                f = this.getField(field.fieldName);
-                control = f.getElement().control;
-                control.applyReadOnly(readonly);
                 fieldState = field.previousStates[i];
                 if (fieldState.control) {
-                    fieldState.control.setCanDelete(fieldState.canDelete);
-                    fieldState.control.setCanMove(fieldState.canMove);
-                    fieldState.control.setCanInsert(fieldState.canInsert);
+                    switch (field.fieldType) {
+                        case $fbiConst.KEYWORD_FIELD:
+                            //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
+                            control = fieldState.control;
+                            buttons = $("div.buttons", control.getElement());
+                            $css(buttons, "visibility", "visible");
+                            switch (control.getListSettings().Type) {
+                                case $fbiConst.SELECT_ELEMENT:
+                                    input = $($fbiConst.SELECT_ELEMENT, control.getElement());
+                                    input.disabled = readonly;
+                                case $fbiConst.RADIO_ELEMENT:
+                                    inputs = $$($fbiConst.INPUT_ELEMENT, control.getElement());
+                                    for (var k = 0; k< inputs.length; k++)
+                                    {
+                                        inputs[k].disabled = readonly;
+                                    }
+                                    break; 
+                                case $fbiConst.TREE_ELEMENT:
+                                    fieldState.control.applyReadOnly(readonly);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
+                            if (control.properties.input.properties.controls.buttons) {
+                                $css.removeClass(control.properties.input.properties.controls.buttons.add.getElement(), "disabled");
+                                control.properties.input.properties.controls.buttons.add.enable();
+                            }
+
+                            break;
+                            
+                        default:
+                            fieldState.control.applyReadOnly(readonly);
+                            fieldState.control.setCanDelete(fieldState.canDelete);
+                            fieldState.control.setCanMove(fieldState.canMove);
+                            fieldState.control.setCanInsert(fieldState.canInsert);
+                    }
+                    
                 }
             }
         }
