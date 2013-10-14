@@ -112,7 +112,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.cs">
+    <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Extensions\ComponentTab\ComponentTab.ascx.cs">
