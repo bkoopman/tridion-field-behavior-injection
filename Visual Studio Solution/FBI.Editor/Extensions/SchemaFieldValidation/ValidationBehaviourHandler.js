@@ -16,6 +16,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
                 var validationRule = this.getValidationRule(field.values);
+                console.debug(validationRule);
                 this.setValidationRule(field, validationRule);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
@@ -43,10 +44,14 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidation
 
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationRule = function ValidationBehaviour$setValidationRule(field, validationRule) {
     var f = this.getField(field.fieldName);
-    $evt.addEventHandler(f, "blur", this.validateRule, [validationRule]);
+    $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, validationRule]));
     //change
     
 };
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(e, validationRule) {
-    console.debug("Validation rule: {0}, for field [{1}][{2}]".format(e.source.getFieldName(), validationRule));
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, validationRule) {
+    var values = field.getValues();
+    for (var i = 0; i < values.length; i++) {
+        var value = values[i];
+        console.debug("Validate {0} with {1}".format(value, validationRule));
+    }
 };

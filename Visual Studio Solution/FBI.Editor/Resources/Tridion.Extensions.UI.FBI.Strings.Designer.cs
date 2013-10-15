@@ -70,12 +70,29 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable 
-        ///FBI.
+        ///   Looks up a localized string similar to Disable FBI.
         /// </summary>
         internal static string DisableFBILabel {
             get {
                 return ResourceManager.GetString("DisableFBILabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error validating field {0}. {1}.
+        /// </summary>
+        internal static string EmailErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("EmailErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email .
+        /// </summary>
+        internal static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
             }
         }
         
@@ -103,6 +120,24 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         internal static string HiddenLabel {
             get {
                 return ResourceManager.GetString("HiddenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error validating field {0}. {1}.
+        /// </summary>
+        internal static string PhoneErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("PhoneErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        internal static string PhoneLabel {
+            get {
+                return ResourceManager.GetString("PhoneLabel", resourceCulture);
             }
         }
         

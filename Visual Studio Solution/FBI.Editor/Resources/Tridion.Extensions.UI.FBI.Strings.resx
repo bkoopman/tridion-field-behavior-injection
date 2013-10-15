@@ -123,6 +123,12 @@
   <data name="DisableFBILabel" xml:space="preserve">
     <value>Disable FBI</value>
   </data>
+  <data name="EmailErrorMessageLabel" xml:space="preserve">
+    <value>There was an error validating field {0}. {1}</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email </value>
+  </data>
   <data name="EnableFBILabel" xml:space="preserve">
     <value>Enable FBI</value>
   </data>
@@ -131,6 +137,12 @@
   </data>
   <data name="HiddenLabel" xml:space="preserve">
     <value>Hidden</value>
+  </data>
+  <data name="PhoneErrorMessageLabel" xml:space="preserve">
+    <value>There was an error validating field {0}. {1}</value>
+  </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Phone</value>
   </data>
   <data name="ReadOnlyLabel" xml:space="preserve">
     <value>Read Only</value>
