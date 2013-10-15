@@ -4,7 +4,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour");
     this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
-    this.callBase
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.READONLY]);
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(fields) {
@@ -68,10 +68,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
             f.setCanMove(false);
             f.setCanInsert(false);
             field.previousStates.push(fieldState);
-            this.addField("{0}-{1}".format(field.fieldName, position), Function.getDelegate(this, this.setReadOnly, [field, false]));
             f = f.getNextFieldSibling();
-
-
+            
             switch (field.fieldType) {
                 case $fbiConst.KEYWORD_FIELD:
                     //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
@@ -108,66 +106,14 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
                         $css.addClass(control.properties.input.properties.controls.buttons.add.getElement(), "disabled");
                     }
                     
-                    
                     break;
 
                 default:
                     break;
             }
-
-
             position++;
 
         } while (f); 
-        
-    } else {
-        //Disable Behaviour
-        if (field.previousStates && field.previousStates.length > 0) {
-            for (var i = 0; i < field.previousStates.length; i++) {
-                fieldState = field.previousStates[i];
-                if (fieldState.control) {
-                    switch (field.fieldType) {
-                        case $fbiConst.KEYWORD_FIELD:
-                            //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
-                            control = fieldState.control;
-                            buttons = $("div.buttons", control.getElement());
-                            $css(buttons, "visibility", "visible");
-                            switch (control.getListSettings().Type) {
-                                case $fbiConst.SELECT_ELEMENT:
-                                    input = $($fbiConst.SELECT_ELEMENT, control.getElement());
-                                    input.disabled = readonly;
-                                case $fbiConst.RADIO_ELEMENT:
-                                    inputs = $$($fbiConst.INPUT_ELEMENT, control.getElement());
-                                    for (var k = 0; k< inputs.length; k++)
-                                    {
-                                        inputs[k].disabled = readonly;
-                                    }
-                                    break; 
-                                case $fbiConst.TREE_ELEMENT:
-                                    fieldState.control.applyReadOnly(readonly);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            
-                            //TODO: CHEK IF THE USER HAS ADD CAPABILITIES FOR KWDS
-                            if (control.properties.input.properties.controls.buttons) {
-                                $css.removeClass(control.properties.input.properties.controls.buttons.add.getElement(), "disabled");
-                                control.properties.input.properties.controls.buttons.add.enable();
-                            }
-
-                            break;
-                            
-                        default:
-                            fieldState.control.applyReadOnly(readonly);
-                            fieldState.control.setCanDelete(fieldState.canDelete);
-                            fieldState.control.setCanMove(fieldState.canMove);
-                            fieldState.control.setCanInsert(fieldState.canInsert);
-                    }
-                    
-                }
-            }
-        }
         
     }
 };

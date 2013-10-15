@@ -7,7 +7,7 @@ Tridion.Extensions.UI.FBI.BehaviourBase = function BehaviourBase() {
     /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.BehaviourBase");
     this.addInterface("Tridion.DisposableObject");
-    this.properties.fields = [];
+    this.key = "base";
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype._getPathTo = function BehaviourBase$_getPathTo(element) {
@@ -69,30 +69,8 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourB
     return $fbi.getCurrentFieldBuilder().getField(fieldName);
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease = function BehaviourBase$cease() {
-    console.debug("Tridion.Extensions.UI.FBI.BehaviourBase.prototype.cease");
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.setKey = function BehaviourBase$setKey(key) {
     var p = this.properties;
-    if (p.fields.length > 0) {
-        for (var i = 0; i < p.fields.length; i++) {
-            var f = p.fields[p.fields[i]];
-            f.restore();
-        }
-    }
-};
-
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.addField = function BehaviourBase$addField(fieldName, callback) {
-    var p = this.properties;
-    var f = {
-        fieldName: fieldName,
-        restore: callback
-    };
-    if (typeof p.fields == "undefined") {
-        p.fields = [];
-    }
-
-    if (p.fields.indexOf(fieldName) < 0) {
-        p.fields[fieldName] = f;
-        p.fields.push(fieldName);
-    }
+    p.key = key;
 };
 
