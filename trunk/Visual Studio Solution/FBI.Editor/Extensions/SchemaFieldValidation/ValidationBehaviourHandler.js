@@ -15,9 +15,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
         
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-                var validationRule = this.getValidationRule(field.values);
-                console.debug(validationRule);
-                this.setValidationRule(field, validationRule);
+                var typeOfValidation = this.getValidationType(field.values);
+                this.setValidationType(field, typeOfValidation);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
@@ -38,20 +37,25 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
     }
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidationRule = function ValidationBehaviour$getValidationRule(values) {
-    return values[0];
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidationType = function ValidationBehaviour$getValidationType(values) {
+    return values[0].value;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationRule = function ValidationBehaviour$setValidationRule(field, validationRule) {
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationType = function ValidationBehaviour$setValidationType(field, type) {
     var f = this.getField(field.fieldName);
-    $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, validationRule]));
+    $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, type]));
     //change
     
 };
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, validationRule) {
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, type) {
     var values = field.getValues();
     for (var i = 0; i < values.length; i++) {
         var value = values[i];
-        console.debug("Validate {0} with {1}".format(value, validationRule));
+        var result = $fbiValidationConfig.checkRule(type, value);
+        if (!result.Success) {
+            $messages.registerWarning(result.Message.format(field.getFieldName()));
+            field.focus();
+            return;
+        }
     }
 };
