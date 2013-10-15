@@ -79,7 +79,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
-    console.debug((schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup);
     c.fieldMaxLengthInput.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
     if (p.selectedGroup) {
         var maxLength = this.getConfigurationValue();
@@ -87,7 +86,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
             maxLength = "";
         }
         c.fieldMaxLengthInput.value = maxLength;
-        console.debug(maxLength);
     }
 
 };
