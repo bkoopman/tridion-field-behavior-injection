@@ -2,7 +2,6 @@
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldReadOnly");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
