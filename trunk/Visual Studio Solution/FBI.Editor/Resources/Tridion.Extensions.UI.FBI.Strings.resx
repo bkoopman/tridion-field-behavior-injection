@@ -156,4 +156,7 @@
   <data name="ValidationLabel" xml:space="preserve">
     <value>Validation Rule</value>
   </data>
+  <data name="ZipLabel" xml:space="preserve">
+    <value>Zip Code</value>
+  </data>
 </root>
