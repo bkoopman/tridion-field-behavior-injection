@@ -2,7 +2,6 @@
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation = function SchemaFieldValidation()
 {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldValidation");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
