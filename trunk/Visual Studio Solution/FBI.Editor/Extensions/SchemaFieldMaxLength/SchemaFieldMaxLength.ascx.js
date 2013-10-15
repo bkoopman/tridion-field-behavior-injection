@@ -35,20 +35,23 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.initialize = function S
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputChange = function SchemaFieldMaxLength$onMaxLengthInputChange(e) {
+    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthCheckboxBlur");
+    var p = this.properties;
+    var c = p.controls;
     var value = c.fieldMaxLengthInput.value;
     if (value != "" && isNaN(value)) {
-        console.debug(e);
-        e.focus();
+        console.debug(e.source);
+        c.fieldMaxLengthInput.value = "";
     }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputBlur = function SchemaFieldMaxLength$onMaxLengthInputBlur() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthCheckboxClick");
+    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthCheckboxBlur");
     var p = this.properties;
     var c = p.controls;
     var value = c.fieldMaxLengthInput.value;
     if (value != "" && !isNaN(value)) {
-        this.setConfigurationValue(checked);
+        this.setConfigurationValue(value);
     } 
 };
 
@@ -64,6 +67,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSelectionChange = fun
     }
 
     var configValue = this.getConfigurationValue();
+    if (typeof configValue === "undefined") {
+        configValue = "";
+    }
     c.fieldMaxLengthInput.value = configValue;
 
 
@@ -76,10 +82,11 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
     var schema = $fbiConfig.getSchema();
     console.debug((schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup);
     c.fieldMaxLengthInput.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
-    console.debug("1");
     if (p.selectedGroup) {
-        console.debug("2");
         var maxLength = this.getConfigurationValue();
+        if (typeof maxLength === "undefined") {
+            maxLength = "";
+        }
         c.fieldMaxLengthInput.value = maxLength;
         console.debug(maxLength);
     }
