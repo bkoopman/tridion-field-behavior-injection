@@ -43,11 +43,12 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function Disable
     if (this.isFBILoaded()) {
         if ($fbiConfig.disabled) {
             c.fbiButton.toggleOff();
-            $fbi.reApplyBehaviours();
+            $fbi.enableActiveHandlers();
         } else {
             c.fbiButton.toggleOn();
-            $fbi.ceaseBehaviours();
+            $fbi.disableActiveHandlers();
         }
+        $fbi.reApplyBehaviours();
         $fbiConfig.disabled = !$fbiConfig.disabled;
     }
     

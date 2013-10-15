@@ -15,4 +15,7 @@ Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";
 Tridion.Extensions.UI.FBI.Constants.RADIO_ELEMENT = "radio";
 Tridion.Extensions.UI.FBI.Constants.TREE_ELEMENT = "tree";
 
+
+Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
+
 var $fbiConst = Tridion.Extensions.UI.FBI.Constants;

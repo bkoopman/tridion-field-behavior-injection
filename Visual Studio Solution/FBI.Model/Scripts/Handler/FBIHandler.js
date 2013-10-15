@@ -15,7 +15,8 @@ Tridion.Extensions.UI.FBI.Handler = function FBIHandler(tabControl) {
     };
     var p = this.properties;
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
-
+    p.activeHandlers = [];
+    p.deactivatedHandlers = [];
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$initialize() {
@@ -92,7 +93,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     $evt.addEventHandler($display, "start", FBIHandler$onDisplayReady);
 };
 
-
 Tridion.Extensions.UI.FBI.Handler.prototype.getConfigurationHelper = function FBIHandler$getConfigurationHelper() {
     /// <summary>Gets the Helper object.</summary>
     /// <returns type="string">The <see cref="Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper"> object</see></returns>
@@ -132,20 +132,24 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerId = p.behaviourHandlers[i];
-            var handlerDefinition = p.behaviourHandlers[handlerId];
-            if (handlerDefinition.enabled == "true") {
-                var handlerImpl = handlerDefinition.instance;
-                if (typeof handlerImpl === "undefined") {
-                    handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
-                    handlerDefinition.instance = handlerImpl;
+            if (self._isHandlerActive(handlerId)) {
+                var handlerDefinition = p.behaviourHandlers[handlerId];
+                if (handlerDefinition.enabled == "true") {
+                    var handlerImpl = handlerDefinition.instance;
+                    if (typeof handlerImpl === "undefined") {
+                        handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
+                        handlerDefinition.instance = handlerImpl;
+                    }
+                    if (p.activeHandlers.indexOf(handlerDefinition.name) < 0) {
+                        p.activeHandlers.push[handlerDefinition.name];
+                    }
+                    self._activateHandler(handlerId);
+                    handlerImpl.apply(handlerDefinition.fields);
                 }
-            
-                handlerImpl.apply(handlerDefinition.fields);
             }
-            
         }
-
-        console.debug("Time taken to apply behaviours: {0}ms".format((Date.getTimer() - time)));
+        
+        $log.info("Tridion.Extensions.UI.FBI.Handler: Time taken to apply behaviours was {0}ms".format((Date.getTimer() - time)));
     }
     
 
@@ -265,8 +269,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.reApplyBehaviours = function FBIHand
     var fbProperties = p.currentBuilder.properties;
     fbProperties.toLoad = true;
     fbProperties.readOnly = false;
-    console.debug(p.currentBuilder);
-    $fb = p.currentBuilder;
     p.currentBuilder.doLoad();
 };
 
@@ -285,10 +287,38 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getCurrentId = function FBIHandler$g
 Tridion.Extensions.UI.FBI.Handler.prototype.getField = function FBIHandler$getField(name) {
     return this.getCurrentFieldBuilder().getField(name);
 };
+
 Tridion.Extensions.UI.FBI.Handler.prototype.getCurrentFieldBuilder = function FBIHandler$getCurrentFieldBuilder() {
     var p = this.properties;
     return p.currentBuilder;
 };
 
+Tridion.Extensions.UI.FBI.Handler.prototype._activateHandler = function FBIHandler$_activateHandler(key) {
+    var p = this.properties;
+    var index = p.activeHandlers.indexOf(key);
+    if (index < 0) {
+        p.activeHandlers.push(key);
+    }
+};
 
+Tridion.Extensions.UI.FBI.Handler.prototype._isHandlerActive = function FBIHandler$_isHandlerActive(key) {
+    var p = this.properties;
+    if (p.deactivatedHandlers.length == 0) {
+        return true;
+    } else {
+        return (p.deactivatedHandlers.indexOf(key) < 0);
+    }
+    
+};
 
+Tridion.Extensions.UI.FBI.Handler.prototype.disableActiveHandlers = function FBIHandler$disableActiveHandlers() {
+    var p = this.properties;
+    p.deactivatedHandlers = [].concat(p.activeHandlers);
+    $log.info("Tridion.Extensions.UI.FBI.Handler: Behaviours successfully disabled.");
+};
+
+Tridion.Extensions.UI.FBI.Handler.prototype.enableActiveHandlers = function FBIHandler$enableActiveHandlers() {
+    var p = this.properties;
+    p.deactivatedHandlers = [];
+    $log.info("Tridion.Extensions.UI.FBI.Handler: Behaviours successfully enabled.");
+};
