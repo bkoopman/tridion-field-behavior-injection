@@ -30,7 +30,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.initialize = function S
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldMaxLengthInput, "blur", Function.getDelegate(this, this.onMaxLengthInputBlur));
-    $evt.addEventHandler(c.fieldMaxLengthInput, "blur", Function.getDelegate(this, this.onMaxLengthInputChange));
+    $evt.addEventHandler(c.fieldMaxLengthInput, "change", Function.getDelegate(this, this.onMaxLengthInputChange));
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "onSchemaChanged");
 };
 
@@ -74,7 +74,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
-    c.fieldMaxLengthInput.disabled = (schema && (schema.isMaxLength() || schema.isLocalized())) || false || !p.selectedGroup;
+    c.fieldMaxLengthInput.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
 
     if (p.selectedGroup) {
         var MaxLength = this.getConfigurationValue();
