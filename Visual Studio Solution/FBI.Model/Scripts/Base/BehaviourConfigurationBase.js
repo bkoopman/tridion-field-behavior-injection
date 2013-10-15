@@ -42,7 +42,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setConfigurationV
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onSchemaChanged = function BehaviourConfigurationBase$onSchemaChanged() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSchemaChanged");
+    console.debug("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onSchemaChanged");
     var schema = $fbiConfig.getSchema();
     if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
         $css.undisplay($fbiConfig.getBehavioursPanel().getElement());
