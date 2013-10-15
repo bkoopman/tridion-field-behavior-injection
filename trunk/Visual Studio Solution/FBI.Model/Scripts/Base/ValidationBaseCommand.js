@@ -1,9 +1,9 @@
-﻿/**
+﻿Type.registerNamespace("Tridion.Extensions.FBI.Commands");
+/**
 * Implements the <c>ValidationSave</c> command
 */
 Tridion.Extensions.FBI.Commands.ValidationBaseCommand = function Commands$ValidationBaseCommand() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.ValidationBaseCommand");
-    var p = this.properties = {};
 };
 
 /**
@@ -29,49 +29,59 @@ Tridion.Extensions.FBI.Commands.ValidationBaseCommand.prototype._isEnabled = fun
 * @param {Tridion.Cme.Selection} selection The current selection.
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
-Tridion.Extensions.FBI.Commands.ValidationBaseCommand.prototype._execute = function ValidationBaseCommand$_execute(selection, pipeline) {
+Tridion.Extensions.FBI.Commands.ValidationBaseCommand.prototype._execute = function ValidationBaseCommand$_execute(selection, pipeline, commandName) {
     var itemUri = selection.getItem(0);
     var item = $models.getItem(itemUri);
-    var command = $cme.getCommand("SaveClose");
-
+    var command = $cme.getCommand(commandName);
+    
     var user = $models.getItem(Tridion.UI.UserSettings.getJsonUserSettings()["User"]["@ID"]);
 
 
     if (user.isLoaded()) {
-        FBIHandler$onUserReady();
+        Validation$onUserReady(user);
     } else {
-        $evt.addEventHandler(user, "load", FBIHandler$onUserReady);
+        $evt.addEventHandler(user, "load", Validation$onUserReady);
         user.load();
     }
 
 
-    function Validation
-    if (item.getItemType() == $const.ItemType.COMPONENT) {
-        var inputs = Tridion.Extensions.FBI.Commands.GetValidationFields(selection);
-        if (inputs.length > 0) {
-            Tridion.Extensions.FBI.Commands.Services.FBIServices.ValidateField(inputs,
-                function (result) {
-                    if (!result.Success) {
-                        $messages.registerWarning(result.ErrorMessage);
-                    } else {                        
-                        return command._execute(selection, pipeline);
+    function Validation$onUserReady(e) {
+        var u = e;
+        if (e.source) {
+            u = e.source;
+        }
+        
+        if (item.getItemType() == $const.ItemType.COMPONENT) {
+            
+            var inputs = Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetValidationFields(selection, u);
+
+            if (inputs.length > 0) {
+                Tridion.Extensions.FBI.Commands.Services.FBIServices.ValidateField(inputs,
+                    function (result) {
+                        if (!result.Success) {
+                            $messages.registerWarning(result.ErrorMessage);
+                        } else {
+                            return command._execute(selection, pipeline);
+                        }
+                    },
+                    function (error) {
+                        console.debug(error);
+                        return;
                     }
-                },
-                function (error) {
-                    console.debug(error);
-                    return;
-                }
-            );
+                );
+            }
+            else {
+                command._execute(selection, pipeline);
+            }
+        } else {
+            command._execute(selection, pipeline);
         }
-        else {            
-            return command._execute(selection, pipeline);
-        }
-    } else {
-        return command._execute(selection, pipeline);
     }
+
+    
 };
 
-Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetValidationFields = function ValidationBaseCommand$GetValidationFields(selection) {
+Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetValidationFields = function ValidationBaseCommand$GetValidationFields(selection, user) {
     var itemUri = selection.getItem(0);
     var item = $models.getItem(itemUri);
     var inputs = [];
@@ -93,59 +103,37 @@ Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetValidationFields = func
             }
             
 
-            Tridion.Extensions.FBI.Commands.GetInputs(item.getXml(), schema, fields, contentFieldBuilder, inputs);
+            Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetInputs(item.getXml(), schema, fields, contentFieldBuilder, inputs, user);
             schema = item.getMetadataSchema();
             fields = schema.getStaticMetadataFields();
-            Tridion.Extensions.FBI.Commands.GetInputs(item.getMetadata(), schema, fields, mdFieldBuilder, inputs);
+            Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetInputs(item.getMetadata(), schema, fields, mdFieldBuilder, inputs, user);
             
         }
     }
     return inputs;
-
-
 };
 
 
-Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetInputs = function ValidationBaseCommand$GetInputs(xml, schema,  fields, fieldBuilder, existingInputs) {
-    var inputs = existingInputs || [];    
+Tridion.Extensions.FBI.Commands.ValidationBaseCommand.GetInputs = function ValidationBaseCommand$GetInputs(xml, schema,  fields, fieldBuilder, existingInputs, user) {
+    var p = this.properties;
+    var inputs = existingInputs || [];
     var xmlFields = $xml.getNewXmlDocument(fields);
     var schemaFields = $xml.selectNodes(xmlFields, "/*/*");
-    var ns = Tridion.Constants.Namespaces;
-    ns["fv"] = "http://www.sdltridion.com/2011/FieldValidation";
-
-
-
-
+    
     for (var i = 0; i < schemaFields.length; i++) {
         var fieldXml = schemaFields[i];
-        var value = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fieldXml, $fbiConst.VALIDATION, user);
-        console.debug("Validation: ");
-        console.debug(value)
-        /*var input = {
-            Type: validation,
-            FieldValue: fieldValue,
-            FieldName: value
-        };
-        
-
-        var extensionXmlElement = $xml.selectSingleNode(fieldXml, "tcm:ExtensionXml");
-        if (extensionXmlElement) {
-            var configurationNode = $xml.selectSingleNode(extensionXmlElement, "fv:configuration");
-            if (configurationNode) {
-                var validation = $xml.getInnerText(configurationNode, "fv:field/fv:validation");
-                validation = (validation != 'undefined') ? validation : 'none';
-                if (validation && validation != 'none') {
-                    var fieldName = $xml.getInnerText(fieldXml, 'tcm:Name');
-                    ns["fvc"] = schema.getStaticNamespaceUri();
-                    var fieldValue = $xml.getInnerXml($xml.getNewXmlDocument(xml), "//fvc:" + fieldName)                    
-                    if (fieldBuilder) {
-                        var contentFieldBuilder = $display.getView().properties.controls.fieldBuilder;                        
-                        fieldValue = $xml.getInnerXml($xml.getNewXmlDocument(fieldBuilder.getData()), "//fvc:" + fieldName);                        
-                    }
-                    
-                    inputs.push(input);
-                }
-            }
-        }*/
+        var configValue = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fieldXml, $fbiConst.VALIDATION, user);
+        if (configValue && configValue.length > 0) {
+            
+            var fieldName = $xml.getInnerText(fieldXml, 'tcm:Name');
+            console.debug(fieldName);
+            var input = {
+                Type: configValue.value,
+                FieldValue: $xml.getInnerXml($xml.getNewXmlDocument(xml), "//fvc:" + fieldName),
+                FieldName: fieldName
+            };
+            console.debug(input);
+            inputs.push(input);
+        }
     }
 };
