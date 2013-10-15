@@ -28,7 +28,7 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
                         var validation = validations[j];
                         console.debug(validation);
                         var Name = validation["@name"];
-                        var Message = validation["@name"];
+                        var Message = validation["@error"];
                         
                         Name = $fbiConfig.getLabel(Name);
                         Message = $fbiConfig.getLabel(Message);
