@@ -119,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.cs">
       <DependentUpon>SchemaFieldMaxLength.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
