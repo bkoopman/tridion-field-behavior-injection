@@ -20,6 +20,10 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = funct
             case $fbiConst.KEYWORD_FIELD:
             case $fbiConst.NUMBER_FIELD:
             case $fbiConst.DATE_FIELD:
+            case $fbiConst.EXTERNAL_LINK_FIELD:
+            case $fbiConst.COMPONENT_LINK_FIELD:
+            case $fbiConst.MULTIMEDIA_LINK_FIELD:
+            case $fbiConst.EMBEDDED_FIELD:
                 if (this.isHidden(field.values)) {
                     this.setVisibility(field, true);
                 }

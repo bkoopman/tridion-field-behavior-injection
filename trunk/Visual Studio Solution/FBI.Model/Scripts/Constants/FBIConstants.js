@@ -10,6 +10,10 @@ Tridion.Extensions.UI.FBI.Constants.KEYWORD_FIELD = "KeywordField";
 Tridion.Extensions.UI.FBI.Constants.XHTML_FIELD = "XHTMLField";
 Tridion.Extensions.UI.FBI.Constants.NUMBER_FIELD = "NumberField";
 Tridion.Extensions.UI.FBI.Constants.DATE_FIELD = "DateField";
+Tridion.Extensions.UI.FBI.Constants.EXTERNAL_LINK_FIELD = "ExternalLinkField";
+Tridion.Extensions.UI.FBI.Constants.COMPONENT_LINK_FIELD = "ComponentLinkField";
+Tridion.Extensions.UI.FBI.Constants.MULTIMEDIA_LINK_FIELD = "MultimediaLinkField";
+Tridion.Extensions.UI.FBI.Constants.EMBEDDED_FIELD = "EmbeddedSchemaField";
 
 Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
 
