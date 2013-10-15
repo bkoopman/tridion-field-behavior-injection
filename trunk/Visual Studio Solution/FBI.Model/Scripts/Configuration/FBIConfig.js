@@ -265,4 +265,13 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSelectedGroups
     return selection.getItems();
 };
 
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getLabel = function SchemaFieldBehaviourConfig$getLabel(key, params) {
+    if (typeof params == "undefined") {
+        return $localization.getResource($fbiConst.RESOURCES_NAMESPACE, key);
+    } else {
+        return $localization.getResource($fbiConst.RESOURCES_NAMESPACE, key, params);
+    }
+};
+
+
 $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig();

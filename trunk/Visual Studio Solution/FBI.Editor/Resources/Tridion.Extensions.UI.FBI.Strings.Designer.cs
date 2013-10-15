@@ -70,6 +70,34 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable 
+        ///FBI.
+        /// </summary>
+        internal static string DisableFBILabel {
+            get {
+                return ResourceManager.GetString("DisableFBILabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable FBI.
+        /// </summary>
+        internal static string EnableFBILabel {
+            get {
+                return ResourceManager.GetString("EnableFBILabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FBI Behaviours Info.
+        /// </summary>
+        internal static string FBITabLabel {
+            get {
+                return ResourceManager.GetString("FBITabLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hidden.
         /// </summary>
         internal static string HiddenLabel {
