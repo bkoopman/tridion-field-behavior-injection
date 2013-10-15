@@ -19,6 +19,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
             case $fbiConst.XHTML_FIELD:
             case $fbiConst.KEYWORD_FIELD:
             case $fbiConst.NUMBER_FIELD:
+            case $fbiConst.DATE_FIELD:
                 if (this.isReadOnly(field.values)) {
                     this.setReadOnly(field, true);
                 }

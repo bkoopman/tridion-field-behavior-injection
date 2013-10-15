@@ -19,6 +19,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = funct
             case $fbiConst.XHTML_FIELD:
             case $fbiConst.KEYWORD_FIELD:
             case $fbiConst.NUMBER_FIELD:
+            case $fbiConst.DATE_FIELD:
                 if (this.isHidden(field.values)) {
                     this.setVisibility(field, true);
                 }
