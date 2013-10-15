@@ -40,7 +40,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputChange 
     var c = p.controls;
     var value = c.fieldMaxLengthInput.value;
     if (value != "" && isNaN(value)) {
-        console.debug(e.source);
         c.fieldMaxLengthInput.value = "";
     }
 };
