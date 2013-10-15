@@ -4,6 +4,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBe
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour");
     this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.HIDDEN]);
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(fields) {
@@ -44,7 +45,6 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.setVisibility
     container = container.getElement().parentElement;
     if (hidden) {
         $css.undisplay(container);
-        this.addField(field.fieldName, Function.getDelegate(this, this.setVisibility, [field, false]));
     } else {
         $css.display(container);
     }
