@@ -47,6 +47,9 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidation
 };
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, type) {
     var values = field.getValues();
+    if (typeof values === "undefined" || values == null) {
+        return;
+    }
     for (var i = 0; i < values.length; i++) {
         var value = values[i];
         var result = $fbiValidationConfig.checkRule(type, value);

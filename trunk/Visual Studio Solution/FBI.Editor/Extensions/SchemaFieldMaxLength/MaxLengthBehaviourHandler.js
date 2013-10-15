@@ -38,18 +38,28 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = functi
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.getMaxLength = function MaxLengthBehaviour$getMaxLength(values) {
-    return parseInt(values[0].value);
+    return values[0].value;
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.setMaxLengthValidation = function MaxLengthBehaviour$setMaxLengthValidation(field, length) {
     var f = this.getField(field.fieldName);
+    $evt.addEventHandler(f, "change", Function.getDelegate(this, this.validateRule, [f, length]));
     $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, length]));
 };
-Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.validateRule = function MaxLengthBehaviour$validateRule(field,  length) {
+
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.validateRule = function MaxLengthBehaviour$validateRule(field, length) {
     var values = field.getValues();
+    if (typeof values === "undefined" || values == null) {
+        return;
+    }
     for (var i = 0; i < values.length; i++) {
+        var value = values[i];
+        if (typeof value === "undefined" || value == null) {
+            continue;
+        }
         if (value.length > length) {
-            
+            $messages.registerWarning($fbiConfig.getLabel("MaximumLengthError").format(field.getFieldName(), $fbiConfig.getLabel("MaxLengthLabel") + "[" + length + "]"));
+            field.focus(i);
             return;
         }
     }
