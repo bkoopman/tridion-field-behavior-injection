@@ -60,7 +60,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     function FBIHandler$onFieldBuilderLoad(e) {
         var builder = e.source;
         self.properties.currentBuilder = builder;
-        $evt.removeEventHandler(builder, "load", FBIHandler$onFieldBuilderLoad);
         self.applyBehaviours(builder.getId(), builder);
     }
 
@@ -92,6 +91,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     //We have to wait until the display is ready
     $evt.addEventHandler($display, "start", FBIHandler$onDisplayReady);
 };
+
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getConfigurationHelper = function FBIHandler$getConfigurationHelper() {
     /// <summary>Gets the Helper object.</summary>
@@ -258,6 +258,16 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
         }
         
     }
+};
+
+Tridion.Extensions.UI.FBI.Handler.prototype.reApplyBehaviours = function FBIHandler$reApplyBehaviours() {
+    var p = this.properties;
+    var fbProperties = p.currentBuilder.properties;
+    fbProperties.toLoad = true;
+    fbProperties.readOnly = false;
+    console.debug(p.currentBuilder);
+    $fb = p.currentBuilder;
+    p.currentBuilder.doLoad();
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getHandlers = function FBIHandler$getHandlers() {
