@@ -15,8 +15,8 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = functi
         
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-                var length = this.getMaxLengthValidation(field.values);
-                this.setMaxLengthType(field, length);
+                var length = this.getMaxLength(field.values);
+                this.setMaxLengthValidation(field, length);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
