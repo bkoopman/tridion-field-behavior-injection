@@ -77,6 +77,11 @@
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx.css">
       <DependentUpon>ComponentTab.ascx</DependentUpon>
     </Content>
+    <Content Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.ascx.js">
+      <DependentUpon>SchemaFieldMaxLength.ascx</DependentUpon>
+    </Content>
+    <Content Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.ascx" />
+    <Content Include="Extensions\SchemaFieldMaxLength\MaxLengthBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
@@ -112,6 +117,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.cs">
+      <DependentUpon>SchemaFieldMaxLength.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>

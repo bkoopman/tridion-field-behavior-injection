@@ -30,7 +30,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function 
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldHiddenCheckbox, "click", Function.getDelegate(this, this.onVisibilityCheckboxClick));
-    this.onSchemaChanged();
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "onSchemaChanged");
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onVisibilityCheckboxClick = function SchemaFieldVisibility$onVisibilityCheckboxClick() {
@@ -54,19 +54,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange = fu
     var configValue = this.getConfigurationValue();
     c.fieldHiddenCheckbox.checked = configValue == "true";
 
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSchemaChanged = function SchemaFieldVisibility$onSchemaChanged() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSchemaChanged");
-    var c = this.properties.controls;
-    var schema = $display.getItem();
-
-    if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
-        $css.undisplay(c.fieldHiddenCheckbox.parentNode);
-    }
-    else {
-        $css.display(c.fieldHiddenCheckbox.parentNode);
-    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = function SchemaFieldVisibility$onUpdateView() {

@@ -70,6 +70,15 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Field {0} is not a valid {1}..
+        /// </summary>
+        internal static string DefaultErrorMessageLabel {
+            get {
+                return ResourceManager.GetString("DefaultErrorMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable FBI.
         /// </summary>
         internal static string DisableFBILabel {
@@ -120,6 +129,15 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         internal static string HiddenLabel {
             get {
                 return ResourceManager.GetString("HiddenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Length (Enter a Number).
+        /// </summary>
+        internal static string MaxLengthLabel {
+            get {
+                return ResourceManager.GetString("MaxLengthLabel", resourceCulture);
             }
         }
         

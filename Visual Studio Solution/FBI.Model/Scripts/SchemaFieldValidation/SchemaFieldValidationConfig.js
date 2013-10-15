@@ -61,9 +61,9 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
     var regexPattern = rule.Regex;
     var regex = XRegExp(regexPattern);
     var match = regex.test(value);
-    console.debug("Match [{0}][{1}]: {2}".format(regex, value, match));
     var result = {
         Success: match,
+        ValidationName: rule.Name,
         Message: rule.Message
     };
     return result;

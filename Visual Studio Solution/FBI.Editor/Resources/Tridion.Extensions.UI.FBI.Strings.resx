@@ -120,6 +120,9 @@
   <data name="BehaviourLabel" xml:space="preserve">
     <value>Behaviour</value>
   </data>
+  <data name="DefaultErrorMessageLabel" xml:space="preserve">
+    <value>Field {0} is not a valid {1}.</value>
+  </data>
   <data name="DisableFBILabel" xml:space="preserve">
     <value>Disable FBI</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="HiddenLabel" xml:space="preserve">
     <value>Hidden</value>
+  </data>
+  <data name="MaxLengthLabel" xml:space="preserve">
+    <value>Maximum Length (Enter a Number)</value>
   </data>
   <data name="PhoneErrorMessageLabel" xml:space="preserve">
     <value>There was an error validating field {0}. {1}</value>
