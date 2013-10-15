@@ -102,11 +102,6 @@
       <Name>Tridion.Extensions.UI.FBI.Base</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\FBI.Validators\Tridion.Extensions.UI.FBI.Validators.csproj">
-      <Project>{38611CD5-8D67-4EC2-8B56-B68C50D1D521}</Project>
-      <Name>Tridion.Extensions.UI.FBI.Validators</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="postbuild.bat" />

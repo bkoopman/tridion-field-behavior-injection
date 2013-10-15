@@ -19,13 +19,7 @@ namespace Tridion.Extensions.FBI.Services.Interfaces
         
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        FieldValidationType[] GetValidations();
-
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        ValidationResult ValidateField(ValidationInput[] input);
-
-        
+        String Echo(String input);
         
     }
 
