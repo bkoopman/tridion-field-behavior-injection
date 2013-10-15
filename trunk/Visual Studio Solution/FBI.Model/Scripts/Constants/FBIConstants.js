@@ -9,6 +9,7 @@ Tridion.Extensions.UI.FBI.Constants.MULTILINE_TEXT_FIELD = "MultiLineTextField";
 Tridion.Extensions.UI.FBI.Constants.KEYWORD_FIELD = "KeywordField";
 Tridion.Extensions.UI.FBI.Constants.XHTML_FIELD = "XHTMLField";
 Tridion.Extensions.UI.FBI.Constants.NUMBER_FIELD = "NumberField";
+Tridion.Extensions.UI.FBI.Constants.DATE_FIELD = "DateField";
 
 Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
 
