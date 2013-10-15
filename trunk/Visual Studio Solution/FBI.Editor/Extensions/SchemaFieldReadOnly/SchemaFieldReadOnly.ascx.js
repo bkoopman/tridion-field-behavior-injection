@@ -32,7 +32,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function Sc
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldReadOnlyCheckbox, "click", Function.getDelegate(this, this.onReadOnlyCheckboxClick));
-    this.onSchemaChanged();
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "onSchemaChanged");
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick = function SchemaFieldReadOnly$onReadOnlyCheckboxClick() {
@@ -58,19 +58,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
     c.fieldReadOnlyCheckbox.checked = configValue == "true";
     
     
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSchemaChanged = function SchemaFieldReadOnly$onSchemaChanged() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSchemaChanged");
-    var c = this.properties.controls;
-    var schema = $fbiConfig.getSchema();
-    
-    if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
-        $css.undisplay(c.fieldReadOnlyCheckbox.parentNode);
-    }
-    else {
-        $css.display(c.fieldReadOnlyCheckbox.parentNode);
-    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {

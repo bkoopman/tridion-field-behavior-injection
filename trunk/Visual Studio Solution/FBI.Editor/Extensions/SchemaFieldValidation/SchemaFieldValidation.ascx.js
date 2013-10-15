@@ -46,7 +46,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize = function 
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldValidatorList, "change", Function.getDelegate(this, this.onValidationChange));
-    this.onSchemaChanged();
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "onSchemaChanged");
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onValidationChange = function SchemaFieldValidation$onValidationChange() {
@@ -70,19 +70,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSelectionChange = fu
     validation = (validation != 'undefined') ? validation : 'none';
     this.setValidation(validation);
 
-};
-
-Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSchemaChanged = function SchemaFieldValidation$onSchemaChanged() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSchemaChanged");
-    var c = this.properties.controls;
-    var schema = $fbiConfig.getSchema();
-    
-    if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
-        $css.undisplay(c.fieldValidatorList.parentNode);
-    }
-    else {
-        $css.display(c.fieldValidatorList.parentNode);
-    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onUpdateView = function SchemaFieldValidation$onUpdateView() {

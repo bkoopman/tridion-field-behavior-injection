@@ -10,6 +10,10 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
     this.key = "";
 };
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = function BehaviourConfigurationBase$initialize(deckPage) {
+    
+};
+
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
     /// <summary>
     /// Sets the behaviour key
@@ -35,4 +39,15 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setConfigurationV
     /// </summary>
     var p = this.properties;
     $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
+};
+
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onSchemaChanged = function BehaviourConfigurationBase$onSchemaChanged() {
+    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSchemaChanged");
+    var schema = $fbiConfig.getSchema();
+    if (schema && (schema.getSubType() == $const.SchemaPurpose.TEMPLATE_PARAMETERS || schema.getSubType() == $const.SchemaPurpose.BUNDLE)) {
+        $css.undisplay($fbiConfig.getBehavioursPanel().getElement());
+    }
+    else {
+        $css.display($fbiConfig.getBehavioursPanel().getElement());
+    }
 };

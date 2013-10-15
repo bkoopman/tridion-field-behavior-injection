@@ -1,13 +1,13 @@
 ﻿/// <reference path="../../../FBI.Model/Scripts/Costants/FBIConstants.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI.Behaviours");
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour = function ValidationBehaviour() {
-    Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour");
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour = function MaxLengthBehaviour() {
+    Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour");
     this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.VALIDATION]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.MAXLENGTH]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = function ValidationBehaviour$apply(fields) {
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = function MaxLengthBehaviour$apply(fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -15,8 +15,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
         
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-                var typeOfValidation = this.getValidationType(field.values);
-                this.setValidationType(field, typeOfValidation);
+                var length = this.getMaxLengthValidation(field.values);
+                this.setMaxLengthType(field, length);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
@@ -37,22 +37,19 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
     }
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidationType = function ValidationBehaviour$getValidationType(values) {
-    return values[0].value;
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.getMaxLength = function MaxLengthBehaviour$getMaxLength(values) {
+    return parseInt(values[0].value);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationType = function ValidationBehaviour$setValidationType(field, type) {
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.setMaxLengthValidation = function MaxLengthBehaviour$setMaxLengthValidation(field, length) {
     var f = this.getField(field.fieldName);
-    $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, type]));
+    $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, length]));
 };
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, type) {
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.validateRule = function MaxLengthBehaviour$validateRule(field,  length) {
     var values = field.getValues();
     for (var i = 0; i < values.length; i++) {
-        var value = values[i];
-        var result = $fbiValidationConfig.checkRule(type, value);
-        if (!result.Success) {
-            $messages.registerWarning(result.Message.format(field.getFieldName(), result.ValidationName));
-            field.focus(i);
+        if (value.length > length) {
+            
             return;
         }
     }

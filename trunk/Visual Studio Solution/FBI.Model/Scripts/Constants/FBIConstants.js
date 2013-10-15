@@ -22,6 +22,7 @@ Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";
 Tridion.Extensions.UI.FBI.Constants.RADIO_ELEMENT = "radio";
 Tridion.Extensions.UI.FBI.Constants.TREE_ELEMENT = "tree";
 
+Tridion.Extensions.UI.FBI.Constants.MAXLENGTH = "maxlength";
 Tridion.Extensions.UI.FBI.Constants.VALIDATION = "validation";
 Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
 Tridion.Extensions.UI.FBI.Constants.HIDDEN = "hidden";
