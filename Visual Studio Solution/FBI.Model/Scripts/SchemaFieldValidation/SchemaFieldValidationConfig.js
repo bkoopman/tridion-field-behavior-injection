@@ -50,6 +50,25 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
     return p.validationRules;
 };
 
+Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototype.getValidationRule = function SFVConfiguration$getValidationRule(type) {
+    var validationRules = this.getValidationRules();
+    return validationRules[type];
+};
+
+Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototype.checkRule = function SFVConfiguration$checkRule(type, value) {
+    var validationRules = this.getValidationRules();
+    var rule = validationRules[type];
+    var regexPattern = rule.Regex;
+    var regex = XRegExp(regexPattern);
+    var match = regex.test(value);
+    console.debug("Match [{0}][{1}]: {2}".format(regex, value, match));
+    var result = {
+        Success: match,
+        Message: rule.Message
+    };
+    return result;
+};
+
 $fbiValidationConfig = new Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration();
 
 
