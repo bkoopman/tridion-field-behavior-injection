@@ -2,7 +2,6 @@
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility = function SchemaFieldVisibility()
 {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldVisibility");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
