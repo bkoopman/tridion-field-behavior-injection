@@ -70,6 +70,8 @@
     <Content Include="Scripts\Base\ValidationBaseCommand.js" />
     <Content Include="Scripts\Configuration\FBIConfig.js" />
     <Content Include="Scripts\Constants\FBIConstants.js" />
+    <Content Include="Scripts\External\Readme.txt" />
+    <Content Include="Scripts\External\xregexp-min.js" />
     <Content Include="Scripts\Handler\FBIHandler.js" />
     <Content Include="Scripts\Helper\FBIHelper.js" />
     <Content Include="Services\FBI\FBIServices.svc" />
@@ -108,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="postbuild.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\External\SchemaFieldValidation\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

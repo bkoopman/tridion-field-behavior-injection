@@ -33,7 +33,7 @@ Tridion.Extensions.FBI.Commands.ValidationSave.prototype._isEnabled = function V
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.ValidationSave.prototype._execute = function ValidationSave$_execute(selection, pipeline) {
-    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline]);
+    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline, "Save"]);
 };
 
 
@@ -42,7 +42,8 @@ Tridion.Extensions.FBI.Commands.ValidationSave.prototype._execute = function Val
 */
 Tridion.Extensions.FBI.Commands.ValidationCheckIn = function Commands$ValidationCheckIn() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.ValidationCheckIn");
-    this.addInterface("Tridion.Cme.Command", ["ValidationCheckIn"]);  
+    this.addInterface("Tridion.Extensions.FBI.Commands.ValidationBaseCommand");
+    this.addInterface("Tridion.Cme.Command", ["ValidationCheckIn"]);
 
 };
 
@@ -70,13 +71,14 @@ Tridion.Extensions.FBI.Commands.ValidationCheckIn.prototype._isEnabled = functio
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.ValidationCheckIn.prototype._execute = function ValidationCheckIn$_execute(selection, pipeline) {
-    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline]);
+    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline, "CheckIn"]);
 };
 /**
 * Implements the <c>ValidationSaveNew</c> command
 */
 Tridion.Extensions.FBI.Commands.ValidationSaveNew = function Commands$ValidationSaveNew() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.ValidationSaveNew");
+    this.addInterface("Tridion.Extensions.FBI.Commands.ValidationBaseCommand");
     this.addInterface("Tridion.Cme.Command", ["ValidationSaveNew"]);
 
 };
@@ -105,7 +107,7 @@ Tridion.Extensions.FBI.Commands.ValidationSaveNew.prototype._isEnabled = functio
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.ValidationSaveNew.prototype._execute = function ValidationSaveNew$_execute(selection, pipeline) {
-    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline]);
+    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline, "SaveNew"]);
 };
 
 /**
@@ -113,6 +115,7 @@ Tridion.Extensions.FBI.Commands.ValidationSaveNew.prototype._execute = function 
 */
 Tridion.Extensions.FBI.Commands.ValidationSaveClose = function Commands$ValidationSaveClose() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.ValidationSaveClose");
+    this.addInterface("Tridion.Extensions.FBI.Commands.ValidationBaseCommand");
     this.addInterface("Tridion.Cme.Command", ["ValidationSaveClose"]);
 
 };
@@ -141,7 +144,5 @@ Tridion.Extensions.FBI.Commands.ValidationSaveClose.prototype._isEnabled = funct
 * @param {Tridion.Cme.Pipeline} execution pipeline.
 */
 Tridion.Extensions.FBI.Commands.ValidationSaveClose.prototype._execute = function ValidationSaveClose$_execute(selection, pipeline) {
-    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline]);
+    this.callBase("Tridion.Extensions.FBI.Commands.ValidationBaseCommand", "_execute", [selection, pipeline, "SaveClose"]);
 };
-
-
