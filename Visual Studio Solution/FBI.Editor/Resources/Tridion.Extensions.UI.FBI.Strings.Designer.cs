@@ -133,7 +133,16 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Length (Enter a Number).
+        ///   Looks up a localized string similar to Field {0} exceeds the maximun allowed characters: {1}.
+        /// </summary>
+        internal static string MaximumLengthError {
+            get {
+                return ResourceManager.GetString("MaximumLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Length .
         /// </summary>
         internal static string MaxLengthLabel {
             get {

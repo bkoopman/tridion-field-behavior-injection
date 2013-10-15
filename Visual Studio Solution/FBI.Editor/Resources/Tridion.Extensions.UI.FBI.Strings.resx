@@ -141,8 +141,11 @@
   <data name="HiddenLabel" xml:space="preserve">
     <value>Hidden</value>
   </data>
+  <data name="MaximumLengthError" xml:space="preserve">
+    <value>Field {0} exceeds the maximun allowed characters: {1}</value>
+  </data>
   <data name="MaxLengthLabel" xml:space="preserve">
-    <value>Maximum Length (Enter a Number)</value>
+    <value>Maximum Length </value>
   </data>
   <data name="PhoneErrorMessageLabel" xml:space="preserve">
     <value>There was an error validating field {0}. {1}</value>

@@ -129,6 +129,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
                 var handlerDefinition = p.behaviourHandlers[handlerId];
                 if (handlerDefinition.enabled == "true") {
                     var handlerImpl = handlerDefinition.instance;
+                    
                     if (typeof handlerImpl === "undefined") {
                         handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
                         handlerDefinition.instance = handlerImpl;
