@@ -32,22 +32,16 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize = function 
         c.fieldValidatorList.disabled = true;
     }
 
-    Tridion.Extensions.FBI.Services.FBIServices.GetValidations(
-        function (validations) {
-            for (var i = 0; i < validations.length; i++) {
-                var opt = c.fieldValidatorList.options;
-                opt[opt.length] = new Option(validations[i].Name, validations[i].Type);
-            }
-            p.validationReady = true;
-            var schema = $display.getItem();
-            c.fieldValidatorList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.validationReady || !p.selectedGroup;
-
-
-        },
-        function (error) {
-            console.debug(error);
-        }
-    );
+    var validations = $fbiValidationConfig.getValidationRules();
+    
+    for (var i = 0; i < validations.length; i++) {
+        var opt = c.fieldValidatorList.options;
+        var type = validations[i];
+        opt[opt.length] = new Option(validations[type].Name, validations[type].Type);
+    }
+    p.validationReady = true;
+    var schema = $display.getItem();
+    c.fieldValidatorList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.validationReady || !p.selectedGroup;
 
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
