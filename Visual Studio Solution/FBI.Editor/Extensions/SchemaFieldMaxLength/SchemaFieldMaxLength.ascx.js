@@ -1,7 +1,6 @@
 ﻿Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength = function SchemaFieldMaxLength() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength");
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.SchemaFieldMaxLength");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
