@@ -50,7 +50,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputBlur = 
     var p = this.properties;
     var c = p.controls;
     var value = c.fieldMaxLengthInput.value;
-    if (value != "" && !isNaN(value)) {
+    if (value == "" || !isNaN(value)) {
         this.setConfigurationValue(value);
     } 
 };
