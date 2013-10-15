@@ -34,25 +34,18 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
         var confXml = $xml.getNewXmlDocument(editor);
         var confObj = $xml.toJson(confXml);
         var handler = {};
-        if (confObj.length) { //IsArray
-            for (var i = 0; i < confObj.length; i++) {
-                handler = {};
-                handler.name = confObj[i]["@name"];
-                handler.handler = confObj[i]["@handler"];
-                handler.enabled = confObj[i]["@enabled"];
-                handler.fields = [];
-                p.behaviourHandlers[handler.name] = handler;
-                p.behaviourHandlers.push(handler.name);
-            }
-        } else {
-            handler.name = confObj["behaviour"]["@name"];
-            handler.handler = confObj["behaviour"]["@handler"];
-            handler.handler = confObj["behaviour"]["@enabled"];
+        if (!confObj.length) { 
+            confObj = [].concat(confObj);
+        }
+        for (var i = 0; i < confObj.length; i++) {
+            handler = {};
+            handler.name = confObj[i]["@name"];
+            handler.handler = confObj[i]["@handler"];
+            handler.enabled = confObj[i]["@enabled"];
             handler.fields = [];
             p.behaviourHandlers[handler.name] = handler;
             p.behaviourHandlers.push(handler.name);
         }
-
     }
 
     //Add Event Handlers

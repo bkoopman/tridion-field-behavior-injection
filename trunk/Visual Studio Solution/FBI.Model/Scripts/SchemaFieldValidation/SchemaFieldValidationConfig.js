@@ -7,20 +7,50 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration = funct
     /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration");
     this.properties = {};
-    this.properties.controls =
-    {
-        tabControl: $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl")
-    };
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototype.getValidationRules = function SFVConfiguration$getValidationRules() {
     var p = this.properties;
-    p.validationRules = {};
+    if (typeof p.validationRules === "undefined") {
+        p.validationRules = [];
+        var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
+        if (editor) {
+            var confXml = $xml.getNewXmlDocument(editor);
+            var confObj = $xml.toJson(confXml);
+            
+            if (!confObj.length) { 
+                confObj = [].concat(confObj);
+            }
+            for (var i = 0; i < confObj.length; i++) {
+                var validations = confObj[i].validation;
+                if (validations) {
+                    for (var j = 0; j < validations.length; j++) {
+                        var validation = validations[j];
+                        console.debug(validation);
+                        var Name = validation["@name"];
+                        var Message = validation["@name"];
+                        
+                        Name = $fbiConfig.getLabel(Name);
+                        Message = $fbiConfig.getLabel(Message);
+                        var validationRule = {
+                            Type: validation["@type"],
+                            Name: Name,
+                            Message: Message,
+                            Regex: validation.regex
+                            
+                        };
+                        p.validationRules.push(validationRule.Type);
+                        p.validationRules[validationRule.Type] = validationRule;
+                    }
+                    break;
+                }                
+            }
+        }
+    }
 
-
-
+    return p.validationRules;
 };
 
-$fbiValidationConfig = Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration;
+$fbiValidationConfig = new Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration();
 
 
