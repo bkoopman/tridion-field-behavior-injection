@@ -26,7 +26,6 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
                 if (validations) {
                     for (var j = 0; j < validations.length; j++) {
                         var validation = validations[j];
-                        console.debug(validation);
                         var Name = validation["@name"];
                         var Message = validation["@error"];
                         
