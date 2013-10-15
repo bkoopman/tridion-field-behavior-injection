@@ -43,10 +43,10 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidation
 
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationRule = function ValidationBehaviour$setValidationRule(field, validationRule) {
     var f = this.getField(field.fieldName);
-    $evt.addEventHandler(f, "blur", this.validateRule, [f,validationRule]);
+    $evt.addEventHandler(f, "blur", this.validateRule, [validationRule]);
     //change
     
 };
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(e, field, validationRule) {
-    console.debug("Validation rule: {0}, for field [{1}][{2}]".format(field.getFieldName(), validationRule));
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(e, validationRule) {
+    console.debug("Validation rule: {0}, for field [{1}][{2}]".format(e.source.getFieldName(), validationRule));
 };
