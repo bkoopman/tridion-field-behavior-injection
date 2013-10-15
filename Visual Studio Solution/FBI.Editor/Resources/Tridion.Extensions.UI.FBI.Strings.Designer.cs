@@ -176,5 +176,14 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
                 return ResourceManager.GetString("ValidationLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip Code.
+        /// </summary>
+        internal static string ZipLabel {
+            get {
+                return ResourceManager.GetString("ZipLabel", resourceCulture);
+            }
+        }
     }
 }
