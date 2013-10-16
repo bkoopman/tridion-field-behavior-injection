@@ -10,17 +10,17 @@
 				    <c:List  runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
 			    </div>
                 
-			    <div class="fbiFooter fbiFooterLeft">
+			    <div class="fbiFooter ">
 				    <input type="checkbox" id="<%=this.ClientID %>_ApplyToEveryoneCheckBox" tabindex="3" />
 				    <label for="<%=this.ClientID %>_ApplyToEveryoneCheckBox">
 					    <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ApplyToEveryoneLabel %>" />
 				    </label>
-			    </div>
-                <div class="fbiFooter fbiFooterRight">
+			        <br/>
+                    <input type="checkbox" id="<%=this.ClientID %>_ShowAllCheckBox" tabindex="3" />
 				    <label for="<%=this.ClientID %>_ShowAllCheckBox">
 					    <asp:Literal ID="Literal4" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ShowUsersLabel %>" />
 				    </label>
-                    <input type="checkbox" id="<%=this.ClientID %>_ShowAllCheckBox" tabindex="3" />
+                    
 			    </div>
                 
                 
