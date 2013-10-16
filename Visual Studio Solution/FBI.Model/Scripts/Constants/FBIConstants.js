@@ -1,5 +1,6 @@
 ﻿Tridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
 
+Tridion.Extensions.UI.FBI.Constants.FBI_NODE_NAME = "fbi";
 Tridion.Extensions.UI.FBI.Constants.EDITOR_NAME = "FBI";
 Tridion.Extensions.UI.FBI.Constants.RESOURCES_NAMESPACE = "Tridion.Extensions.UI.FBI.Strings";
 Tridion.Extensions.UI.FBI.Constants.NAMESPACE_URL = "http://www.sdltridion.com/2013/FieldBehaviourInjection";
