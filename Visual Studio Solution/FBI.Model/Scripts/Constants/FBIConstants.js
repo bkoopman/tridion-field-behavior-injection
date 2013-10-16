@@ -27,4 +27,6 @@ Tridion.Extensions.UI.FBI.Constants.VALIDATION = "validation";
 Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
 Tridion.Extensions.UI.FBI.Constants.HIDDEN = "hidden";
 
+Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/ListDefinitions/TrusteesList-head.xml";
+
 var $fbiConst = Tridion.Extensions.UI.FBI.Constants;
