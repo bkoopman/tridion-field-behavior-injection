@@ -15,11 +15,29 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
     this.properties.data = {};
     this.properties.metadata = {};
-    this.disabled = false;
+    
     p.usersXml = "";
     p.groupsXml = "";
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
+    var ns = Tridion.Constants.Namespaces;
+    ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
     
+    p.disabled = false;
+    var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
+    if (editor) {
+        var confXml = $xml.getNewXmlDocument(editor);
+        var confObj = $xml.toJson(confXml);
+
+        if (!confObj.length) {
+            confObj = [].concat(confObj);
+        }
+        for (var i = 0; i < confObj.length; i++) {
+            if (confObj[i][$fbiConst.NAMESPACE_PREFIX]) {
+                p.disabled = confObj[i][$fbiConst.NAMESPACE_PREFIX]["@enabled"] == "false";
+                return;
+            }
+        }
+    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.initialize = function SchemaFieldBehaviourConfig$intialize() {
@@ -296,6 +314,11 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getLabel = functi
     } else {
         return $localization.getResource($fbiConst.RESOURCES_NAMESPACE, key, params);
     }
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.isEnabled = function SchemaFieldBehaviourConfig$isEnabled(key, params) {
+    var p = this.properties;
+    return !p.disabled;
 };
 
 $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig();

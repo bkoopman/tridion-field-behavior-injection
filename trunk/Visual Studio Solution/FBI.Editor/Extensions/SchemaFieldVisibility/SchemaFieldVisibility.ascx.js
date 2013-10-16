@@ -71,5 +71,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = functio
 
 };
 
-Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
-Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
+if ($fbiConfig.isEnabled()) {
+    Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
+    Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
+}

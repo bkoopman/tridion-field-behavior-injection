@@ -96,6 +96,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setValidation = functi
         }
     }
 };
-
-Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldValidation);
-Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldValidation);
+if ($fbiConfig.isEnabled()) {
+    Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldValidation);
+    Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldValidation);
+}
