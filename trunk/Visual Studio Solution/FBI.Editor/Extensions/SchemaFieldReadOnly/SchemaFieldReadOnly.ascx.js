@@ -34,7 +34,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function Sc
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick = function SchemaFieldReadOnly$onReadOnlyCheckboxClick() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick");
     var p = this.properties;
     var c = p.controls;
     var checked = c.fieldReadOnlyCheckbox.checked ? "true" : "false";
@@ -42,7 +41,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onReadOnlyCheckboxClick 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = function SchemaFieldReadOnly$onSelectionChange() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange");
     var p = this.properties;
     var c = p.controls;
     c.fieldReadOnlyCheckbox.disabled = false;

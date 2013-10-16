@@ -32,7 +32,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onVisibilityCheckboxClick = function SchemaFieldVisibility$onVisibilityCheckboxClick() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onVisibilityCheckboxClick");
     var p = this.properties;
     var c = p.controls;
     var checked = c.fieldHiddenCheckbox.checked ? "true" : "false";
@@ -40,7 +39,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onVisibilityCheckboxCl
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange = function SchemaFieldVisibility$onSelectionChange() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange");
     var p = this.properties;
     var c = p.controls;
 

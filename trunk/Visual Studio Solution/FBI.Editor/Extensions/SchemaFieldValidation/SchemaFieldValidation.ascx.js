@@ -55,7 +55,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onValidationChange = f
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSelectionChange = function SchemaFieldValidation$onSelectionChange() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSelectionChange");
     var p = this.properties;
     var c = p.controls;
 
