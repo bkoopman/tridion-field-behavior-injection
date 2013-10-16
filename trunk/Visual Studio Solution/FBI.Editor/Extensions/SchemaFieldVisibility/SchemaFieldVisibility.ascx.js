@@ -55,7 +55,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange = fu
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = function SchemaFieldVisibility$onUpdateView() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView");
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
