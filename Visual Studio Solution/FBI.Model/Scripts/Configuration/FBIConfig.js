@@ -201,7 +201,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.loadUsers = funct
     /// <summary>
     /// Initializes the <see cref="Tridion.Controls.List">users list</see>
     ///</summary>
-    console.debug(this);
     var p = this.properties;
     
     var checkControl = this.getShowAllCheckBox();
