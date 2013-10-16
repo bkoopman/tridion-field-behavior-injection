@@ -162,4 +162,13 @@
   <data name="ZipLabel" xml:space="preserve">
     <value>Zip Code</value>
   </data>
+  <data name="ApplyToEveryoneLabel" xml:space="preserve">
+    <value>Apply to Everyone</value>
+  </data>
+  <data name="ShowUsersLabel" xml:space="preserve">
+    <value>Show all users</value>
+  </data>
+  <data name="UsersAndGroupsLabel" xml:space="preserve">
+    <value>Users and Groups</value>
+  </data>
 </root>
