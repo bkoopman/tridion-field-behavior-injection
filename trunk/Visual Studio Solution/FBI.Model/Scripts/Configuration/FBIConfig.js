@@ -16,8 +16,16 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     this.properties.data = {};
     this.properties.metadata = {};
     this.disabled = false;
+    p.usersXml = "";
+    p.groupsXml = "";
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
     
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.initialize = function SchemaFieldBehaviourConfig$intialize() {
+    var checkbox = this.getShowAllCheckBox();
+    $evt.addEventHandler(checkbox, "click", this.getDelegate(this.loadUsers));
+    this.initializeGroups();
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getTab = function SchemaFieldBehaviourConfig$getTab() {
@@ -88,6 +96,23 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getUsersAndGroups
     return c.usersAndGroupsList;
 };
 
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getShowAllCheckBox = function SchemaFieldBehaviourConfig$getShowAllCheckBox() {
+    /// <summary>Gets the Field Designer control.</summary>
+    /// <returns type="string">The <see cref="Tridion.Controls.FieldDesigner">control</see></returns>
+    var c = this.getControls();
+    if (typeof c.showAllCheckbox === "undefined") {
+        switch (this.getTab()) {
+            case "SchemaDesignTab":
+                c.showAllCheckbox = $("#SchemaDesignTab_SchemaDesignFieldDesigner_SchemaFieldBehaviour_ShowAllCheckBox");
+                break;
+            case "MetadataDesignTab":
+                c.showAllCheckbox = $("#MetadataDesignTab_MetadataDesignFieldDesigner_MDSchemaFieldBehaviour_ShowAllCheckBox");
+                break;
+        }
+    }
+    return c.showAllCheckbox;
+};
+
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getBehavioursPanel = function SchemaFieldBehaviourConfig$getBehavioursPanel() {
     /// <summary>Gets the Behaviours Panel control.</summary>
     /// <returns type="string">The <see cref="Tridion.Controls.Panel">control</see></returns>
@@ -142,100 +167,101 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.hidePanel = funct
     $css.undisplay(this.getBehavioursPanel().getElement().parentNode);
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.initializeGroups = function SchemaFieldBehaviourConfig$initializeGroups() {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.onGroupsLoaded = function SchemaFieldBehaviourConfig$onGroupsLoaded() {
+    var p = this.properties;
+    p.groupsXml = $xml.getInnerXml($xml.getNewXmlDocument(p.groupsList.getXml()).firstChild);
+    this._renderList();
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.onUsersLoaded = function SchemaFieldBehaviourConfig$onUsersLoaded() {
+    var p = this.properties;
+    p.usersXml = $xml.getInnerXml($xml.getNewXmlDocument(p.usersList.getXml()).firstChild);
+    this._renderList();
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.loadUsers = function SchemaFieldBehaviourConfig$loadUsers() {
     /// <summary>
-    /// Initializes the <see cref="Tridion.Controls.List">users and groups list</see>
+    /// Initializes the <see cref="Tridion.Controls.List">users list</see>
     ///</summary>
-    var self = this;
+    console.debug(this);
+    var p = this.properties;
+    
+    var checkControl = this.getShowAllCheckBox();
+    if (!checkControl.checked) {
+        p.usersXml = "";
+        this._renderList();
+        this.getFieldDeisgner().fireEvent("updateview");
+        return;
+    }
+    
+    
     var listControl = this.getUsersAndGroupsList();
     listControl.setLoading(true);
     listControl.clearSelection();
 
-    function FieldBehaviour$listLoaded() {
-        $evt.removeEventHandler(listControl, "load", FieldBehaviour$listLoaded);
-        self._renderList(listControl.getXml());
-    };
-
-    //TODO: Try to keep the list when loaded, so far didn't have time
-    var xml = this._getStaticTrusteesXml();
-    this._renderList(xml);
-
-    //TODO: Something like this
-    /*if (!listControl.isLoaded(true)) {
-        var xml = this._getStaticTrusteesXml();
-        this._renderList(xml);
-
+    var usrMng = $models.getItem($const.ItemType.USER_MANAGEMENT);
+    p.usersList = usrMng.getList();
+    if (p.usersList.isLoaded()) {
+        this.onUsersLoaded();
+    } else {
+        $evt.addEventHandler(p.usersList, "load", Function.getDelegate(this, this.onUsersLoaded));
+        p.usersList.load();
     }
-    else {
-        $evt.addEventHandler(listControl, "load", FieldBehaviour$listLoaded);
-        console.debug(listControl);
-        console.debug("hello");
-        listControl.load(true);
-    }*/
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._getStaticTrusteesXml = function SchemaFieldBehaviourConfig$_getStaticTrusteesXml(/*settingsType, parentItem*/) {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.initializeGroups = function SchemaFieldBehaviourConfig$initializeGroups() {
+    /// <summary>
+    /// Initializes the <see cref="Tridion.Controls.List">users and groups list</see>
+    ///</summary>
+    var p = this.properties;
+    var listControl = this.getUsersAndGroupsList();
+    listControl.setLoading(true);
+    listControl.clearSelection();
+    
+    var groupMng = $models.getItem($const.ItemType.GROUP_MANAGEMENT);
+    p.groupsList = groupMng.getList();
+    if (p.groupsList.isLoaded()) {
+        this.onGroupsLoaded();
+    } else {
+        $evt.addEventHandler(p.groupsList, "load", this.onGroupsLoaded);
+        p.groupsList.load();
+    }
+};
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._getStaticTrusteesXml = function SchemaFieldBehaviourConfig$_getStaticTrusteesXml() {
     /// <summary>
     /// Gets the list of trustees, including both, groups and users.
     /// <returns type="string">The xml containing the list</returns>
     ///</summary>
-    var xml;
-    //var schema = $display.getItem();
-    //var parentItem = schema.getOrganizationalItem();
+    var p = this.properties;
+    var xml = p.groupsXml;
+    if (p.usersXml != "") {
+        xml += p.usersXml;
+    }
+  
+    var resultXml = String.format("<tcm:ListTrustees xmlns:tcm=\"{0}\" xmlns:xlink=\"{1}\">{2}</tcm:ListTrustees>",
+			$const.Namespaces.tcm, $const.Namespaces.xlink, xml);
 
-    /*if (parentItem && parentItem.isStaticLoaded()) {        
-        if (settingsType == Tridion.Cme.SecurityTab.SettingsType.PERMISSIONS) {
-            xml = parentItem.getStaticTrusteesXml();
-        }
-        else if (settingsType == Tridion.Cme.SecurityTab.SettingsType.EXCEPTIONS) {
-            xml = parentItem.getStaticTrusteesWithDenialXml();
-        }
-
-        
-    }*/
-    var hardcodedList = ''
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Information Designer" xlink:href="tcm:0-4-65568" ItemType="65568"><tcm:Right Type="2" Setting="Allow"/><tcm:Right Type="4" Setting="Allow"/><tcm:Right Type="8" Setting="Implicit Deny"/><tcm:Right Type="16" Setting="Allow"/><tcm:Right Type="32" Setting="Implicit Deny"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Implicit Deny"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Implicit Deny"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Implicit Deny"/><tcm:Right Type="8192" Setting="Allow"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Allow"/><tcm:Right Type="65536" Setting="Implicit Deny"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Author" xlink:href="tcm:0-5-65568" ItemType="65568"><tcm:Right Type="2" Setting="Implicit Deny"/><tcm:Right Type="4" Setting="Implicit Deny"/><tcm:Right Type="8" Setting="Implicit Deny"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Allow"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Implicit Deny"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Implicit Deny"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Implicit Deny"/><tcm:Right Type="8192" Setting="Implicit Deny"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Implicit Deny"/><tcm:Right Type="65536" Setting="Implicit Deny"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Template Designer" xlink:href="tcm:0-6-65568" ItemType="65568"><tcm:Right Type="2" Setting="Implicit Deny"/><tcm:Right Type="4" Setting="Allow"/><tcm:Right Type="8" Setting="Implicit Deny"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Implicit Deny"/><tcm:Right Type="64" Setting="Allow"/><tcm:Right Type="128" Setting="Implicit Deny"/><tcm:Right Type="256" Setting="Allow"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Implicit Deny"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Implicit Deny"/><tcm:Right Type="8192" Setting="Implicit Deny"/><tcm:Right Type="16384" Setting="Allow"/><tcm:Right Type="32768" Setting="Allow"/><tcm:Right Type="65536" Setting="Implicit Deny"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Editor" xlink:href="tcm:0-7-65568" ItemType="65568"><tcm:Right Type="2" Setting="Implicit Deny"/><tcm:Right Type="4" Setting="Allow"/><tcm:Right Type="8" Setting="Implicit Deny"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Allow"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Allow"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Allow"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Implicit Deny"/><tcm:Right Type="8192" Setting="Implicit Deny"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Allow"/><tcm:Right Type="65536" Setting="Implicit Deny"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Chief Editor" xlink:href="tcm:0-8-65568" ItemType="65568"><tcm:Right Type="2" Setting="Implicit Deny"/><tcm:Right Type="4" Setting="Allow"/><tcm:Right Type="8" Setting="Allow"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Allow"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Allow"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Allow"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Allow"/><tcm:Right Type="8192" Setting="Allow"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Allow"/><tcm:Right Type="65536" Setting="Allow"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Publication Manager" xlink:href="tcm:0-9-65568" ItemType="65568"><tcm:Right Type="2" Setting="Allow"/><tcm:Right Type="4" Setting="Allow"/><tcm:Right Type="8" Setting="Allow"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Implicit Deny"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Allow"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Implicit Deny"/><tcm:Right Type="1024" Setting="Implicit Deny"/><tcm:Right Type="2048" Setting="Allow"/><tcm:Right Type="4096" Setting="Allow"/><tcm:Right Type="8192" Setting="Implicit Deny"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Allow"/><tcm:Right Type="65536" Setting="Allow"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Trustee xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:title="Interaction Manager" xlink:href="tcm:0-10-65568" ItemType="65568"><tcm:Right Type="2" Setting="Implicit Deny"/><tcm:Right Type="4" Setting="Implicit Deny"/><tcm:Right Type="8" Setting="Implicit Deny"/><tcm:Right Type="16" Setting="Implicit Deny"/><tcm:Right Type="32" Setting="Implicit Deny"/><tcm:Right Type="64" Setting="Implicit Deny"/><tcm:Right Type="128" Setting="Allow"/><tcm:Right Type="256" Setting="Implicit Deny"/><tcm:Right Type="512" Setting="Allow"/><tcm:Right Type="1024" Setting="Implicit Deny"/><tcm:Right Type="2048" Setting="Implicit Deny"/><tcm:Right Type="4096" Setting="Implicit Deny"/><tcm:Right Type="8192" Setting="Allow"/><tcm:Right Type="16384" Setting="Implicit Deny"/><tcm:Right Type="32768" Setting="Implicit Deny"/><tcm:Right Type="65536" Setting="Implicit Deny"/><tcm:Right Type="33554432" Setting="Implicit Deny"/><tcm:Right Type="67108864" Setting="Implicit Deny"/><tcm:Right Type="134217728" Setting="Implicit Deny"/><tcm:Right Type="268435456" Setting="Implicit Deny"/><tcm:Right Type="536870912" Setting="Implicit Deny"/><tcm:Right Type="1073741824" Setting="Implicit Deny"/><tcm:Right Type="2147483648" Setting="Implicit Deny"/></tcm:Trustee>'
-        + '<tcm:Item ID="tcm:0-11-65552" Title="SDLTRIDION2013\SDL Tridion 2013" Icon="T65552L0P0S1" Description="Tridion Content Management Administrator" IsPredefined="false" Enabled="1" Type="65552"/>';
-
-    xml = String.format("<tcm:ListTrustees xmlns:tcm=\"{0}\" xmlns:xlink=\"{1}\">{2}</tcm:ListTrustees>",
-			$const.Namespaces.tcm, $const.Namespaces.xlink, hardcodedList);
-
-    return xml;
+    return resultXml;
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = function SchemaFieldBehaviourConfig$_renderList(bodyXml) {
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = function SchemaFieldBehaviourConfig$_renderList() {
     /// <summary>
     /// Renders the users and groups list
     ///</summary>
+    var bodyXml = this._getStaticTrusteesXml();
     $assert.isString(bodyXml);
-
+    
     var p = this.properties;
-    var c = p.controls;
     var control = this.getUsersAndGroupsList();
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
-    //control.setLoading(true);
-    //control.clearSelection();
-    //this._updateSecuritySettings(settingsType);
-
-    //var self = this;
 
     function FieldBehaviour$_drawControl(definitionDocument) {
         control.draw(xmlDoc, definitionDocument);
         control.setLoading(false);
-        control.clearSelection();
-
-        /*self.addFailableTcmEventHandlerOnce(control, "draw", function () {
-            control.selectItem(control.getItemByIndex(0));
-        });*/
     }
-
+    
 
     if (!p.listHeadDoc) {
         function FieldBehaviour$_headDocumentLoaded(headDoc) {
@@ -246,14 +272,13 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
         function FieldBehaviour$_headDocumentLoadFailed() {
             $log.error("Unable to load head xml file for list.");
         }
-
-        var xmlPath = $config.expandEditorPath("Xml/ListDefinitions/TrusteesList-head.xml", $const.CMEEditorName);
+        
+        var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $const.CMEEditorName);
         $xml.loadXmlDocument(xmlPath + "?forView=" + Tridion.Core.Configuration.CurrentView + "&forControl=" + control.getId(), FieldBehaviour$_headDocumentLoaded, FieldBehaviour$_headDocumentLoadFailed);
-        return;
+        
+    } else {
+        FieldBehaviour$_drawControl(p.listHeadDoc);
     }
-
-    FieldBehaviour$_drawControl(p.listHeadDoc);
-
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getSelectedGroups = function SchemaFieldBehaviourConfig$getSelectedGroups() {
@@ -272,6 +297,5 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getLabel = functi
         return $localization.getResource($fbiConst.RESOURCES_NAMESPACE, key, params);
     }
 };
-
 
 $fbiConfig = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig();

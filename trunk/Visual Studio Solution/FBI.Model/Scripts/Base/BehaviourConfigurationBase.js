@@ -38,7 +38,10 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setConfigurationV
     /// <param name="value">The value</param>
     /// </summary>
     var p = this.properties;
-    $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
+    var groupSelected = !(typeof p.selectedGroup === "undefined");
+    if(groupSelected){
+        $fbiConfig.getConfigurationHelper().setConfigurationValue(p.selectedGroup, this.key, value);
+    }
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onSchemaChanged = function BehaviourConfigurationBase$onSchemaChanged() {

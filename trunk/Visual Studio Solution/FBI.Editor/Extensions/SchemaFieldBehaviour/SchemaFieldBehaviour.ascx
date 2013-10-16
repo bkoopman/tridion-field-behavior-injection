@@ -10,7 +10,7 @@
 				    <c:List  runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
 			    </div>
 			    <div class="footer">
-				    <input type="checkbox" id="UpperShowAll" tabindex="3" />
+				    <input type="checkbox" id="<%=this.ClientID %>_ShowAllCheckBox" tabindex="3" />
 				    <label for="UpperShowAll">
 					    <asp:Literal ID="Literal4" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, ShowAll %>" />
 				    </label>

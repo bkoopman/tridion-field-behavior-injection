@@ -162,7 +162,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
         FBIHandler$onSchemaReady();
     } else {
         $evt.addEventHandler(schema, "start", FBIHandler$onSchemaReady);
-        schema.load(false);
+        schema.load(false, $const.OpenMode.VIEW, true);
     }
 
 };

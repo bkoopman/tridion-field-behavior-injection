@@ -48,11 +48,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
     var c = p.controls;
     c.fieldReadOnlyCheckbox.disabled = false;
     var selectedGroups = $fbiConfig.getSelectedGroups();
-    
+
     if (selectedGroups) {
         p.selectedGroup = selectedGroups[0];
-    }
-    
+    } 
     var configValue = this.getConfigurationValue();
     c.fieldReadOnlyCheckbox.checked = configValue == "true";
     
