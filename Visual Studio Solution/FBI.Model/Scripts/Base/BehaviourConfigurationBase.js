@@ -54,3 +54,13 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onSchemaChanged =
         $css.display($fbiConfig.getBehavioursPanel().getElement());
     }
 };
+
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = function BehaviourConfigurationBase$iniTimer() {
+    var p = this.properties;
+    p.timer = Date.getTimer();
+};
+
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
+    var p = this.properties;
+    $log.info("{0}::: Time taken to initialize was {1}ms".format(this.getTypeName(), (Date.getTimer() - p.timer)));
+};

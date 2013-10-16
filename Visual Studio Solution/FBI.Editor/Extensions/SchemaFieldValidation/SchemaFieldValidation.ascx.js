@@ -14,7 +14,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation = function SchemaFieldValidation
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize = function SchemaFieldValidation$initialize(deckPage) {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize");
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;
