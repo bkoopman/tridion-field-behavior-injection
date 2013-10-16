@@ -90,5 +90,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
 
 };
 
-Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
-Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
+if ($fbiConfig.isEnabled()) {
+    Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
+    Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
+}
+

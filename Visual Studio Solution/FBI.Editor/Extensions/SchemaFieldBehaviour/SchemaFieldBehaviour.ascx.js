@@ -11,10 +11,12 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {
     console.debug("Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize");
     //Extension Initialization    
-    var ns = Tridion.Constants.Namespaces;
-    ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
-    $fbiConfig.initialize();
-    $fbiConfig.getBehavioursPanel().close();
+    if ($fbiConfig.isEnabled()) {
+        $fbiConfig.initialize();
+        $fbiConfig.getBehavioursPanel().close();
+    } else {
+        $fbiConfig.hidePanel();
+    }
 };
 
 Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldBehaviour);
