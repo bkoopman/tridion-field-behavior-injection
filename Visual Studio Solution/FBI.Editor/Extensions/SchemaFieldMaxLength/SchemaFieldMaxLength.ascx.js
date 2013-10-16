@@ -74,7 +74,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSelectionChange = fun
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function SchemaFieldMaxLength$onUpdateView() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView");
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
