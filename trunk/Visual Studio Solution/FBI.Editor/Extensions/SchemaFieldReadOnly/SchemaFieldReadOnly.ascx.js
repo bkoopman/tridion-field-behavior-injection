@@ -13,7 +13,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.initialize");
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;

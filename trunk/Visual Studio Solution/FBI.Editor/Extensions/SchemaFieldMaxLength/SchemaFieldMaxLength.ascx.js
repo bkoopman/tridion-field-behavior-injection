@@ -12,7 +12,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength = function SchemaFieldMaxLength()
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.initialize = function SchemaFieldMaxLength$initialize(deckPage) {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.initialize");
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
     var p = this.properties;
     var c = p.controls;

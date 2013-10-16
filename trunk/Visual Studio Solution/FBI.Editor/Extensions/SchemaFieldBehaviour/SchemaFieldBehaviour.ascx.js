@@ -9,7 +9,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize");
     //Extension Initialization    
     if ($fbiConfig.isEnabled()) {
         $fbiConfig.initialize();
