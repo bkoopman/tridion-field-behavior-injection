@@ -44,7 +44,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputChange 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputBlur = function SchemaFieldMaxLength$onMaxLengthInputBlur() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthCheckboxBlur");
     var p = this.properties;
     var c = p.controls;
     var value = c.fieldMaxLengthInput.value;
@@ -54,7 +53,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onMaxLengthInputBlur = 
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSelectionChange = function SchemaFieldMaxLength$onSelectionChange() {
-    console.debug("Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSelectionChange");
     var p = this.properties;
     var c = p.controls;
     c.fieldMaxLengthInput.disabled = false;
