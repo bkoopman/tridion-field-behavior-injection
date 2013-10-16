@@ -61,6 +61,15 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply to Everyone.
+        /// </summary>
+        internal static string ApplyToEveryoneLabel {
+            get {
+                return ResourceManager.GetString("ApplyToEveryoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Behaviour.
         /// </summary>
         internal static string BehaviourLabel {
@@ -174,6 +183,24 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         internal static string ReadOnlyLabel {
             get {
                 return ResourceManager.GetString("ReadOnlyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all users.
+        /// </summary>
+        internal static string ShowUsersLabel {
+            get {
+                return ResourceManager.GetString("ShowUsersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users and Groups.
+        /// </summary>
+        internal static string UsersAndGroupsLabel {
+            get {
+                return ResourceManager.GetString("UsersAndGroupsLabel", resourceCulture);
             }
         }
         

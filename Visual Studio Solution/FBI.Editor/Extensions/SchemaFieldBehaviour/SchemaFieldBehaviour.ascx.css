@@ -2,6 +2,12 @@
     
 }
 
+.fbiFooter {
+    height: 24px !important;
+    margin-top: 4px;
+    float: left;
+}
+
 .fbiLeftPanel {
     width:50%;
     display:inline;

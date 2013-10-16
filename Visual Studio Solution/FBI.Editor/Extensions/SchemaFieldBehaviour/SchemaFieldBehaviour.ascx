@@ -4,68 +4,38 @@
 	    <div id="Permissions">
 		    <div class="fbiLeftPanel">
 			    <div class="fbi_label">
-				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
+				    <asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, UsersAndGroupsLabel %>" />:
 			    </div>
 			    <div class="middle">
 				    <c:List  runat="server" MultiSelect="false" ID="UsersAndGroupsList" TabIndex="2" />
 			    </div>
-			    <div class="footer">
-				    <input type="checkbox" id="<%=this.ClientID %>_ShowAllCheckBox" tabindex="3" />
-				    <label for="UpperShowAll">
-					    <asp:Literal ID="Literal4" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, ShowAll %>" />
+                
+			    <div class="fbiFooter fbiFooterLeft">
+				    <input type="checkbox" id="<%=this.ClientID %>_ApplyToEveryoneCheckBox" tabindex="3" />
+				    <label for="<%=this.ClientID %>_ApplyToEveryoneCheckBox">
+					    <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ApplyToEveryoneLabel %>" />
 				    </label>
 			    </div>
+                <div class="fbiFooter fbiFooterRight">
+				    <label for="<%=this.ClientID %>_ShowAllCheckBox">
+					    <asp:Literal ID="Literal4" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, ShowUsersLabel %>" />
+				    </label>
+                    <input type="checkbox" id="<%=this.ClientID %>_ShowAllCheckBox" tabindex="3" />
+			    </div>
+                
+                
 		    </div>
 		    <div class="fbiRightPanel">
 			    <div class="fbi_label">
 				    <span><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, BehaviourLabel %>"/>:</span>				    
 			    </div>
 			    <div class="middle securityInfo" id="UpperSecurityInfo">
-                    <div id="Div1" class="list stack horizontal" tabindex="-1" c:multiselect="false" c:textlookup="true" style="outline: 0px;">							                    
+                    <div id="behaviours-wrapper" class="list stack horizontal" tabindex="-1" c:multiselect="false" c:textlookup="true" style="outline: 0px;">							                    
                         <!-- Behaviours come here -->
                         <c:ExtendableArea id="BehavioursArea" runat="server" />
 			        </div>
-                <%-- 
-			    <div class="footer">				    
-                    <input type="checkbox" id="ShowExceptions" tabindex="5" />
-				    <label for="ShowExceptions">
-					    <asp:Literal ID="Literal7" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, ShowExceptions %>" />
-				    </label>                    
-			    </div>
-                --%>
-		    </div>
-	    </div>
-
-        <%-- 
-	    <div id="Exceptions">
-		    <div id="ExceptionsLabel">
-			    <span class="PermissionsLabel"><asp:Literal ID="Literal8" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, PermissionsExceptionsLabel %>" /></span>
-			    
-		    </div>
-		    <div class="leftPanel">
-			    <div class="label">
-				    <asp:Literal ID="Literal10" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, UsersAndGroups %>" />:
-			    </div>
-			    <div class="middle">
-				    <c:List runat="server" MultiSelect="false" ID="LowerList" TabIndex="6" />
-			    </div>
-			    <div class="footer">
-				    <input type="checkbox" id="LowerShowAll" tabindex="7" />
-				    <label for="LowerShowAll">
-					    <asp:Literal ID="Literal11" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, ShowAll %>" />
-				    </label>						
-			    </div>
-		    </div>
-		    <div class="rightPanel">
-			    <div class="label">
-				    <span class="PermissionsLabel"><asp:Literal ID="Literal12" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, Permissions %>" />:</span>
-				    <span class="RightsLabel"><asp:Literal ID="Literal13" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, Rights %>" />:</span>
-			    </div>
-			    <div class="middle securityInfo" id="LowerSecurityInfo"></div>
-		    </div>
-	    
-        </div>
-        --%>
+		        </div>
+	        </div>
         </div>
     </div>
 </c:Panel>
