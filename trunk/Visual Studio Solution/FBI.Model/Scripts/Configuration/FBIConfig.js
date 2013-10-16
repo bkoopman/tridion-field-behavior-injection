@@ -33,7 +33,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
         }
         for (var i = 0; i < confObj.length; i++) {
             if (confObj[i][$fbiConst.NAMESPACE_PREFIX]) {
-                p.disabled = confObj[i][$fbiConst.NAMESPACE_PREFIX]["@enabled"] == "false";
+                p.disabled = confObj[i][$fbiConst.FBI_NODE_NAME]["@enabled"] == "false";
                 return;
             }
         }
