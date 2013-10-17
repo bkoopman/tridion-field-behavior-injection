@@ -70,5 +70,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
 
 };
 
-Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
-Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
+if ($fbiConfig.isEnabled()) {
+    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
+    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
+}
+

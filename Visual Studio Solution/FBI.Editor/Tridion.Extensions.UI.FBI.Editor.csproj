@@ -125,13 +125,13 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisiblity.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\ComponentTab\ComponentTab.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ComponentTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Tridion.Extensions.UI.FBI.Strings.Designer.cs">
       <AutoGen>True</AutoGen>
