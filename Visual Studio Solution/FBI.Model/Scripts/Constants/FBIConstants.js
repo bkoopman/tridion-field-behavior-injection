@@ -1,6 +1,14 @@
 ﻿Tridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
 
 Tridion.Extensions.UI.FBI.Constants.FBI_NODE_NAME = "fbi";
+Tridion.Extensions.UI.FBI.Constants.BEHAVIOUR_NODE_NAME = "behaviour";
+
+Tridion.Extensions.UI.FBI.Constants.CONTENT_TAB_ID = "SchemaBasedFields";
+Tridion.Extensions.UI.FBI.Constants.METADATA_TAB_ID = "ItemMetadata";
+
+Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
+Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";
+
 Tridion.Extensions.UI.FBI.Constants.EDITOR_NAME = "FBI";
 Tridion.Extensions.UI.FBI.Constants.RESOURCES_NAMESPACE = "Tridion.Extensions.UI.FBI.Strings";
 Tridion.Extensions.UI.FBI.Constants.NAMESPACE_URL = "http://www.sdltridion.com/2013/FieldBehaviourInjection";
