@@ -69,7 +69,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
     }
 
 };
-if ($fbiConfig.isEnabled()) {
-    Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
-    Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
-}
+
+Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
+Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);

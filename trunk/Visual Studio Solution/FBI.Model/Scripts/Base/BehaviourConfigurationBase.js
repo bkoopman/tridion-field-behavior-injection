@@ -11,7 +11,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = function BehaviourConfigurationBase$initialize(deckPage) {
-    
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
