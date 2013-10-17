@@ -64,6 +64,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Behaviours\MaxLengthBehaviourHandler.js" />
+    <Content Include="Scripts\Behaviours\ReadOnlyBehaviourHandler.js" />
+    <Content Include="Scripts\Behaviours\ValidationBehaviourHandler.js" />
+    <Content Include="Scripts\Behaviours\VisibilityBehaviourHandler.js" />
     <Content Include="Configuration\System.config.fragment.xml" />
     <Content Include="Scripts\Base\BehaviourBase.js" />
     <Content Include="Scripts\Base\BehaviourConfigurationBase.js" />

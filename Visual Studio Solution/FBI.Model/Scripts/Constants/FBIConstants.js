@@ -29,6 +29,7 @@ Tridion.Extensions.UI.FBI.Constants.MULTIMEDIA_LINK_FIELD = "MultimediaLinkField
 Tridion.Extensions.UI.FBI.Constants.EMBEDDED_FIELD = "EmbeddedSchemaField";
 
 Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
+Tridion.Extensions.UI.FBI.Constants.FBI_COMPONENT_TAB = "FBIComponentTab"
 
 Tridion.Extensions.UI.FBI.Constants.INPUT_ELEMENT = "input";
 Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";

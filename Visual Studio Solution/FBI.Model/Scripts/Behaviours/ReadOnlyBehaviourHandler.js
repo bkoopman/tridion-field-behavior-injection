@@ -2,7 +2,6 @@
 Type.registerNamespace("Tridion.Extensions.UI.FBI.Behaviours");
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehaviour() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour");
-    this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.READONLY]);
 };

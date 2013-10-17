@@ -2,7 +2,6 @@
 Type.registerNamespace("Tridion.Extensions.UI.FBI.Behaviours");
 Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour = function MaxLengthBehaviour() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour");
-    this.addInterface("Tridion.DisposableObject");
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourBase");
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.MAXLENGTH]);
 };
