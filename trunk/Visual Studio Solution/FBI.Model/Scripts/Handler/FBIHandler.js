@@ -57,6 +57,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     p.behaviourHandlers.push(handler.name);
                 }
             }
+            this.fireEvent("configloaded");
             break;
         }
     }
@@ -102,6 +103,20 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     }
     //We have to wait until the display is ready
     $evt.addEventHandler($display, "start", FBIHandler$onDisplayReady);
+};
+
+Tridion.Extensions.UI.FBI.Handler.prototype.addHandler = function FBIHandler$addHandler(name, type, enabled) {
+    var p = this.properties;
+    var handler = {};
+    handler.name = name;
+    handler.handler = type;
+    handler.enabled = enabled;
+    handler[$fbiConst.CONTENT] = {};
+    handler[$fbiConst.CONTENT].fields = [];
+    handler[$fbiConst.METADATA] = {};
+    handler[$fbiConst.METADATA].fields = [];
+    p.behaviourHandlers[handler.name] = handler;
+    p.behaviourHandlers.push(handler.name);
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getConfigurationHelper = function FBIHandler$getConfigurationHelper() {
