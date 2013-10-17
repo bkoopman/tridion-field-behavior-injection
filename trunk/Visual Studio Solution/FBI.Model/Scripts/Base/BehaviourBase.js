@@ -33,7 +33,7 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype._getPathTo = function Behaviou
     return "";
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(fieldType, fieldName) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(context, fieldType, fieldName) {
     /// <summary>Gets the field html element.</summary>
     /// <param name="fieldType">The field type</param>
     /// <param name="fieldName">The field name</param>
@@ -42,14 +42,14 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function Beh
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
         case $fbiConst.MULTILINE_TEXT_FIELD:
-            return $fbi.getCurrentFieldBuilder().getField(fieldName).getElement().firstChild;
+            return this.getField(context, fieldName).getElement().firstChild;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(fieldType, fieldName) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(context, fieldType, fieldName) {
     /// <summary>Gets the field container html element.</summary>
     /// <param name="fieldType">The field type</param>
     /// <param name="fieldName">The field name</param>
@@ -58,19 +58,20 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function B
     switch ((fieldType)) {
         case $fbiConst.SINGLE_LINE_TEXT_FIELD:
         case $fbiConst.MULTILINE_TEXT_FIELD:
-            return this.getFieldElement(fieldType, fieldName).parentElement;
+            return this.getFieldElement(context, fieldType, fieldName).parentElement;
         default:
             console.warn("Not element found for [" + fieldType + "]: " + fieldName);
             return null;
     }
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourBase$getField(fieldName) {
-    return $fbi.getCurrentFieldBuilder().getField(fieldName);
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourBase$getField(context, fieldName) {
+    return $fbi.getFieldBuilderByContext(context).getField(fieldName);
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.setKey = function BehaviourBase$setKey(key) {
     var p = this.properties;
     p.key = key;
 };
+
 

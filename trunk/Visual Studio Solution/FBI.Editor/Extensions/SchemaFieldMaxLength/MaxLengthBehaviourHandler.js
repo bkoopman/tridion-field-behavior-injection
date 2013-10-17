@@ -7,7 +7,7 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour = function MaxLengthBeha
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.MAXLENGTH]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = function MaxLengthBehaviour$apply(fields) {
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = function MaxLengthBehaviour$apply(context, fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -16,7 +16,7 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.apply = functi
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
                 var length = this.getMaxLength(field.values);
-                this.setMaxLengthValidation(field, length);
+                this.setMaxLengthValidation(context, field, length);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
@@ -41,8 +41,8 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.getMaxLength =
     return values[0].value;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.setMaxLengthValidation = function MaxLengthBehaviour$setMaxLengthValidation(field, length) {
-    var f = this.getField(field.fieldName);
+Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.setMaxLengthValidation = function MaxLengthBehaviour$setMaxLengthValidation(context, field, length) {
+    var f = this.getField(context, field.fieldName);
     $evt.addEventHandler(f, "change", Function.getDelegate(this, this.validateRule, [f, length]));
     $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, length]));
 };
