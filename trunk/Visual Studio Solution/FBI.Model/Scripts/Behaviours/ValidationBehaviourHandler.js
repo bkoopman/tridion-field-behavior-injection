@@ -65,7 +65,6 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule 
                 field.properties.input.style["background-color"] = $fbiConst.DEFAULT_INPUT_COLOR;
                 field.properties.input.style["border"] = $fbiConst.DEFAULT_INPUT_BORDER_COLOR;
             }
-            field.focus(i);
             return;
         }
     }
