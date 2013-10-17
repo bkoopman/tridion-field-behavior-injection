@@ -54,6 +54,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule 
         var result = $fbiValidationConfig.checkRule(type, value);
         if (!result.Success) {
             $messages.registerWarning(result.Message.format(field.getFieldName(), result.ValidationName));
+            field.getElement().style["background-color"] = "#FBE3E4";
             field.focus(i);
             return;
         }

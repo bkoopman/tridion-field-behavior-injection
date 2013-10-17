@@ -49,7 +49,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     handler = {};
                     handler.name = behaviourConf[j]["@name"];
                     handler.handler = behaviourConf[j]["@handler"];
-                    handler.enabled = behaviourConf[j]["@enabled"];
+                    handler.enabled = (behaviourConf[j]["@enabled"] == "true"); 
                     handler[$fbiConst.CONTENT] = {};
                     handler[$fbiConst.CONTENT].fields = [];
                     handler[$fbiConst.METADATA] = {};
@@ -58,6 +58,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     p.behaviourHandlers.push(handler.name);
                 }
             }
+            
             break;
         }
     }
@@ -94,7 +95,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     var fbmd = tab.properties.controls.fieldBuilder;
                     if (fbmd) {
                         self.properties.builders[$fbiConst.METADATA] = fbmd;
-                        $evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
+                        //$evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
                     }
                 }
                 break;
@@ -117,6 +118,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.registerHandler = function FBIHandle
     handler[$fbiConst.METADATA].fields = [];
     p.behaviourHandlers[handler.name] = handler;
     p.behaviourHandlers.push(handler.name);
+    $log.message("Handler: {0} [{1}] [{2}] registered.".format(name, type, enabled));
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getConfigurationHelper = function FBIHandler$getConfigurationHelper() {
@@ -148,9 +150,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
             var handlerId = p.behaviourHandlers[i];
             if (self._isHandlerActive(handlerId)) {
                 var handlerDefinition = p.behaviourHandlers[handlerId];
-                if (handlerDefinition.enabled == "true") {
+                if (handlerDefinition.enabled) {
                     var handlerImpl = handlerDefinition.instance;
-                    
                     if (typeof handlerImpl === "undefined") {
                         handlerImpl = new (Type.resolveNamespace(handlerDefinition.handler));
                         handlerDefinition.instance = handlerImpl;
@@ -231,7 +232,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.ceaseBehaviours = function FBIHandle
         var name = p.behaviourHandlers[j];
         var handlerDefinition = p.behaviourHandlers[name];
         var isDefined = !(typeof handlerDefinition.instance === "undefined");
-        if (isDefined && handlerDefinition.enabled == "true") {
+        if (isDefined && handlerDefinition.enabled) {
             handlerDefinition.instance.cease();
         }
     }
@@ -262,11 +263,9 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
             break;
 
     }
-
-    
     var fields = $xml.selectNodes(fieldsDoc, "*/*");
+    
     for (var j = 0; j < fields.length; j++) {
-        
         var fieldType = $dom.getLocalName(fields[j]);
         var fieldName = $xml.selectStringValue(fields[j], "tcm:Name");
         var isMultivalue = ($xml.selectStringValue(fields[j], "tcm:MaxOccurs") != "1");
@@ -274,10 +273,11 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
         for (var i = 0; i < p.behaviourHandlers.length; i++) {
             var handlerName = p.behaviourHandlers[i];
             var handler = p.behaviourHandlers[handlerName];
-            if (handler.enabled == "true") {
+            
+            if (handler.enabled) {
                 var configValue = $fbi.getConfigurationHelper().hasConfigurationValueFromFieldXml(fields[j], handler.name, user);
+                
                 if (configValue && configValue.length > 0) {
-                    
                     if (typeof handler[context] === "undefined") {
                         handler[context] = [];
                     }
