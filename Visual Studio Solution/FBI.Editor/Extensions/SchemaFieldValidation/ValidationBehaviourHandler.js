@@ -7,7 +7,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour = function ValidationBe
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.VALIDATION]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = function ValidationBehaviour$apply(fields) {
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = function ValidationBehaviour$apply(context, fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -16,7 +16,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.apply = funct
         switch (fieldType) {
             case $fbiConst.SINGLE_LINE_TEXT_FIELD:
                 var typeOfValidation = this.getValidationType(field.values);
-                this.setValidationType(field, typeOfValidation);
+                this.setValidationType(context, field, typeOfValidation);
                 break;
             case $fbiConst.MULTILINE_TEXT_FIELD:
             case $fbiConst.XHTML_FIELD:
@@ -41,8 +41,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidation
     return values[0].value;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationType = function ValidationBehaviour$setValidationType(field, type) {
-    var f = this.getField(field.fieldName);
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationType = function ValidationBehaviour$setValidationType(context, field, type) {
+    var f = this.getField(context, field.fieldName);
     $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, type]));
 };
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, type) {

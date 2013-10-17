@@ -7,7 +7,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBe
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.HIDDEN]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(fields) {
+Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(context, fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -25,7 +25,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = funct
             case $fbiConst.MULTIMEDIA_LINK_FIELD:
             case $fbiConst.EMBEDDED_FIELD:
                 if (this.isHidden(field.values)) {
-                    this.setVisibility(field, true);
+                    this.setVisibility(context, field, true);
                 }
                 break;
 
@@ -45,8 +45,8 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.isHidden = fu
     return false;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.setVisibility = function VisibilityBehaviour$setVisibility(field, hidden) {
-    var container = this.getField(field.fieldName);
+Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.setVisibility = function VisibilityBehaviour$setVisibility(context, field, hidden) {
+    var container = this.getField(context, field.fieldName);
     container = container.getElement().control;
     container = container.getElement().parentElement;
     if (hidden) {

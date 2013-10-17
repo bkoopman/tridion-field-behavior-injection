@@ -3,8 +3,10 @@
 Tridion.Extensions.UI.FBI.Constants.FBI_NODE_NAME = "fbi";
 Tridion.Extensions.UI.FBI.Constants.BEHAVIOUR_NODE_NAME = "behaviour";
 
-Tridion.Extensions.UI.FBI.Constants.CONTENT_TAB_ID = "SchemaBasedFields";
-Tridion.Extensions.UI.FBI.Constants.METADATA_TAB_ID = "ItemMetadata";
+Tridion.Extensions.UI.FBI.Constants.CONTENT_FIELD_DESIGNER_ID = "SchemaBasedFields";
+Tridion.Extensions.UI.FBI.Constants.METADATA_FIELD_DESIGNER_ID = "ItemMetadata";
+
+Tridion.Extensions.UI.FBI.Constants.METADATA_TAB_ID = "MetadataTab";
 
 Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
 Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";

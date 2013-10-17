@@ -7,8 +7,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour = function ReadOnlyBehavi
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.READONLY]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(fields) {
-    console.debug(fields);
+Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = function ReadOnlyBehaviour$apply(context, fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
@@ -26,7 +25,7 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.apply = functio
             case $fbiConst.MULTIMEDIA_LINK_FIELD:
             case $fbiConst.EMBEDDED_FIELD:
                 if (this.isReadOnly(field.values)) {
-                    this.setReadOnly(field, true);
+                    this.setReadOnly(context, field, true);
                 }
                 break;
                 
@@ -46,8 +45,8 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.isReadOnly = fu
     return false;
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = function ReadOnlyBehaviour$setReadOnly(field, readonly) {
-    var f = this.getField(field.fieldName);
+Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = function ReadOnlyBehaviour$setReadOnly(context, field, readonly) {
+    var f = this.getField(context, field.fieldName);
     var fieldState;
     var control;
     var button;
@@ -58,7 +57,6 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
     if (readonly) {
         var position = 0;
         do {
-            console.debug(f);
             control = f.getElement().control;
             f.applyReadOnly(readonly);
             if (typeof field.previousStates === "undefined") {
