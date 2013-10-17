@@ -2,22 +2,22 @@
 /// <reference path="../Helper/FBIHelper.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
-Tridion.Extensions.UI.FBI.Handler = function FBIHandler(tabControl) {
+Tridion.Extensions.UI.FBI.Handler = function FBIHandler() {
     /// <summary>
     /// Handler class to deal with the behaviours configuration, and triggers them.
     /// Moreover, it exposes a Helper class based on <see cref="Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper"/>
     /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.Handler");
+    this.addInterface("Tridion.DisposableObject");
+    
     this.properties = {};
-    this.properties.controls =
-    {
-        tabControl: $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl")
-    };
     var p = this.properties;
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
     p.builders = {};
     p.activeHandlers = [];
     p.deactivatedHandlers = [];
+    p.behaviourHandlers = [];
+    p.controls = {};
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$initialize() {
@@ -27,7 +27,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     /// </summary>
     var p = this.properties;
     var c = p.controls;
-    p.behaviourHandlers = [];
+    
+    c.tabControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
     
     //Load handlers from configuration
     var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
@@ -57,7 +58,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     p.behaviourHandlers.push(handler.name);
                 }
             }
-            this.fireEvent("configloaded");
             break;
         }
     }
@@ -105,7 +105,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     $evt.addEventHandler($display, "start", FBIHandler$onDisplayReady);
 };
 
-Tridion.Extensions.UI.FBI.Handler.prototype.addHandler = function FBIHandler$addHandler(name, type, enabled) {
+Tridion.Extensions.UI.FBI.Handler.prototype.registerHandler = function FBIHandler$resgisterHandler(name, type, enabled) {
     var p = this.properties;
     var handler = {};
     handler.name = name;
@@ -361,3 +361,5 @@ Tridion.Extensions.UI.FBI.Handler.prototype.enableActiveHandlers = function FBIH
     p.deactivatedHandlers = [];
     $log.info("Tridion.Extensions.UI.FBI.Handler: Behaviours successfully enabled.");
 };
+
+$fbi = new Tridion.Extensions.UI.FBI.Handler();

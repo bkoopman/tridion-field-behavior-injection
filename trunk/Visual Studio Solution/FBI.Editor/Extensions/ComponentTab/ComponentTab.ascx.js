@@ -12,7 +12,7 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab = function FBITab(element) {
 
 
 Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.initialize = function FBITab$initialize() {
-    $fbi = new Tridion.Extensions.UI.FBI.Handler();
+
     $fbi.initialize();
 };
 
@@ -25,6 +25,6 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab.prototype.updateView = function FBITab$upd
     //Not needed
 };
 
-Tridion.Controls.Deck.registerPageType(Tridion.Extensions.UI.FBI.Tabs.FBITab, "FBIComponentTab");
+Tridion.Controls.Deck.registerPageType(Tridion.Extensions.UI.FBI.Tabs.FBITab, $fbiConst.FBI_COMPONENT_TAB);
 
 

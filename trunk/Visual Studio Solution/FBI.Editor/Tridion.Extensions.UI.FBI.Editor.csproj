@@ -81,7 +81,6 @@
       <DependentUpon>SchemaFieldMaxLength.ascx</DependentUpon>
     </Content>
     <Content Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.ascx" />
-    <Content Include="Extensions\SchemaFieldMaxLength\MaxLengthBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx" />
     <Content Include="Extensions\SchemaFieldReadOnly\SchemaFieldReadOnly.ascx.js">
       <DependentUpon>SchemaFieldReadOnly.ascx</DependentUpon>
@@ -93,7 +92,6 @@
     <Content Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx.js">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldValidation\ValidationBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx" />
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx.js">
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
@@ -101,9 +99,7 @@
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx.js">
       <DependentUpon>SchemaFieldVisibility.ascx</DependentUpon>
     </Content>
-    <Content Include="Extensions\SchemaFieldVisibility\VisibilityBehaviourHandler.js" />
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
-    <Content Include="Extensions\SchemaFieldReadOnly\ReadOnlyBehaviourHandler.js" />
     <Content Include="Scripts\FBICommands.js" />
     <Content Include="Themes\Carbon\FBICommands.css" />
     <Content Include="Themes\Carbon\Icons\DisableFBI16x16.png" />
