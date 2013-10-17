@@ -45,9 +45,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.isHidden = fu
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.setVisibility = function VisibilityBehaviour$setVisibility(context, field, hidden) {
-    var container = this.getField(context, field.fieldName);
-    container = container.getElement().control;
-    container = container.getElement().parentElement;
+    var container = this.getFieldContainer(context, field.fieldName);//this.getField(context, field.fieldName);
     if (hidden) {
         $css.undisplay(container);
     } else {

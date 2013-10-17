@@ -33,36 +33,24 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype._getPathTo = function Behaviou
     return "";
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(context, fieldType, fieldName) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldElement = function BehaviourBase$getFieldElement(context, fieldName) {
     /// <summary>Gets the field html element.</summary>
-    /// <param name="fieldType">The field type</param>
+    /// <param name="context">The field context</param>
     /// <param name="fieldName">The field name</param>
-    /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
     /// <returns type="element">The field html element</returns>
-    switch ((fieldType)) {
-        case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-        case $fbiConst.MULTILINE_TEXT_FIELD:
-            return this.getField(context, fieldName).getElement().firstChild;
-        default:
-            console.warn("Not element found for [" + fieldType + "]: " + fieldName);
-            return null;
-    }
+   
+   return this.getField(context, fieldName).getElement().firstChild;
+   
 };
 
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(context, fieldType, fieldName) {
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getFieldContainer = function BehaviourBase$getFieldContainer(context, fieldName) {
     /// <summary>Gets the field container html element.</summary>
-    /// <param name="fieldType">The field type</param>
+    /// <param name="context">The field cotext</param>
     /// <param name="fieldName">The field name</param>
-    /// <param name="builder">The <see cref="Tridion.Controls.FieldBuilder"/>control</param>
     /// <returns type="element">The field container html element</returns>
-    switch ((fieldType)) {
-        case $fbiConst.SINGLE_LINE_TEXT_FIELD:
-        case $fbiConst.MULTILINE_TEXT_FIELD:
-            return this.getFieldElement(context, fieldType, fieldName).parentElement;
-        default:
-            console.warn("Not element found for [" + fieldType + "]: " + fieldName);
-            return null;
-    }
+   
+   return this.getField(context, fieldName).getElement().control.getElement().parentElement;
+   
 };
 
 Tridion.Extensions.UI.FBI.BehaviourBase.prototype.getField = function BehaviourBase$getField(context, fieldName) {
@@ -73,10 +61,3 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.setKey = function BehaviourBas
     var p = this.properties;
     p.key = key;
 };
-
-Tridion.Extensions.UI.FBI.BehaviourBase.prototype.registerHandler = function BehaviourBase$registerHandler() {
-    var name = this.key;
-    var type = this.getTypeName();
-    $fbi.addHandler(name, type, true);
-};
-
