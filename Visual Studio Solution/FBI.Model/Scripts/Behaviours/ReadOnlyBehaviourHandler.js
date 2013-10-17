@@ -58,21 +58,6 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = f
         do {
             control = f.getElement().control;
             f.applyReadOnly(readonly);
-            if (typeof field.previousStates === "undefined") {
-                field.previousStates = [];
-            }
-            
-            fieldState = {
-                control: control,
-                canDelete: f.getCanDelete(),
-                canMove: f.getCanMove(),
-                canInsert: f.getCanInsert()
-            };
-            
-            f.setCanDelete(false);
-            f.setCanMove(false);
-            f.setCanInsert(false);
-            field.previousStates.push(fieldState);
             f = f.getNextFieldSibling();
             
             switch (field.fieldType) {
