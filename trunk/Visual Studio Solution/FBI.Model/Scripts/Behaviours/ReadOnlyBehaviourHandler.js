@@ -46,7 +46,6 @@ Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.isReadOnly = fu
 
 Tridion.Extensions.UI.FBI.Behaviours.ReadOnlyBehaviour.prototype.setReadOnly = function ReadOnlyBehaviour$setReadOnly(context, field, readonly) {
     var f = this.getField(context, field.fieldName);
-    var fieldState;
     var control;
     var button;
     var input;
