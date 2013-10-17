@@ -74,4 +74,9 @@ Tridion.Extensions.UI.FBI.BehaviourBase.prototype.setKey = function BehaviourBas
     p.key = key;
 };
 
+Tridion.Extensions.UI.FBI.BehaviourBase.prototype.registerHandler = function BehaviourBase$registerHandler() {
+    var name = this.key;
+    var type = this.getTypeName();
+    $fbi.addHandler(name, type, true);
+};
 
