@@ -29,7 +29,7 @@ Tridion.Extensions.UI.FBI.Constants.MULTIMEDIA_LINK_FIELD = "MultimediaLinkField
 Tridion.Extensions.UI.FBI.Constants.EMBEDDED_FIELD = "EmbeddedSchemaField";
 
 Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
-Tridion.Extensions.UI.FBI.Constants.FBI_COMPONENT_TAB = "FBIComponentTab"
+Tridion.Extensions.UI.FBI.Constants.FBI_COMPONENT_TAB = "FBIComponentTab";
 
 Tridion.Extensions.UI.FBI.Constants.INPUT_ELEMENT = "input";
 Tridion.Extensions.UI.FBI.Constants.SELECT_ELEMENT = "select";
@@ -42,5 +42,9 @@ Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
 Tridion.Extensions.UI.FBI.Constants.HIDDEN = "hidden";
 
 Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/ListDefinitions/TrusteesList-head.xml";
+Tridion.Extensions.UI.FBI.Constants.ERROR_COLOR = "#FBE3E4";
+Tridion.Extensions.UI.FBI.Constants.ERROR_BORDER_COLOR = "solid 1px red";
+Tridion.Extensions.UI.FBI.Constants.DEFAULT_INPUT_COLOR = "#FFF";
+Tridion.Extensions.UI.FBI.Constants.DEFAULT_INPUT_BORDER_COLOR = "1px solid #b8c1cc";
 
 var $fbiConst = Tridion.Extensions.UI.FBI.Constants;

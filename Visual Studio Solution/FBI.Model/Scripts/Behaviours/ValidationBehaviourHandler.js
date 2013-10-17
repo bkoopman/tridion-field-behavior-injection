@@ -54,7 +54,17 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule 
         var result = $fbiValidationConfig.checkRule(type, value);
         if (!result.Success) {
             $messages.registerWarning(result.Message.format(field.getFieldName(), result.ValidationName));
-            field.getElement().style["background-color"] = "#FBE3E4";
+            if (field.properties.input) {
+                field.properties.input.style["background-color"] = $fbiConst.ERROR_COLOR;
+                field.properties.input.style["border"] = $fbiConst.ERROR_BORDER_COLOR;
+            }
+            field.focus(i);
+            return;
+        } else {
+            if (field.properties.input) {
+                field.properties.input.style["background-color"] = $fbiConst.DEFAULT_INPUT_COLOR;
+                field.properties.input.style["border"] = $fbiConst.DEFAULT_INPUT_BORDER_COLOR;
+            }
             field.focus(i);
             return;
         }

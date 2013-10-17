@@ -17,33 +17,37 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
         if (editor) {
             var confXml = $xml.getNewXmlDocument(editor);
             var confObj = $xml.toJson(confXml);
-            
-            if (!confObj.length) { 
-                confObj = [].concat(confObj);
-            }
-            for (var i = 0; i < confObj.length; i++) {
-                var validations = confObj[i].validation;
-                if (validations) {
-                    for (var j = 0; j < validations.length; j++) {
-                        var validation = validations[j];
-                        var Name = validation["@name"];
-                        var Message = validation["@error"];
-                        
-                        Name = $fbiConfig.getLabel(Name);
-                        Message = $fbiConfig.getLabel(Message);
-                        var validationRule = {
-                            Type: validation["@type"],
-                            Name: Name,
-                            Message: Message,
-                            Regex: validation.regex
-                            
-                        };
-                        p.validationRules.push(validationRule.Type);
-                        p.validationRules[validationRule.Type] = validationRule;
+            if (confObj) {
+                confObj = confObj.behaviour;
+                if (!confObj.length) {
+                    confObj = [].concat(confObj);
+                }
+
+                for (var i = 0; i < confObj.length; i++) {
+                    var validations = confObj[i].validation;
+                    if (validations) {
+                        for (var j = 0; j < validations.length; j++) {
+                            var validation = validations[j];
+                            var Name = validation["@name"];
+                            var Message = validation["@error"];
+
+                            Name = $fbiConfig.getLabel(Name);
+                            Message = $fbiConfig.getLabel(Message);
+                            var validationRule = {
+                                Type: validation["@type"],
+                                Name: Name,
+                                Message: Message,
+                                Regex: validation.regex
+
+                            };
+                            p.validationRules.push(validationRule.Type);
+                            p.validationRules[validationRule.Type] = validationRule;
+                        }
+                        break;
                     }
-                    break;
-                }                
+                }
             }
+            
         }
     }
 
