@@ -58,9 +58,8 @@ Tridion.Extensions.UI.FBI.Behaviours.MaxLengthBehaviour.prototype.validateRule =
         }
         if (value.length > length) {
             $messages.registerWarning($fbiConfig.getLabel("MaximumLengthError").format(field.getFieldName(), $fbiConfig.getLabel("MaxLengthLabel") + "[" + length + "]"));
-            field.getElement().style["background-color"] = "#FBE3E4";
             field.focus(i);
             return;
-        }
+        } 
     }
 };
