@@ -167,7 +167,6 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
     }
 
     if (schema.isLoaded()) {
-        $evt.removeEventHandler(schema, "load", FBIHandler$onSchemaReady);
         FBIHandler$onSchemaReady();
     } else {
         $evt.addEventHandler(schema, "load", FBIHandler$onSchemaReady);

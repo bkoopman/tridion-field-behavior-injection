@@ -22,7 +22,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.initialize = function S
             break;
         case "MetadataDesignTab":
             c.fieldMaxLengthInput = $("#MetadataDesignTab_MetadataDesignFieldDesigner_MDSchemaFieldBehaviour_MDSchemaFieldMaxLength_text");
-
             break;
     }
 
@@ -87,7 +86,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function
 };
 
 if ($fbiConfig.isEnabled()) {
-    Tridion.Controls.Deck.registerInitializeExtender("SchemaDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
-    Tridion.Controls.Deck.registerInitializeExtender("MetadataDesignTab", Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
+    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
+    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldMaxLength);
 }
 
