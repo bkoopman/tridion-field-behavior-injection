@@ -6,6 +6,7 @@ Tridion.Extensions.FBI.Commands.DisableFBI = function FBICommands$DisableFBI() {
     Type.enableInterface(this, "Tridion.Extensions.FBI.Commands.DisableFBI");
     this.addInterface("Tridion.Cme.Command", ["DisableFBI"]);
     this.buttonId = "#DisableFBIBtn";
+    this.hiddenMenuItemId = "li.DisableFBI > span";
     this.properties.controls = {};
 };
 
@@ -39,13 +40,24 @@ Tridion.Extensions.FBI.Commands.DisableFBI.prototype._execute = function Disable
     if (typeof c.fbiButton === "undefined") {
         c.fbiButton = $controls.getControl($(this.buttonId), "Tridion.Controls.RibbonButton");
     }
+    if (typeof c.hiddenSpan === "undefined") {
+        c.hiddenSpan = $(this.hiddenMenuItemId);
+        
+    }
 
     if (this.isFBILoaded()) {
         if ($fbiConfig.disabled) {
             c.fbiButton.setText($fbiConfig.getLabel("DisableFBILabel"));
+            if (c.hiddenSpan) {
+                c.hiddenSpan.innerText = $fbiConfig.getLabel("DisableFBILabel");
+            }
+
             $fbi.enableActiveHandlers();
         } else {
             c.fbiButton.setText($fbiConfig.getLabel("EnableFBILabel"));
+            if (c.hiddenSpan) {
+                c.hiddenSpan.innerText = $fbiConfig.getLabel("EnableFBILabel");
+            }
             $fbi.disableActiveHandlers();
         }
         $fbi.reApplyBehaviours();
