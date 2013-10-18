@@ -7,7 +7,10 @@ Tridion.Extensions.UI.FBI.Tabs.FBITab = function FBITab(element) {
     this.properties.controls = {};
     this.initialize();
     //TODO: Remove it when done
-    //$dom.removeNode($("#FBIComponentTab_switch"));
+    /*if (!$fbiConfig.showTab()) {
+        $dom.removeNode($("#FBIComponentTab_switch"));
+    }*/
+    
 };
 
 
