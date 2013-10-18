@@ -28,11 +28,9 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
                     if (validations) {
                         for (var j = 0; j < validations.length; j++) {
                             var validation = validations[j];
-                            var Name = validation["@name"];
-                            var Message = validation["@error"];
+                            var Name = this.getResourceValue(validation["@name"]);
+                            var Message = this.getResourceValue(validation["@error"]);
 
-                            Name = $fbiConfig.getLabel(Name);
-                            Message = $fbiConfig.getLabel(Message);
                             var validationRule = {
                                 Type: validation["@type"],
                                 Name: Name,
@@ -71,6 +69,14 @@ Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototy
         Message: rule.Message
     };
     return result;
+};
+
+Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration.prototype.getResourceValue = function SFVConfiguration$checkRule(value) {
+    if (value.indexOf("resources:") >= 0) {
+        return $fbiConfig.getLabel(value.replace(/resources:/, ''));
+    } else {
+        return $fbiConfig.getLabel(value).replace('[', '').replace(']', '');
+    }
 };
 
 $fbiValidationConfig = new Tridion.Extensions.UI.FBI.Behaviours.SchemaFieldValidation.Configuration();
