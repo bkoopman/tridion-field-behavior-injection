@@ -13,7 +13,7 @@ Tridion.Extensions.UI.FBI.Handler = function FBIHandler() {
     this.properties = {};
     var p = this.properties;
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
-    p.builders = {};
+    p.builders = [];
     p.activeHandlers = [];
     p.deactivatedHandlers = [];
     p.behaviourHandlers = [];
@@ -86,16 +86,19 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                 //Content Fields
                 var fb = $display.getView().properties.controls.fieldBuilder;
                 if (fb) {
+                    self.properties.builders.push($fbiConst.CONTENT);
                     self.properties.builders[$fbiConst.CONTENT] = fb;
+                    
                     $evt.addEventHandler(fb, "load", FBIHandler$onFieldBuilderLoad);
                 }
                 //Metadata Fieds
-                if (c.tabControl.getPage("MetadataTab")) {
-                    var tab = c.tabControl.getPage("MetadataTab");
+                if (c.tabControl.getPage($fbiConst.METADATA_TAB_ID)) {
+                    var tab = c.tabControl.getPage($fbiConst.METADATA_TAB_ID);
                     var fbmd = tab.properties.controls.fieldBuilder;
                     if (fbmd) {
+                        self.properties.builders.push($fbiConst.METADATA);
                         self.properties.builders[$fbiConst.METADATA] = fbmd;
-                        //$evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
+                        $evt.addEventHandler(fbmd, "load", FBIHandler$onFieldBuilderLoad);
                     }
                 }
                 break;
@@ -300,11 +303,14 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
 
 Tridion.Extensions.UI.FBI.Handler.prototype.reApplyBehaviours = function FBIHandler$reApplyBehaviours() {
     var p = this.properties;
-    var fbProperties = p.currentBuilder.properties;
-    fbProperties.toLoad = true;
-    fbProperties.readOnly = false;
-    //TODO: APPLY TO EVERY BUILDER
-    //p.currentBuilder.doLoad();
+    for (var i = 0; i < p.builders.length; i++) {
+        var builderName = p.builders[i];
+        var builder = p.builders[builderName]
+        var fbProperties = builder.properties;
+        fbProperties.toLoad = true;
+        fbProperties.readOnly = false;
+        builder.doLoad();
+    }
 };
 
 Tridion.Extensions.UI.FBI.Handler.prototype.getHandlers = function FBIHandler$getHandlers() {
