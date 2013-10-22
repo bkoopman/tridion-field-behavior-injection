@@ -9,14 +9,16 @@
 }
 
 .fbiLeftPanel {
-    width:50%;
+    width:49%;
+    padding-right:1%;
     display:inline;
     float:left;
     height: 250px;
 }
 
 .fbiRightPanel {
-    width:50%;
+    width:49%;
+    padding-left:1%;
     display:inline;
     float:left;
     height: 250px;
