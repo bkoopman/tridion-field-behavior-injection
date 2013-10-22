@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="postbuild.bat" />
+    <None Include="Properties\PublishProfiles\tridion.pubxml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

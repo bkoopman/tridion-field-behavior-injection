@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using Tridion.Extensions.FBI.Model;
+//using Tridion.Extensions.FBI.Model;
 
 
 namespace Tridion.Extensions.FBI.Services.Interfaces
