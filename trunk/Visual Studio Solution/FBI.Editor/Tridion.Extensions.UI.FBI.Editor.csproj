@@ -92,6 +92,10 @@
     <Content Include="Extensions\SchemaFieldBehaviour\SchemaFieldBehaviour.ascx.js">
       <DependentUpon>SchemaFieldBehaviour.ascx</DependentUpon>
     </Content>
+    <Content Include="Extensions\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlight.ascx" />
+    <Content Include="Extensions\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlight.ascx.js">
+	      <DependentUpon>SchemaFieldSyntaxHighlight.ascx</DependentUpon>
+	</Content>
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx" />
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx.js">
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
@@ -124,6 +128,10 @@
     <Compile Include="Extensions\ComponentTab\ComponentTab.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ComponentTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlight.ascx.cs">
+      <DependentUpon>SchemaFieldSyntaxHighlight.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
