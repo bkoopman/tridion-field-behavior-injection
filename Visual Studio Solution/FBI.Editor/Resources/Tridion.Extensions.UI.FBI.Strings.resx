@@ -142,7 +142,7 @@
     <value>Hidden</value>
   </data>
   <data name="MaximumLengthError" xml:space="preserve">
-    <value>Field {0} exceeds the maximun allowed characters: {1}</value>
+    <value>Field {0} exceeds the maximum allowed number of characters: {1}</value>
   </data>
   <data name="MaxLengthLabel" xml:space="preserve">
     <value>Maximum Length </value>
