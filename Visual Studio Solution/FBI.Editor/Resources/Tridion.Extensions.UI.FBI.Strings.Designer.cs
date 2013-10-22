@@ -70,7 +70,7 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Behaviour.
+        ///   Looks up a localized string similar to Behavior.
         /// </summary>
         internal static string BehaviourLabel {
             get {
@@ -124,7 +124,7 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FBI Behaviours Info.
+        ///   Looks up a localized string similar to FBI Behaviors Info.
         /// </summary>
         internal static string FBITabLabel {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BehaviourLabel" xml:space="preserve">
-    <value>Behaviour</value>
+    <value>Behavior</value>
   </data>
   <data name="DefaultErrorMessageLabel" xml:space="preserve">
     <value>Field {0} is not a valid {1}.</value>
@@ -136,7 +136,7 @@
     <value>Enable FBI</value>
   </data>
   <data name="FBITabLabel" xml:space="preserve">
-    <value>FBI Behaviours Info</value>
+    <value>FBI Behaviors Info</value>
   </data>
   <data name="HiddenLabel" xml:space="preserve">
     <value>Hidden</value>
