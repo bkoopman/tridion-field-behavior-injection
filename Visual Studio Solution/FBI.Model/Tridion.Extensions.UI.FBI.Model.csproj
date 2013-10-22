@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Scripts\Behaviours\MaxLengthBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\ReadOnlyBehaviourHandler.js" />
+    <Content Include="Scripts\Behaviours\SyntaxHighlightBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\ValidationBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\VisibilityBehaviourHandler.js" />
     <Content Include="Configuration\System.config.fragment.xml" />
@@ -77,6 +78,7 @@
     <Content Include="Scripts\External\SchemaFieldValidation\xregexp-min.js" />
     <Content Include="Scripts\Handler\FBIHandler.js" />
     <Content Include="Scripts\Helper\FBIHelper.js" />
+    <Content Include="Scripts\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlightConfig.js" />
     <Content Include="Scripts\SchemaFieldValidation\SchemaFieldValidationConfig.js" />
     <Content Include="Services\FBI\FBIServices.svc" />
     <Content Include="Web.config" />
