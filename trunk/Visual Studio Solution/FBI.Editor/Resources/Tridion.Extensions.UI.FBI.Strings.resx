@@ -171,4 +171,10 @@
   <data name="UsersAndGroupsLabel" xml:space="preserve">
     <value>Users and Groups</value>
   </data>
+  <data name="SyntaxHighlightLabel" xml:space="preserve">
+    <value>Syntax Highlighting</value>
+  </data>
+  <data name="SyntaxHighlightSelect" xml:space="preserve">
+    <value>Select Syntax</value>
+  </data>
 </root>
