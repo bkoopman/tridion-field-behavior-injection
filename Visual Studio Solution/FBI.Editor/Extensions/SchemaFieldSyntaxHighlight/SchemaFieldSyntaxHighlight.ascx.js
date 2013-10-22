@@ -35,14 +35,13 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.initialize = func
 
     for (var i = 0; i < languages.length; i++) {
         var opt = c.fieldLanguageList.options;
-
         var lang = languages[i];
         opt[opt.length] = new Option(languages[lang].Name, languages[lang].Type);
-
     }
     p.languagesReady = true;
     var schema = $display.getItem();
     c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.languagesReady || !p.selectedGroup;
+
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
     $evt.addEventHandler(c.fieldLanguageList, "change", Function.getDelegate(this, this.onLanguageChange));
@@ -60,7 +59,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onSelectionChange
     var p = this.properties;
     var c = p.controls;
 
-    c.fieldValidatorList.disabled = false;
+    c.fieldLanguageList.disabled = false;
     var selectedGroups = $fbiConfig.getSelectedGroups();
     if (selectedGroups) {
         p.selectedGroup = selectedGroups[0];
@@ -75,18 +74,18 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = fu
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
-    c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.validationReady;
+    c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
 
     if (p.selectedGroup) {
         var language = this.getSelection();
-        validation = (validation != 'undefined') ? validation : 'none';
-        this.setLanguageValue(validation);
+        language = (language != 'undefined') ? language : 'none';
+        this.setLanguageValue(language);
     }
 };
 
-Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setLanguageValue = function SchemaFieldValidation$setLanguageValue(textToFind) {
+Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.setLanguageValue = function SchemaFieldSyntaxHighlight$setLanguageValue(textToFind) {
     var c = this.properties.controls;
-    var dd = c.fieldValidatorList;
+    var dd = c.fieldLanguageList;
     dd.selectedIndex = 0;
     for (var i = 0; i < dd.options.length; i++) {
         if (dd.options[i].value === textToFind) {
