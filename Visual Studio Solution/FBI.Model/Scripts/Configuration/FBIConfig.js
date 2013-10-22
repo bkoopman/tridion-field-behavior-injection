@@ -273,6 +273,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     var control = this.getUsersAndGroupsList();
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
+    // ToDo: add behavior flag to XML
+
 
     function FieldBehaviour$_drawControl(definitionDocument) {
         control.draw(xmlDoc, definitionDocument);
