@@ -31,27 +31,22 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.initialize = func
         c.fieldLanguageList.disabled = true;
     }
 
-    console.log("here");
     var languages = $fbiSyntaxHighlightConfig.getLanguages();
-
-    console.log("here2");
 
     for (var i = 0; i < languages.length; i++) {
         var opt = c.fieldLanguageList.options;
-        console.log("here 3");
+
         var lang = languages[i];
         opt[opt.length] = new Option(languages[lang].Name, languages[lang].Type);
+
     }
     p.languagesReady = true;
     var schema = $display.getItem();
     c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.languagesReady || !p.selectedGroup;
-
     $evt.addEventHandler($fbiConfig.getUsersAndGroupsList(), "selectionchange", Function.getDelegate(this, this.onSelectionChange));
     $evt.addEventHandler($fbiConfig.getFieldDeisgner(), "updateview", Function.getDelegate(this, this.onUpdateView));
-    $evt.addEventHandler(c.fieldValidatorList, "change", Function.getDelegate(this, this.onLanguageChange));
+    $evt.addEventHandler(c.fieldLanguageList, "change", Function.getDelegate(this, this.onLanguageChange));
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "onSchemaChanged");
-
-
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onLanguageChange = function SchemaFieldSyntaxHighlight$onLanguageChange() {
