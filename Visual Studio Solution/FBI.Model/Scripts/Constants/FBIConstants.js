@@ -12,6 +12,7 @@ Tridion.Extensions.UI.FBI.Constants.METADATA_SCHEMA_DESIGN_TAB = "MetadataDesign
 
 Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
 Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";
+Tridion.Extensions.UI.FBI.Constants.SE_METADATA = "semetadata";
 
 Tridion.Extensions.UI.FBI.Constants.EDITOR_NAME = "FBI";
 Tridion.Extensions.UI.FBI.Constants.RESOURCES_NAMESPACE = "Tridion.Extensions.UI.FBI.Strings";
@@ -29,6 +30,7 @@ Tridion.Extensions.UI.FBI.Constants.MULTIMEDIA_LINK_FIELD = "MultimediaLinkField
 Tridion.Extensions.UI.FBI.Constants.EMBEDDED_FIELD = "EmbeddedSchemaField";
 
 Tridion.Extensions.UI.FBI.Constants.COMPONENT_VIEW = "ComponentView";
+Tridion.Extensions.UI.FBI.Constants.SE_METADATA_VIEW = "MetadataView";
 Tridion.Extensions.UI.FBI.Constants.FBI_COMPONENT_TAB = "FBIComponentTab";
 
 Tridion.Extensions.UI.FBI.Constants.INPUT_ELEMENT = "input";

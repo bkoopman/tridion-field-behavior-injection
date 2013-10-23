@@ -28,7 +28,14 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
     var p = this.properties;
     var c = p.controls;
     
-    c.tabControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
+    
+    
+    if(!(typeof $("#MasterTabControl") === "undefined"))
+    {
+        c.tabControl = $controls.getControl($("#MasterTabControl"), "Tridion.Controls.TabControl");
+    }
+    
+    
     
     //Load handlers from configuration
     var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;
@@ -54,6 +61,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     handler[$fbiConst.CONTENT].fields = [];
                     handler[$fbiConst.METADATA] = {};
                     handler[$fbiConst.METADATA].fields = [];
+                    handler[$fbiConst.SE_METADATA] = {};
+                    handler[$fbiConst.SE_METADATA].fields = [];
                     p.behaviourHandlers[handler.name] = handler;
                     p.behaviourHandlers.push(handler.name);
                 }
@@ -68,13 +77,17 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
 
     function FBIHandler$onFieldBuilderLoad(e) {
         var builder = e.source;
-        var id = builder.getId()
+        var id = builder.getId();
+        
         var context = self.getContext(id);
         self.properties.currentBuilder = builder;
         self.applyBehaviours(id, builder, context);
     }
 
+   
+
     function FBIHandler$onDisplayReady() {
+        
         $evt.removeEventHandler($display, "start", FBIHandler$onDisplayReady);
         var viewId = $display.getView().getId();
         switch (viewId) {
@@ -82,7 +95,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
             case $fbiConst.COMPONENT_VIEW:
                 //Schema
                 self.properties.controls.schemaControl = $controls.getControl($("#Schema"), "Tridion.Controls.Dropdown");
-
+                
                 //Content Fields
                 var fb = $display.getView().properties.controls.fieldBuilder;
                 if (fb) {
@@ -102,6 +115,21 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     }
                 }
                 break;
+            case $fbiConst.SE_METADATA_VIEW:
+                var view = $display.getView();
+                var vp = view.properties;
+                self.properties.schemaId = $models.getItem(vp.itemId).getMetadataSchemaId();
+                
+                //Metadata Fields
+                var sefbmd = vp.controls.fieldBuilder;
+                
+                if (sefbmd) {
+                    self.properties.builders.push($fbiConst.SE_METADATA);
+                    self.properties.builders[$fbiConst.SE_METADATA] = sefbmd;
+                    $evt.addEventHandler(sefbmd, "load", FBIHandler$onFieldBuilderLoad);
+                }
+                
+                break;
             default:
         }
     }
@@ -119,6 +147,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.registerHandler = function FBIHandle
     handler[$fbiConst.CONTENT].fields = [];
     handler[$fbiConst.METADATA] = {};
     handler[$fbiConst.METADATA].fields = [];
+    handler[$fbiConst.SE_METADATA] = {};
+    handler[$fbiConst.SE_METADATA].fields = [];
     p.behaviourHandlers[handler.name] = handler;
     p.behaviourHandlers.push(handler.name);
     $log.message("Handler: {0} [{1}] [{2}] registered.".format(name, type, enabled));
@@ -136,8 +166,13 @@ Tridion.Extensions.UI.FBI.Handler.prototype.applyBehaviours = function FBIHandle
     /// <param name="id">The behaviour id (unique key) [optional]</param>
     /// <param name="fieldBuilder">The field builder object <see cref="Tridion.Controls.FieldBuilder"/> [optional]</param>
     var p = this.properties;
-    var c = p.controls;
-    var schemaId = c.schemaControl.getValue();
+    var schemaId = p.schemaId;
+    if(typeof p.schemaId === "undefined"){
+        //Non-SE
+        schemaId = p.controls.schemaControl.getValue();
+
+    }
+
 
     var user = $models.getItem(Tridion.UI.UserSettings.getJsonUserSettings()["User"]["@ID"]);
     var self = this;
@@ -201,7 +236,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.getContext = function FBIHandler$get
         case $fbiConst.METADATA_FIELD_DESIGNER_ID:
             return $fbiConst.METADATA;
         default:
-            return $fbiConst.CONTENT;
+            //Site Edit Metadata Field Builder has an empty id
+            return $fbiConst.SE_METADATA;
     }
 };
 
@@ -263,6 +299,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
             fieldsDoc = $xml.getNewXmlDocument(schema.getMetadataFields());
             break;
         default:
+            context = $fbiConst.SE_METADATA;
+            fieldsDoc = $xml.getNewXmlDocument(schema.getMetadataFields());
             break;
 
     }
@@ -285,6 +323,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
                         handler[context] = [];
                     }
                     var target = handler[context];
+                    console.debug("Context: " + context);
                     if (typeof target.fields[fieldName] === "undefined") {
                         target.fields[fieldName] = [];
                     }
