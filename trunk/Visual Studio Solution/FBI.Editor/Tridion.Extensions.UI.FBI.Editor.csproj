@@ -106,6 +106,22 @@
     </Content>
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
     <Content Include="Scripts\FBICommands.js" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\animated-overlay.gif" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Themes\Carbon\jquery-ui\smoothness\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Themes\Carbon\FBICommands.css" />
     <Content Include="Themes\Carbon\Icons\DisableFBI16x16.png" />
     <Content Include="Themes\Carbon\Icons\DisableFBI32x32.png" />
