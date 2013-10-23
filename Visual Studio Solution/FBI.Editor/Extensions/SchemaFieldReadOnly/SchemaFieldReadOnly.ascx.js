@@ -58,16 +58,18 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {
-    var p = this.properties;
-    var c = p.controls;
-    var schema = $fbiConfig.getSchema();
-    c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
+    if (this.isAllowedField()) {
+        p = this.properties;
+        var c = p.controls;
+        var schema = $fbiConfig.getSchema();
+        c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
 
-    if (p.selectedGroup) {
-        var readonly = this.getConfigurationValue();
-        c.fieldReadOnlyCheckbox.checked = readonly == "true";
-    } else {
-        c.fieldReadOnlyCheckbox.checked = false;
+        if (p.selectedGroup) {
+            var readonly = this.getConfigurationValue();
+            c.fieldReadOnlyCheckbox.checked = readonly == "true";
+        } else {
+            c.fieldReadOnlyCheckbox.checked = false;
+        }
     }
 
 };

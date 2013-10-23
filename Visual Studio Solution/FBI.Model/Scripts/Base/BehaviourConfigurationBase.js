@@ -73,7 +73,11 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     var fieldValue = $fbiEditorConfig[fieldType];
     var behaviourConfig = $fbiEditorConfig.getBehaviourConfig(this.key);
     //Binary AND
-    return fieldValue & behaviourConfig.allowedTypes;
+    var allowed = fieldValue & behaviourConfig.allowedTypes;
+    if (!allowed) {
+        this.hide();
+    }
+    return allowed;
    
 };
 

@@ -56,17 +56,20 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onSelectionChange = fu
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = function SchemaFieldVisibility$onUpdateView() {
-    var p = this.properties;
-    var c = p.controls;
-    var schema = $fbiConfig.getSchema();
-    c.fieldHiddenCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
+    if (this.isAllowedField()) {
+        var p = this.properties;
+        var c = p.controls;
+        var schema = $fbiConfig.getSchema();
+        c.fieldHiddenCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
 
-    if (p.selectedGroup) {
-        var Visibility = this.getConfigurationValue();
-        c.fieldHiddenCheckbox.checked = Visibility == "true";
-    } else {
-        c.fieldHiddenCheckbox.checked = false;
+        if (p.selectedGroup) {
+            var Visibility = this.getConfigurationValue();
+            c.fieldHiddenCheckbox.checked = Visibility == "true";
+        } else {
+            c.fieldHiddenCheckbox.checked = false;
+        }
     }
+  
 
 };
 
