@@ -16,8 +16,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight = function SchemaFieldSynta
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.initialize = function SchemaFieldSyntaxHighlight$initialize(deckPage) {
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setAreaId", [this.areaId]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "initialize", [deckPage, this.key, this.areaId]);
     var p = this.properties;
     var c = p.controls;
 

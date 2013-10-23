@@ -14,8 +14,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setAreaId", [this.areaId]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "initialize", [deckPage, this.key, this.areaId]);
     var p = this.properties;
     var c = p.controls;
     
@@ -58,8 +57,10 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {
+    console.debug($fbiConfig.getFieldDeisgner().getFieldXml());
     if (this.isAllowedField()) {
-        p = this.properties;
+        
+        var p = this.properties;
         var c = p.controls;
         var schema = $fbiConfig.getSchema();
         c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
