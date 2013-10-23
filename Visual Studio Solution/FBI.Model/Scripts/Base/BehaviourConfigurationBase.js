@@ -67,8 +67,9 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
-    var fieldXml = $xml.getNewXmlDocument($fbiConfig.getFieldDeisgner().getFieldXml());
-    var fieldType = $dom.getLocalName(fieldXml);
+    
+    var fieldType = $dom.getLocalName($fbiConfig.getFieldDeisgner().getFieldXml());
+    console.debug(fieldType);
     //TODO: CHECK IF TH EFIELD TYPE IS ALLOWED, IN THE MEANTIME ALL ARE
     return true;
 };
