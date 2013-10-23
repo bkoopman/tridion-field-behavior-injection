@@ -19,7 +19,6 @@ Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.apply = 
                     this.setSyntaxHighlight(context, field, true);
                 }
                 break;
-            /*
             case $fbiConst.XHTML_FIELD:
             case $fbiConst.KEYWORD_FIELD:
             case $fbiConst.NUMBER_FIELD:
@@ -28,7 +27,6 @@ Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.apply = 
             case $fbiConst.COMPONENT_LINK_FIELD:
             case $fbiConst.MULTIMEDIA_LINK_FIELD:
             case $fbiConst.EMBEDDED_FIELD:
-            */
                 
             default:
                 console.warn("Field [" + fieldName + "] Behaviour [" + this.getTypeName() + "] not implemented for field type: [" + fieldType +"]");
@@ -40,18 +38,6 @@ Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.apply = 
 Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.getSyntaxHighlight = function SyntaxHighlightBehaviour$getSyntaxHighlight(values) {
     return values[0].value;
 };
-
-/*
-Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.isSyntaxHighlighted = function SyntaxHighlightBehaviour$isSyntaxHighlighted(values) {
-    for (var i = 0; i < values.length; i++) {
-        if (values[i].value == "true") {
-            return true;
-        }
-    }
-    return false;
-    //return values[0].value;
-};
-*/
 
 Tridion.Extensions.UI.FBI.Behaviours.SyntaxHighlightBehaviour.prototype.setSyntaxHighlight = function SyntaxHighlightBehaviour$getSyntaxHighlight(context, field, readonly) {
     var f = this.getField(context, field.fieldName);
