@@ -6,7 +6,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation = function SchemaFieldValidation
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
     
-	this.key = "validation";
+    this.key = "validation";
+    this.areaId = "SchemaFieldValidation";
+    
     var p = this.properties;
     p.controls = {};
 
@@ -15,6 +17,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation = function SchemaFieldValidation
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.initialize = function SchemaFieldValidation$initialize(deckPage) {
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setAreaId", [this.areaId]);
     var p = this.properties;
     var c = p.controls;
 

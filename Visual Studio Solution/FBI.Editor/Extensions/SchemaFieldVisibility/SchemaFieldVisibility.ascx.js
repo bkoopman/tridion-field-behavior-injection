@@ -7,12 +7,15 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility = function SchemaFieldVisibility
     this.addInterface("Tridion.DisposableObject");
     
     this.key = "hidden";
+    this.areaId = "SchemaFieldVisibility";
+    
     var p = this.properties;
     p.controls = {};
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function SchemaFieldVisibility$initialize(deckPage) {
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "areaId", [this.areaId]);
     var p = this.properties;
     var c = p.controls;
 
