@@ -67,13 +67,17 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
-    
+    console.debug("Checking allowed field");
     var fieldType = $dom.getLocalName($fbiConfig.getFieldDeisgner().getFieldXml());
     console.debug(fieldType);
     var fieldValue = $fbiEditorConfig[fieldType];
     var behaviourConfig = $fbiEditorConfig.getBehaviourConfig(this.key);
+    if (behaviourConfig.allFieldTypes) {
+        return true;
+    }
     //Binary AND
     var allowed = fieldValue & behaviourConfig.allowedTypes;
+    console.debug("{0} : {1} & {2}".format(allowed, fieldValue, behaviourConfig.allowedTypes));
     if (!allowed) {
         this.hide();
     }
