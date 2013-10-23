@@ -15,8 +15,8 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     var editor = $config.Editors[$fbiConst.EDITOR_NAME];
     p.configDoc = $xml.getNewXmlDocument(editor.configuration);
 
-    p.enabled = $xml.selectStringValue(configDoc, "//cfg:fbi/@enabled", ns) == "true";
-    p.showtab =$xml.selectStringValue(configDoc, "//cfg:fbi/@showTab", ns) == "true";
+    p.enabled = $xml.selectStringValue(p.configDoc, "//cfg:fbi/@enabled", ns) == "true";
+    p.showtab = $xml.selectStringValue(p.configDoc, "//cfg:fbi/@showTab", ns) == "true";
     p.behaviours = [];
 
     var behaviourNodes = $xml.selectNodes(p.configDoc, "//cfg:behaviour", ns);
