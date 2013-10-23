@@ -78,7 +78,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hideConfig = func
     var p = this.properies;
     
     if($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
-        prefix = "MD";
+        prefix = $fbiConfig.METADATA_PREFIX;
     };
     
     var selector = "#" + prefix + p.areaId;
