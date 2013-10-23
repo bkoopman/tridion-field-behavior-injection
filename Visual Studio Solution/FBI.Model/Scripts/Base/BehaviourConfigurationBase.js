@@ -70,8 +70,11 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     
     var fieldType = $dom.getLocalName($fbiConfig.getFieldDeisgner().getFieldXml());
     console.debug(fieldType);
-    //TODO: CHECK IF TH EFIELD TYPE IS ALLOWED, IN THE MEANTIME ALL ARE
-    return true;
+    var fieldValue = $fbiEditorConfig[fieldType];
+    var behaviourConfig = $fbiEditorConfig.getBehaviourConfig(this.key);
+    //Binary AND
+    return fieldValue & behaviourConfig.allowedTypes;
+   
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hide = function BehaviourConfigurationBase$hide() {
