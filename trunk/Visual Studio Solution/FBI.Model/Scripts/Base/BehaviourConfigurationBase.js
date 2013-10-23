@@ -20,7 +20,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function
     this.key = key;
 };
 
-Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(areaId) {
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = function BehaviourConfigurationBase$setAreaId(areaId) {
     /// <summary>
     /// Sets the behaviour areaId
     /// </summary>
