@@ -15,7 +15,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility = function SchemaFieldVisibility
 
 Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.initialize = function SchemaFieldVisibility$initialize(deckPage) {
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
-    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "areaId", [this.areaId]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setAreaId", [this.areaId]);
     var p = this.properties;
     var c = p.controls;
 
