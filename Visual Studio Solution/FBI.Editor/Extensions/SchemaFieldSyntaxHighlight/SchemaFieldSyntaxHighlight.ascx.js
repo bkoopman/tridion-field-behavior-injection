@@ -6,7 +6,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight = function SchemaFieldSynta
     this.addInterface("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
     
-    this.key = "SyntaxHighlight";
+    this.key = "syntaxhighlight";
     this.areaId = "SchemaFieldSyntaxHighlight";
 	var p = this.properties;
     p.controls = {};
