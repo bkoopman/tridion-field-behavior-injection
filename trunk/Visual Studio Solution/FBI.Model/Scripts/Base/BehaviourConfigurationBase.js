@@ -58,6 +58,13 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
     p.timer = Date.getTimer();
 };
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
+    var fieldXml = $xml.getNewXmlDocument($fbiConfig.getFieldDeisgner().getFieldXml());
+    var fieldType = $dom.getLocalName(fieldXml);
+    //TODO: CHECK IF TH EFIELD TYPE IS ALLOWED, IN THE MEANTIME ALL ARE
+    return true;
+};
+
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
     var p = this.properties;
     $log.info("{0}::: Time taken to initialize was {1}ms".format(this.getTypeName(), (Date.getTimer() - p.timer)));
