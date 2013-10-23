@@ -28,12 +28,47 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
             name: $xml.selectStringValue(behaviourNode, "@name", ns),
             key: $xml.selectStringValue(behaviourNode, "@name", ns), //key is the name
             handler: $xml.selectStringValue(behaviourNode, "@handler", ns),
-            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "//cfg:allowedTypes/@value", ns))
-        };
+            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "//cfg:allowedTypes/@value", ns)),
+            
+    };
         
         p.behaviours.push(behaviour.key);
         p.behaviours[behaviour.key] = behaviour;
     }
-    };
+};
+
+
+
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getBehaviourConfig = function BehaviourConfigurationBase$getBehaviourConfig(key) {
+    var p = this.properties;
+    return p.behaviours[key];
+};
+
+
+Tridion.Extensions.UI.FBI.FBIEditorConfig["SingleLineTextField"] = 1;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["MultiLineTextField"] = 2;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["KeywordField"] = 4;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["XHTMLField"] = 8;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["NumberField"] = 16;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["DateField"] = 32;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["ExternalLinkField"] = 64;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["ComponentLinkField"] = 128;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["MultimediaLinkField"] = 512;
+Tridion.Extensions.UI.FBI.FBIEditorConfig["EmbeddedSchemaField"] = 1024;
+
+
+Tridion.Extensions.UI.FBI.FBIEditorConfig.SingleLineTextField = 1;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.MultiLineTextField = 2;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.KeywordField = 4;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.XHTMLField = 8;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.NumberField = 16;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.DateField = 32;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.ExternalLinkField = 64;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.ComponentLinkField = 128;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.MultimediaLinkField = 512;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.EmbeddedSchemaField = 1024;
+
+
+
 
 $fbiEditorConfig = new Tridion.Extensions.UI.FBI.FBIEditorConfig();
