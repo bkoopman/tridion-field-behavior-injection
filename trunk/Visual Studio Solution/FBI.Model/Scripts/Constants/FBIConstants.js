@@ -10,7 +10,9 @@ Tridion.Extensions.UI.FBI.Constants.METADATA_FIELD_DESIGNER_ID = "ItemMetadata";
 
 Tridion.Extensions.UI.FBI.Constants.METADATA_TAB_ID = "MetadataTab";
 Tridion.Extensions.UI.FBI.Constants.SCHEMA_DESIGN_TAB = "SchemaDesignTab";
+Tridion.Extensions.UI.FBI.Constants.SCHEMA_DESIGN_FIELD_LIST = "SchemaDesignFieldsList";
 Tridion.Extensions.UI.FBI.Constants.METADATA_SCHEMA_DESIGN_TAB = "MetadataDesignTab";
+Tridion.Extensions.UI.FBI.Constants.METADATA_DESIGN_FIELD_LIST = "MetadataDesignFieldsList";
 
 Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
 Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";
