@@ -7,6 +7,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight = function SchemaFieldSynta
     this.addInterface("Tridion.DisposableObject");
     
     this.key = "SyntaxHighlight";
+    this.areaId = "SchemaFieldSyntaxHighlight"
 	var p = this.properties;
     p.controls = {};
 
@@ -16,6 +17,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight = function SchemaFieldSynta
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.initialize = function SchemaFieldSyntaxHighlight$initialize(deckPage) {
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setKey", [this.key]);
+    this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "setAreaId", [this.areaId]);
     var p = this.properties;
     var c = p.controls;
 
@@ -71,15 +73,21 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onSelectionChange
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = function SchemaFieldSyntaxHighlight$onUpdateView() {
-    var p = this.properties;
-    var c = p.controls;
-    var schema = $fbiConfig.getSchema();
-    c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
 
-    if (p.selectedGroup) {
-        var language = this.getSelection();
-        language = (language != 'undefined') ? language : 'none';
-        this.setLanguageValue(language);
+    if (this.isAllowedField()) {
+        var p = this.properties;
+        var c = p.controls;
+        var schema = $fbiConfig.getSchema();
+        c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
+
+        if (p.selectedGroup) {
+            var language = this.getSelection();
+            language = (language != 'undefined') ? language : 'none';
+            this.setLanguageValue(language);
+        }
+    }
+    else {
+        this.hide();
     }
 };
 
