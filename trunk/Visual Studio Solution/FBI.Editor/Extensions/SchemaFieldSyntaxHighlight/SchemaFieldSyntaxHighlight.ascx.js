@@ -86,9 +86,6 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = fu
             this.setLanguageValue(language);
         }
     }
-    else {
-        this.hide();
-    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.setLanguageValue = function SchemaFieldSyntaxHighlight$setLanguageValue(textToFind) {
