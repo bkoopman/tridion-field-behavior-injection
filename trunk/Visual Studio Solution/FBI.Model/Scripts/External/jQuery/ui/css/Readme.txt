@@ -1,0 +1,1 @@
+﻿The css for jquery ui is added in the editor as part of the Theme
