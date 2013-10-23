@@ -20,6 +20,13 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function
     this.key = key;
 };
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(areaId) {
+    /// <summary>
+    /// Sets the behaviour areaId
+    /// </summary>
+    this.areaId = areaId;
+};
+
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
     /// <summary>
     /// Gets the configuration value
@@ -63,6 +70,19 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     var fieldType = $dom.getLocalName(fieldXml);
     //TODO: CHECK IF TH EFIELD TYPE IS ALLOWED, IN THE MEANTIME ALL ARE
     return true;
+};
+
+
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hideConfig = function BehaviourConfigurationBase$hideConfig() {
+    var prefix = "";
+    var p = this.properies;
+    
+    if($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
+        prefix = "MD";
+    };
+    
+    var selector = "#" + prefix + p.areaId;
+    $css.undisplay($(selector));
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
