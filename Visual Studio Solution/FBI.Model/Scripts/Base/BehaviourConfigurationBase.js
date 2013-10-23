@@ -14,6 +14,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = func
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
+    console.info("Registering extended area [{0}]".format(key));
     /// <summary>
     /// Sets the behaviour key
     /// </summary>
@@ -72,8 +73,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     return true;
 };
 
-
-Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hideConfig = function BehaviourConfigurationBase$hideConfig() {
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hide = function BehaviourConfigurationBase$hide() {
     var prefix = "";
     
     
