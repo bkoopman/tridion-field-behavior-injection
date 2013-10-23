@@ -28,10 +28,13 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
             name: $xml.selectStringValue(behaviourNode, "@name", ns),
             key: $xml.selectStringValue(behaviourNode, "@name", ns), //key is the name
             handler: $xml.selectStringValue(behaviourNode, "@handler", ns),
-            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "//cfg:allowedTypes/@value", ns)),
+            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "//cfg:allowedFieldTypes/@value", ns)),
             
-    };
-        
+        };
+        if (isNaN(behaviour.allowedTypes)) {
+            behaviour.allowedTypes = 0;
+        }
+
         p.behaviours.push(behaviour.key);
         p.behaviours[behaviour.key] = behaviour;
     }
