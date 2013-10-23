@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\System.config.fragment.xml" />
+    <Content Include="Extensions\SiteEdit\SiteEditEnabler.js" />
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx" />
     <Content Include="Extensions\ComponentTab\ComponentTab.ascx.js">
       <DependentUpon>ComponentTab.ascx</DependentUpon>
@@ -94,8 +95,8 @@
     </Content>
     <Content Include="Extensions\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlight.ascx" />
     <Content Include="Extensions\SchemaFieldSyntaxHighlight\SchemaFieldSyntaxHighlight.ascx.js">
-	      <DependentUpon>SchemaFieldSyntaxHighlight.ascx</DependentUpon>
-	</Content>
+      <DependentUpon>SchemaFieldSyntaxHighlight.ascx</DependentUpon>
+    </Content>
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx" />
     <Content Include="Extensions\SchemaFieldValidation\SchemaFieldValidation.ascx.js">
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
@@ -163,6 +164,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Tridion.Extensions.UI.FBI.Strings.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
