@@ -75,6 +75,7 @@
     <Content Include="Scripts\Configuration\FBIConfig.js" />
     <Content Include="Scripts\Constants\FBIConstants.js" />
     <Content Include="Scripts\External\jQuery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\External\jQuery\ui\css\Readme.txt" />
     <Content Include="Scripts\External\jQuery\ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="Scripts\External\jQuery\ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="Scripts\External\jQuery\ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
