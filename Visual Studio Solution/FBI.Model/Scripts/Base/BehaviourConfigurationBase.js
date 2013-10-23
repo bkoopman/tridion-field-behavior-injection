@@ -75,13 +75,13 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hideConfig = function BehaviourConfigurationBase$hideConfig() {
     var prefix = "";
-    var p = this.properies;
+    
     
     if($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
         prefix = $fbiConfig.METADATA_PREFIX;
     };
     
-    var selector = "#" + prefix + p.areaId;
+    var selector = "#" + prefix + this.areaId;
     $css.undisplay($(selector));
 };
 

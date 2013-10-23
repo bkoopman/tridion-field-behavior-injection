@@ -43,29 +43,45 @@ Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.getValidation
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.setValidationType = function ValidationBehaviour$setValidationType(context, field, type) {
     var f = this.getField(context, field.fieldName);
     $evt.addEventHandler(f, "blur", Function.getDelegate(this, this.validateRule, [f, type]));
+    $evt.addEventHandler(f, "change", Function.getDelegate(this, this.clearActiveMessage, [f]));
+};
+
+Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.clearActiveMessage = function ValidationBehaviour$clearActiveMessage(field) {
+    field.activeMessage == undefined;
+    field.activeFieldPosition = -1;
 };
 Tridion.Extensions.UI.FBI.Behaviours.ValidationBehaviour.prototype.validateRule = function ValidationBehaviour$validateRule(field, type) {
     var values = field.getValues();
     if (typeof values === "undefined" || values == null) {
         return;
     }
-    for (var i = 0; i < values.length; i++) {
-        var value = values[i];
-        var result = $fbiValidationConfig.checkRule(type, value);
-        if (!result.Success) {
-            $messages.registerWarning(result.Message.format(field.getFieldName(), result.ValidationName));
-            if (field.properties.input) {
-                field.properties.input.style["background-color"] = $fbiConst.ERROR_COLOR;
-                field.properties.input.style["border"] = $fbiConst.ERROR_BORDER_COLOR;
+
+    if (typeof field.activeMessage === "undefined") {
+        for (var i = 0; i < values.length; i++) {
+            var value = values[i];
+            var result = $fbiValidationConfig.checkRule(type, value);
+            if (!result.Success) {
+                field.activeMessage = $messages.registerWarning($fbiConfig.getLabel("ValidationLabel"), result.Message.format(field.getFieldName(), result.ValidationName));
+                field.activeFieldPosition = i;
+                if (field.properties.input) {
+                    field.properties.input.style["background-color"] = $fbiConst.ERROR_COLOR;
+                    field.properties.input.style["border"] = $fbiConst.ERROR_BORDER_COLOR;
+                }
+                field.focus(i);
+                return;
+            } else {
+                field.activeMessage = undefined;
+                field.activeFieldPosition = -1;
+                if (field.properties.input) {
+                    field.properties.input.style["background-color"] = $fbiConst.DEFAULT_INPUT_COLOR;
+                    field.properties.input.style["border"] = $fbiConst.DEFAULT_INPUT_BORDER_COLOR;
+                }
+                return;
             }
-            field.focus(i);
-            return;
-        } else {
-            if (field.properties.input) {
-                field.properties.input.style["background-color"] = $fbiConst.DEFAULT_INPUT_COLOR;
-                field.properties.input.style["border"] = $fbiConst.DEFAULT_INPUT_BORDER_COLOR;
-            }
-            return;
         }
+    } else {
+        field.focus(field.activeFieldPosition);
     }
+
+
 };
