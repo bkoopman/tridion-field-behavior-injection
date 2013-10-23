@@ -323,7 +323,7 @@ Tridion.Extensions.UI.FBI.Handler.prototype.loadFieldsConfiguration = function F
                         handler[context] = [];
                     }
                     var target = handler[context];
-                    console.debug("Context: " + context);
+                    
                     if (typeof target.fields[fieldName] === "undefined") {
                         target.fields[fieldName] = [];
                     }
