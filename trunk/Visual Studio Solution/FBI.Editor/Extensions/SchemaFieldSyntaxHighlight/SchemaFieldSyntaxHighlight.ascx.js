@@ -52,7 +52,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onLanguageChange 
     var p = this.properties;
     var c = p.controls;
     var language = c.fieldLanguageList.value;
-    this.setLanguageValue(language);
+    this.setConfigurationValue(language);
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onSelectionChange = function SchemaFieldSyntaxHighlight$onSelectionChange() {
