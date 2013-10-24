@@ -1,4 +1,4 @@
-﻿Tridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
+﻿SchemaDesignTabTridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
 
 Tridion.Extensions.UI.FBI.Constants.FBI_NODE_NAME = "fbi";
 Tridion.Extensions.UI.FBI.Constants.BEHAVIOUR_NODE_NAME = "behaviour";
@@ -8,11 +8,14 @@ Tridion.Extensions.UI.FBI.Constants.METADATA_PREFIX = "MD";
 Tridion.Extensions.UI.FBI.Constants.CONTENT_FIELD_DESIGNER_ID = "SchemaBasedFields";
 Tridion.Extensions.UI.FBI.Constants.METADATA_FIELD_DESIGNER_ID = "ItemMetadata";
 
-Tridion.Extensions.UI.FBI.Constants.METADATA_TAB_ID = "MetadataTab";
+Tridion.Extensions.UI.FBI.Constants.METADATA_DESIGN_TAB = "MetadataTab";
 Tridion.Extensions.UI.FBI.Constants.SCHEMA_DESIGN_TAB = "SchemaDesignTab";
 Tridion.Extensions.UI.FBI.Constants.SCHEMA_DESIGN_FIELD_LIST = "SchemaDesignFieldsList";
 Tridion.Extensions.UI.FBI.Constants.METADATA_SCHEMA_DESIGN_TAB = "MetadataDesignTab";
 Tridion.Extensions.UI.FBI.Constants.METADATA_DESIGN_FIELD_LIST = "MetadataDesignFieldsList";
+
+Tridion.Extensions.UI.FBI.Constants.XML_SCHEMA_METADATA = "Metadata";
+Tridion.Extensions.UI.FBI.Constants.XML_SCHEMA_CONTENT = "ContentSchemaDesignTab";
 
 Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
 Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";
@@ -24,6 +27,10 @@ Tridion.Extensions.UI.FBI.Constants.NAMESPACE_URL = "http://www.sdltridion.com/2
 Tridion.Extensions.UI.FBI.Constants.NAMESPACE_PREFIX = "fbi";
 Tridion.Extensions.UI.FBI.Constants.CONFIG_URL = "http://www.sdltridion.com/2009/GUI/Configuration/Merge";
 Tridion.Extensions.UI.FBI.Constants.CONFIG_PREFIX = "cfg";
+
+Tridion.Extensions.UI.FBI.Constants.XSD_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
+Tridion.Extensions.UI.FBI.Constants.XSD_PREFIX = "xsd";
+
 Tridion.Extensions.UI.FBI.Constants.SINGLE_LINE_TEXT_FIELD = "SingleLineTextField";
 Tridion.Extensions.UI.FBI.Constants.MULTILINE_TEXT_FIELD = "MultiLineTextField";
 Tridion.Extensions.UI.FBI.Constants.KEYWORD_FIELD = "KeywordField";
