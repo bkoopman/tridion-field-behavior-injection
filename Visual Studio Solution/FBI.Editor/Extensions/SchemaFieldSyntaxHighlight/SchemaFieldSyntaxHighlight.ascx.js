@@ -76,12 +76,12 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = fu
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
     c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
-
-    if (p.selectedGroup) {
+    //TODO: THIS CODE FAILS, Jaime Santos
+   /* if (p.selectedGroup) {
         var language = c.fieldLanguageList.getSelection();
         language = (language != 'undefined') ? language : 'none';
         this.setLanguageValue(language);
-    }
+    }*/
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.setLanguageValue = function SchemaFieldSyntaxHighlight$setLanguageValue(textToFind) {
