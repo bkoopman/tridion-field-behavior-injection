@@ -10,9 +10,17 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour = function SchemaFieldBehaviour()
 
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function SchemaFieldBehaviour$initialize(deckPage) {
     //Extension Initialization    
-    if ($fbiConfig.isEnabled()) {
+    if ($fbiEditorConfig.isEnabled()) {
         $fbiConfig.initialize();
         $fbiConfig.getBehavioursPanel().close();
+        var behaviours = $fbiEditorConfig.getAllBehaviours();
+        for (var i = 0; i < behaviours.length; i++) {
+            var behaviour = behaviours[behaviours[i]];
+            if (behaviour.enabled && behaviour.areaHandler) {
+                Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
+                Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
+            } 
+        }
     } else {
         $fbiConfig.hidePanel();
     }
