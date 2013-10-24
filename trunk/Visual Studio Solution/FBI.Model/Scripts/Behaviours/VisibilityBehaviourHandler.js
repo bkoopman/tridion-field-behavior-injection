@@ -6,7 +6,7 @@ Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour = function VisibilityBe
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourBase", "setKey", [$fbiConst.HIDDEN]);
 };
 
-Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviourapply(context, fields) {
+Tridion.Extensions.UI.FBI.Behaviours.VisibilityBehaviour.prototype.apply = function VisibilityBehaviour$apply(context, fields) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[fields[i]];
         var fieldName = field.fieldName;
