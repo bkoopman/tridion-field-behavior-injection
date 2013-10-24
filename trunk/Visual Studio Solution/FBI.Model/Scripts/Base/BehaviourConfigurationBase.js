@@ -7,17 +7,24 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
     /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
     this.addInterface("Tridion.DisposableObject");
-    this.key = "";
+    
+
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = function BehaviourConfigurationBase$initialize(deckPage, key, areaId) {
     this.setKey(key);
     this.setAreaId(areaId);
-    $evt.addEventHandler($fbiConfig.getFieldList(), "select", this.getDelegate(this.isAllowedField));
+    var p = this.properties;
+    var prefix = "";
+    if ($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
+        prefix = $fbiConfig.METADATA_PREFIX;
+    };
+    p.element = $("#{0}{1}".format(prefix, areaId));
+    p.fbiWrapperElement = $("div.fbi_feature_wrapper", p.element);
+
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
-    console.info("Registering extended area [{0}]".format(key));
     /// <summary>
     /// Sets the behaviour key
     /// </summary>
@@ -25,10 +32,12 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = function BehaviourConfigurationBase$setAreaId(areaId) {
+    console.info("Registering extended area [{0}] - [{1}]".format(this.key, areaId));
     /// <summary>
     /// Sets the behaviour areaId
     /// </summary>
     this.areaId = areaId;
+    
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
@@ -70,42 +79,29 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
-    var fieldType = $dom.getLocalName($fbiConfig.getConfigurationHelper().getFieldType());
-    var fieldValue = $fbiEditorConfig.getFieldTypeValue(fieldType);
-    
-    var behaviourConfig = $fbiEditorConfig.getBehaviourConfig(this.key);
-    if (behaviourConfig.allFieldTypes) {
-        return true;
-    }
-    //Binary AND
-    console.debug("Field Type: " + fieldType);
-    console.debug("Field Value: " + fieldValue);
-    var allowed = fieldValue & behaviourConfig.allowedTypes;
-    console.debug("{0} : {1} & {2}".format(allowed, fieldValue, behaviourConfig.allowedTypes));
-    if (!allowed) {
-        this.display(false);
-    } else {
-        this.display(true);
-    }
-    return allowed;
-    
+    return true;
+};
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getElement = function BehaviourConfigurationBase$getElement() {
+    var p = this.properties;
+    return p.element;
+};
+
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getWrapperElement = function BehaviourConfigurationBase$getWrapperElement() {
+    var p = this.properties;
+    return p.element.firstChild;
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = function BehaviourConfigurationBase$display(display) {
-    var prefix = "";
-    if($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
-        prefix = $fbiConfig.METADATA_PREFIX;
-    };
-    
-    var selector = "#" + prefix + this.areaId;
+    var p = this.properties;
     if (display) {
-        $css.display($(selector));
+        $css.display(p.element);
+        $css.display(p.fbiWrapperElement);
+        console.debug(p.fbiWrapperElement);
     } else {
-
-        $css.undisplay($(selector));
+        $css.undisplay(p.element);
+        $css.undisplay(p.fbiWrapperElement);
     }
-
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
