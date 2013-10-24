@@ -180,4 +180,7 @@
   <data name="BehaviorsSetLabel" xml:space="preserve">
     <value>Behaviors Set</value>
   </data>
+  <data name="EditImageLabel" xml:space="preserve">
+    <value>Image Editor</value>
+  </data>
 </root>
