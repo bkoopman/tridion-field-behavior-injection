@@ -292,7 +292,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
             $log.error("Unable to load head xml file for list.");
         }
         
-        var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $const.CMEEditorName);
+        //var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $const.CMEEditorName);
+        var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $fbiConst.EDITOR_NAME);
         $xml.loadXmlDocument(xmlPath + "?forView=" + Tridion.Core.Configuration.CurrentView + "&forControl=" + control.getId(), FieldBehaviour$_headDocumentLoaded, FieldBehaviour$_headDocumentLoadFailed);
         
     } else {
