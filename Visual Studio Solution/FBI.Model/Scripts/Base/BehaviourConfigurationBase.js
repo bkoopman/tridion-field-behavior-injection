@@ -96,6 +96,28 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getWrapperElement
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = function BehaviourConfigurationBase$display(display) {
     var p = this.properties;
     
+    
+    
+    var fieldType = $fbiConfig.getConfigurationHelper().getFieldType();
+
+    if (fieldType == $fbiConst.SINGLE_LINE_TEXT_FIELD) {
+        var fieldName = $xml.selectStringValue($fbiConfig.getFieldDeisgner().getFieldXml(), "tcm:Name");
+        var schemaXml = $xml.getNewXmlDocument($fbiConfig.getSchema().getXml());
+        var xpath = "//xsd:element[@name='{0}']//xsd:element[@name='{1}']";
+        
+
+    }
+
+
+    
+
+
+
+    console.debug($xml.selectSingleNode(schemaXml, "//xsd:element[@name='" + fieldName + "']"));
+    $ifc = $fbiConfig.getFieldDeisgner().properties.controls.inputFieldControl;
+    console.debug("[{0}] [{1}] Display: {2} [{3}]".format(this.key, fieldName, display, fieldType));
+    var ns = $const.Namespaces;
+    
     if (display) {
         $css.display(p.element);
         $css.display(p.fbiWrapperElement);

@@ -21,6 +21,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig = function SchemaFieldBehav
     p.helper = new Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper();
     var ns = Tridion.Constants.Namespaces;
     ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
+    ns[$fbiConst.CONFIG_PREFIX] = $fbiConst.CONFIG_URL;
+    ns[$fbiConst.XSD_PREFIX] = $fbiConst.XSD_NAMESPACE;
     
     p.disabled = false;
     var editor = $config.Editors[$fbiConst.EDITOR_NAME].configuration;

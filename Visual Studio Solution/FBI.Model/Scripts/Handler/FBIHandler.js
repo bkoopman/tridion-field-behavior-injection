@@ -105,8 +105,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.initialize = function FBIHandler$ini
                     $evt.addEventHandler(fb, "load", FBIHandler$onFieldBuilderLoad);
                 }
                 //Metadata Fieds
-                if (c.tabControl.getPage($fbiConst.METADATA_TAB_ID)) {
-                    var tab = c.tabControl.getPage($fbiConst.METADATA_TAB_ID);
+                if (c.tabControl.getPage($fbiConst.METADATA_DESIGN_TAB)) {
+                    var tab = c.tabControl.getPage($fbiConst.METADATA_DESIGN_TAB);
                     var fbmd = tab.properties.controls.fieldBuilder;
                     if (fbmd) {
                         self.properties.builders.push($fbiConst.METADATA);
@@ -258,8 +258,8 @@ Tridion.Extensions.UI.FBI.Handler.prototype.ceaseBehaviours = function FBIHandle
             var fb = $display.getView().properties.controls.fieldBuilder;
             builders.push(fb);
             //Metadata Fieds
-            if (c.tabControl.getPage($fbiConst.METADATA_TAB_ID)) {
-                var tab = c.tabControl.getPage($fbiConst.METADATA_TAB_ID);
+            if (c.tabControl.getPage($fbiConst.METADATA_DESIGN_TAB)) {
+                var tab = c.tabControl.getPage($fbiConst.METADATA_DESIGN_TAB);
                 var fbmd = tab.properties.controls.fieldBuilder;
                 builders.push(fbmd);
             }
