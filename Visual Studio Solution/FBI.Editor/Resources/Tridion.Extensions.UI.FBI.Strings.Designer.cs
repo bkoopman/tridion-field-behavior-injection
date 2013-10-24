@@ -70,11 +70,11 @@ namespace Tridion.Extensions.UI.FBI.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Behaviors Enabled .
+        ///   Looks up a localized string similar to Behaviors Set.
         /// </summary>
-        internal static string BehaviorsEnabledLabel {
+        internal static string BehaviorsSetLabel {
             get {
-                return ResourceManager.GetString("BehaviorsEnabledLabel", resourceCulture);
+                return ResourceManager.GetString("BehaviorsSetLabel", resourceCulture);
             }
         }
         
