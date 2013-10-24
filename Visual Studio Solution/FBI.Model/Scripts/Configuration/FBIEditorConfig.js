@@ -58,8 +58,8 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     p.fieldTypes["DateField"] = 32;
     p.fieldTypes["ExternalLinkField"] = 64;
     p.fieldTypes["ComponentLinkField"] = 128;
-    p.fieldTypes["MultimediaLinkField"] = 512;
-    p.fieldTypes["EmbeddedSchemaField"] = 1024;
+    p.fieldTypes["MultimediaLinkField"] = 256;
+    p.fieldTypes["EmbeddedSchemaField"] = 512;
     
     p.SingleLineTextField = 1;
     p.MultiLineTextField = 2;
