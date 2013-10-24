@@ -19,6 +19,8 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     p.enabled = $xml.selectStringValue(p.configDoc, "//cfg:fbi/@enabled", ns) == "true";
     p.showtab = $xml.selectStringValue(p.configDoc, "//cfg:fbi/@showTab", ns) == "true";
     p.behaviours = [];
+    p.enabledBehaviours = [];
+    p.enabledBehaviourKeys = [];
 
     var behaviourNodes = $xml.selectNodes(p.configDoc, "//cfg:behaviour", ns);
     for (var i = 0; i < behaviourNodes.length; i++) {
@@ -39,6 +41,11 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
 
         p.behaviours.push(behaviour.key);
         p.behaviours[behaviour.key] = behaviour;
+
+        if (behaviour.enabled) {
+            p.enabledBehaviours.push(behaviour);
+            p.enabledBehaviourKeys.push(behaviour.key);
+        }
     }
     
     p.fieldTypes = {};
@@ -66,22 +73,15 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     p.EmbeddedSchemaField = 1024;
 };
 
-Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getEnabledBehaviourKeys = function BehaviourConfigurationBase$getEnabledBehaviourKeys() {
-    var p = this.properties;
-
-    var enabledBehaviourKeys = new Array();
-
-    for (var i = 0; i < p.behaviours.length; i++) {
-        var key = p.behaviours[i];
-        var behaviour = p.behaviours[key];
-        if (behaviour.enabled) {
-            enabledBehaviourKeys.push(key);
-        }
-    }
-
-    return enabledBehaviourKeys;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getEnabledBehaviours = function BehaviourConfigurationBase$getEnabledBehaviours() {
+    var p = this.properties;    
+    return p.enabledBehaviours;
 };
 
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getEnabledBehaviourKeys = function BehaviourConfigurationBase$getEnabledBehaviourKeys() {
+    var p = this.properties;
+    return p.enabledBehaviourKeys;
+};
 
 Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getBehaviourConfig = function BehaviourConfigurationBase$getBehaviourConfig(key) {
     var p = this.properties;
