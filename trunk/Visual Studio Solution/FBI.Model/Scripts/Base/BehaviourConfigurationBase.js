@@ -13,7 +13,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = function BehaviourConfigurationBase$initialize(deckPage, key, areaId) {
     this.setKey(key);
     this.setAreaId(areaId);
-    
+    $evt.addEventHandler($fbiConfig.getFieldList(), "select", this.getDelegate(this.isAllowedField));
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
@@ -70,37 +70,42 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
+    var fieldType = $dom.getLocalName($fbiConfig.getConfigurationHelper().getFieldType());
+    var fieldValue = $fbiEditorConfig.getFieldTypeValue(fieldType);
     
-    /*$fieldXml = $fbiConfig.getFieldDeisgner().getFieldXml();
-    var fieldType = $dom.getLocalName($fbiConfig.getFieldDeisgner().getFieldXml());
-    $fieldXml = $fbiConfig.getFieldDeisgner().getFieldXml();
-    console.debug(fieldType);
-    var fieldValue = $fbiEditorConfig[fieldType];
     var behaviourConfig = $fbiEditorConfig.getBehaviourConfig(this.key);
     if (behaviourConfig.allFieldTypes) {
         return true;
     }
     //Binary AND
+    console.debug("Field Type: " + fieldType);
+    console.debug("Field Value: " + fieldValue);
     var allowed = fieldValue & behaviourConfig.allowedTypes;
     console.debug("{0} : {1} & {2}".format(allowed, fieldValue, behaviourConfig.allowedTypes));
     if (!allowed) {
-        this.hide();
+        this.display(false);
+    } else {
+        this.display(true);
     }
-    return allowed;*/
-    return true;
+    return allowed;
+    
 
 };
 
-Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hide = function BehaviourConfigurationBase$hide() {
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = function BehaviourConfigurationBase$display(display) {
     var prefix = "";
-    
-    
     if($fbiConfig.getTab() == $fbiConst.METADATA_SCHEMA_DESIGN_TAB) {
         prefix = $fbiConfig.METADATA_PREFIX;
     };
     
     var selector = "#" + prefix + this.areaId;
-    $css.undisplay($(selector));
+    if (display) {
+        $css.display($(selector));
+    } else {
+
+        $css.undisplay($(selector));
+    }
+
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {

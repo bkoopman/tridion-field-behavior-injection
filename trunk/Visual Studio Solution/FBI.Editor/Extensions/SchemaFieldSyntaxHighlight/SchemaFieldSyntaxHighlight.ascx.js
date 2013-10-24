@@ -72,18 +72,15 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onSelectionChange
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = function SchemaFieldSyntaxHighlight$onUpdateView() {
+    var p = this.properties;
+    var c = p.controls;
+    var schema = $fbiConfig.getSchema();
+    c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
 
-    if (this.isAllowedField()) {
-        var p = this.properties;
-        var c = p.controls;
-        var schema = $fbiConfig.getSchema();
-        c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
-
-        if (p.selectedGroup) {
-            var language = this.getSelection();
-            language = (language != 'undefined') ? language : 'none';
-            this.setLanguageValue(language);
-        }
+    if (p.selectedGroup) {
+        var language = this.getSelection();
+        language = (language != 'undefined') ? language : 'none';
+        this.setLanguageValue(language);
     }
 };
 

@@ -6,6 +6,7 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.FBIEditorConfig");
     this.addInterface("Tridion.DisposableObject");
     var p = this.properties;
+    p.fieldTypes = {};
     this.Namespace = p.ns = $fbiConst.NAMESPACE_URL;
     var ns = { };
     ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
@@ -28,7 +29,7 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
             name: $xml.selectStringValue(behaviourNode, "@name", ns),
             key: $xml.selectStringValue(behaviourNode, "@name", ns), //key is the name
             handler: $xml.selectStringValue(behaviourNode, "@handler", ns),
-            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "//cfg:allowedFieldTypes/@value", ns)),
+            allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "cfg:allowedFieldTypes/@value", ns)),
             
         };
         if (isNaN(behaviour.allowedTypes)) {
@@ -38,6 +39,30 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
         p.behaviours.push(behaviour.key);
         p.behaviours[behaviour.key] = behaviour;
     }
+    
+    p.fieldTypes = {};
+
+    p.fieldTypes["SingleLineTextField"] = 1;
+    p.fieldTypes["MultiLineTextField"] = 2;
+    p.fieldTypes["KeywordField"] = 4;
+    p.fieldTypes["XHTMLField"] = 8;
+    p.fieldTypes["NumberField"] = 16;
+    p.fieldTypes["DateField"] = 32;
+    p.fieldTypes["ExternalLinkField"] = 64;
+    p.fieldTypes["ComponentLinkField"] = 128;
+    p.fieldTypes["MultimediaLinkField"] = 512;
+    p.fieldTypes["EmbeddedSchemaField"] = 1024;
+    
+    p.SingleLineTextField = 1;
+    p.MultiLineTextField = 2;
+    p.KeywordField = 4;
+    p.XHTMLField = 8;
+    p.NumberField = 16;
+    p.DateField = 32;
+    p.ExternalLinkField = 64;
+    p.ComponentLinkField = 128;
+    p.MultimediaLinkField = 512;
+    p.EmbeddedSchemaField = 1024;
 };
 
 
@@ -48,28 +73,11 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getBehaviourConfig = functio
 };
 
 
-Tridion.Extensions.UI.FBI.FBIEditorConfig["SingleLineTextField"] = 1;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["MultiLineTextField"] = 2;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["KeywordField"] = 4;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["XHTMLField"] = 8;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["NumberField"] = 16;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["DateField"] = 32;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["ExternalLinkField"] = 64;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["ComponentLinkField"] = 128;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["MultimediaLinkField"] = 512;
-Tridion.Extensions.UI.FBI.FBIEditorConfig["EmbeddedSchemaField"] = 1024;
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getFieldTypeValue = function BehaviourConfigurationBase$getFieldTypeValue(type) {
+    var p = this.properties;
+    return p.fieldTypes[type];
+};
 
-
-Tridion.Extensions.UI.FBI.FBIEditorConfig.SingleLineTextField = 1;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.MultiLineTextField = 2;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.KeywordField = 4;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.XHTMLField = 8;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.NumberField = 16;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.DateField = 32;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.ExternalLinkField = 64;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.ComponentLinkField = 128;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.MultimediaLinkField = 512;
-Tridion.Extensions.UI.FBI.FBIEditorConfig.EmbeddedSchemaField = 1024;
 
 
 

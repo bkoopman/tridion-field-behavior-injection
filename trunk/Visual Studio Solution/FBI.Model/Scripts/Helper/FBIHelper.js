@@ -232,3 +232,15 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.setConfigurationV
         console.warn("This method is meant to be called on the 'SchemaView' only.");
     }
 };
+
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getFieldType = function SchemaFieldBehaviourHelper$getFieldType() {
+    var p = this.properties;
+    var c = p.controls;
+    if (c.fieldDesigner) {
+        var fieldXml = c.fieldDesigner.getFieldXml();
+        return fieldXml;
+        $dom.getLocalName(fieldXml);
+    } else {
+        console.warn("This method is meant to be called on the 'SchemaView' only.");
+    }
+};
