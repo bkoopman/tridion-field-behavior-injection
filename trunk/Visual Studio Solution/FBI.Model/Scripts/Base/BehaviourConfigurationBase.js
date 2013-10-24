@@ -40,10 +40,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = funct
     
 };
 
-Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onUpdateView = function BehaviourConfigurationBase$onUpdateView() {
-
-};
-
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
     /// <summary>
     /// Gets the configuration value
