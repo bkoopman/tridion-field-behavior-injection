@@ -134,6 +134,11 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = functio
     }
 };
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.checkAndApplyVisiblity = function BehaviourConfigurationBase$checkAndApplyVisiblity() {
+    var visible = this.isAllowedField();
+    this.display(visible);
+    return visible;
+};
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
     var p = this.properties;
     $log.info("{0}::: Time taken to initialize was {1}ms".format(this.getTypeName(), (Date.getTimer() - p.timer)));
