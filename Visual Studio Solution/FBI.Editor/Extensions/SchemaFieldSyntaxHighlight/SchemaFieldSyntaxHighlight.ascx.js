@@ -78,7 +78,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = fu
     c.fieldLanguageList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.languagesReady;
 
     if (p.selectedGroup) {
-        var language = this.getSelection();
+        var language = c.fieldLanguageList.getSelection();
         language = (language != 'undefined') ? language : 'none';
         this.setLanguageValue(language);
     }
