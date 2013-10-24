@@ -17,6 +17,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
         for (var i = 0; i < behaviours.length; i++) {
             var behaviour = behaviours[behaviours[i]];
             if (behaviour.enabled && behaviour.areaHandler) {
+                console.info("Registering extended area [{0}]".format(behaviour.name));
                 Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
                 Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
             }
