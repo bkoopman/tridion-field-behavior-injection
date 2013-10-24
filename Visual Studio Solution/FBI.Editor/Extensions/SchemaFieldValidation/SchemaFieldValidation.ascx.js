@@ -72,20 +72,17 @@ Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onSelectionChange = fu
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.onUpdateView = function SchemaFieldValidation$onUpdateView() {
-    if (this.isAllowedField()) {
-        var p = this.properties;
-        var c = p.controls;
-        var schema = $fbiConfig.getSchema();
-        c.fieldValidatorList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.validationReady;
+    var p = this.properties;
+    var c = p.controls;
+    var schema = $fbiConfig.getSchema();
+    c.fieldValidatorList.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup || !p.validationReady;
 
 
-        if (p.selectedGroup) {
-            var validation = this.getConfigurationValue();
-            validation = (validation != 'undefined') ? validation : 'none';
-            this.setValidation(validation);
-        }
-    } 
-
+    if (p.selectedGroup) {
+        var validation = this.getConfigurationValue();
+        validation = (validation != 'undefined') ? validation : 'none';
+        this.setValidation(validation);
+    }
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldValidation.prototype.setValidation = function SchemaFieldValidation$setValidation(textToFind) {

@@ -7,7 +7,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
     this.addInterface("Tridion.DisposableObject");
     
     this.key = "readonly";
-    this.areaId = "SchemaFieldReadonly";
+    this.areaId = "SchemaFieldReadOnly";
 	var p = this.properties;
     p.controls = {};
     
@@ -57,22 +57,17 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {
-    console.debug($fbiConfig.getFieldDeisgner().getFieldXml());
-    if (this.isAllowedField()) {
-        
-        var p = this.properties;
-        var c = p.controls;
-        var schema = $fbiConfig.getSchema();
-        c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
+    var p = this.properties;
+    var c = p.controls;
+    var schema = $fbiConfig.getSchema();
+    c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
 
-        if (p.selectedGroup) {
-            var readonly = this.getConfigurationValue();
-            c.fieldReadOnlyCheckbox.checked = readonly == "true";
-        } else {
-            c.fieldReadOnlyCheckbox.checked = false;
-        }
+    if (p.selectedGroup) {
+        var readonly = this.getConfigurationValue();
+        c.fieldReadOnlyCheckbox.checked = readonly == "true";
+    } else {
+        c.fieldReadOnlyCheckbox.checked = false;
     }
-
 };
 
 if ($fbiConfig.isEnabled()) {
