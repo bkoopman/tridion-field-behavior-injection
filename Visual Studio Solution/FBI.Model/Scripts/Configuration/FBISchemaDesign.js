@@ -97,6 +97,23 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getFieldDeisgner 
     return c.fieldDesigner;
 };
 
+Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getFieldList = function SchemaFieldBehaviourConfig$getFieldList() {
+    /// <summary>Gets the Field Designer control.</summary>
+    /// <returns type="string">The <see cref="Tridion.Controls.FieldDesigner">control</see></returns>
+    var c = this.getControls();
+    if (typeof c.fieldDesigner === "undefined") {
+        switch (this.getTab()) {
+            case "SchemaDesignTab":
+                c.fieldList = $controls.getControl($("#SchemaDesignFieldsList"), "Tridion.Controls.List");
+                break;
+            case "MetadataDesignTab":
+                c.fieldList = $controls.getControl($("#MetadataDesignFieldsList"), "Tridion.Controls.List");
+                break;
+        }
+    }
+    return c.fieldList;
+};
+
 Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype.getUsersAndGroupsList = function SchemaFieldBehaviourConfig$getUsersAndGroupsList() {
     /// <summary>Gets the Users and Groups List control.</summary>
     /// <returns type="string">The <see cref="Tridion.Controls.List">control</see></returns>
