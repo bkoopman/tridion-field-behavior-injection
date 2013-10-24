@@ -177,7 +177,7 @@
   <data name="SyntaxHighlightSelect" xml:space="preserve">
     <value>Select Syntax</value>
   </data>
-  <data name="BehaviorsEnabledLabel" xml:space="preserve">
-    <value>Behaviors Enabled </value>
+  <data name="BehaviorsSetLabel" xml:space="preserve">
+    <value>Behaviors Set</value>
   </data>
 </root>

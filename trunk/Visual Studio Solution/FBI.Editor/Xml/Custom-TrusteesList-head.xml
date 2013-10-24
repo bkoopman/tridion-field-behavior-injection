@@ -8,12 +8,12 @@
     <list:itemSelector>/tcm:ListTrustees/*</list:itemSelector>
     <list:titleSelector>@*[name()='xlink:title' or name()='Title']</list:titleSelector>
     <list:idSelector>@*[name()='xlink:href' or name()='ID']</list:idSelector>
-    <list:behavioursSelector>@*[name()='BehaviorsEnabled']</list:behavioursSelector>
+    <list:behavioursSelector>@*[name()='BehavioursSet']</list:behavioursSelector>
     <list:emptyListMessage></list:emptyListMessage>
   </list:rows>
   <list:columns>
     <list:column id="IconColum" type="icon" title="" width="20" enableresizing="false" enablesorting="false" enablefiltering="false" selector="concat('T', @*[name()='ItemType' or name()='Type'])" />
     <list:column id="NameColumn" type="data" title="{Resources: Tridion.Web.UI.Strings, Name}" selector="@*[name()='xlink:title' or name()='Title']"/>
-    <list:column id="BehavioursColumn" type="data" title="{Resources: Tridion.Extensions.UI.FBI.Strings, BehaviorsEnabledLabel}" selector="@*[name()='BehaviorsEnabled']"/>
+    <list:column id="BehavioursColumn" type="data" title="{Resources: Tridion.Extensions.UI.FBI.Strings, BehaviorsSetLabel}" selector="@*[name()='BehavioursSet']"/>
   </list:columns>
 </list:listDefinition>
