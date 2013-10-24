@@ -31,6 +31,7 @@
 .fbi_feature_wrapper {
     padding:5px;
     border-bottom: solid 1px #a1a9b2;
+    display: none;
 }
 
 .fbi_top_padding {
