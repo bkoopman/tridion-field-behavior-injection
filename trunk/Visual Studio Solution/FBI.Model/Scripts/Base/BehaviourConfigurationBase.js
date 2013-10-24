@@ -13,21 +13,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initialize = function BehaviourConfigurationBase$initialize(deckPage, key, areaId) {
     this.setKey(key);
     this.setAreaId(areaId);
-    var p = this.properties;
-    var c = p.controls;
-    var prefix = $fbiConfig.getFieldDeisgner().getId();
     
-    
-    switch (deckPage) {
-        case $fbiConst.SCHEMA_DESIGN_TAB:
-            c.fieldList = $("#" + $fbiConst.METADATA_DESIGN_FIELD_LIST);
-            break;
-        case $fbiConst.METADATA_TAB_ID:
-            c.fieldList = $("#"+$fbiConst.METADATA_DESIGN_FIELD_LIST);
-
-            break;
-    }
-    $evt.addEventHandler(c.fieldType, "change", this.getDelegate(this._onFieldTypeChange));
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function BehaviourConfigurationBase$setKey(key) {
@@ -43,12 +29,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = funct
     /// Sets the behaviour areaId
     /// </summary>
     this.areaId = areaId;
-};
-
-Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype._onFieldTypeChange = function BehaviourConfigurationBase$_onFieldTypeChange() {
-    this.isAllowed = this.isAllowedField();
-    $ft = this.fieldType;
-    console.debug(this.fieldType.getValue());
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
@@ -90,7 +70,8 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
-   
+    
+    /*$fieldXml = $fbiConfig.getFieldDeisgner().getFieldXml();
     var fieldType = $dom.getLocalName($fbiConfig.getFieldDeisgner().getFieldXml());
     $fieldXml = $fbiConfig.getFieldDeisgner().getFieldXml();
     console.debug(fieldType);
@@ -105,8 +86,9 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     if (!allowed) {
         this.hide();
     }
-    return allowed;
-   
+    return allowed;*/
+    return true;
+
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.hide = function BehaviourConfigurationBase$hide() {
