@@ -79,6 +79,9 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
+    if ($fbiEditorConfig.getBehaviourConfig(this.key).allFieldTypes) {
+        return true;
+    }
     var fieldType = $fbiConfig.getConfigurationHelper().getFieldType();
     if (fieldType == $fbiConst.SINGLE_LINE_TEXT_FIELD) {
         var fieldName = $xml.selectStringValue($fbiConfig.getFieldDeisgner().getFieldXml(), "tcm:Name");
