@@ -6,8 +6,9 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase = function BehaviourConfigu
     /// Behaviour Base to be used as the base class for all extended areas behaviours (ascx code behind). It contains useful methods for the behaviour manipulation
     /// </summary>
     Tridion.OO.enableInterface(this, "Tridion.Extensions.UI.FBI.BehaviourConfigurationBase");
-    this.addInterface("Tridion.DisposableObject");
-    
+    this.addInterface("Tridion.ObjectWithEvents");
+    var p = this.properties;
+    p.visible = false;
 
 };
 
@@ -32,7 +33,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setKey = function
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = function BehaviourConfigurationBase$setAreaId(areaId) {
-    console.info("Registering extended area [{0}] - [{1}]".format(this.key, areaId));
     /// <summary>
     /// Sets the behaviour areaId
     /// </summary>
@@ -113,6 +113,8 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
     if (allowedTypes & fieldValue) {
         allowed = true;
     }
+
+    //console.debug("Field {0} of type {1} on Behaviour {2} is Allowed: {3}".format(fieldName, fieldType, this.key, allowed));
     return allowed;
 };
 
@@ -131,15 +133,27 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = functio
     if (display) {
         $css.display(p.element);
         $css.display(p.fbiWrapperElement);
+        if (!p.visible) {
+            this.fireEvent("show");
+        }
+        
+        p.visible = true;
+        
     } else {
         $css.undisplay(p.element);
         $css.undisplay(p.fbiWrapperElement);
+        if (p.visible) {
+            this.fireEvent("hide");
+        }
+        p.visible = false;
+        
     }
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.checkAndApplyVisiblity = function BehaviourConfigurationBase$checkAndApplyVisiblity() {
     var visible = this.isAllowedField();
     this.display(visible);
+    //console.debug("Visibility [{0}]: {1}".format(this.key, visible));
     return visible;
 };
 

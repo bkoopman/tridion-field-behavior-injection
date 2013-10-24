@@ -63,7 +63,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
     c.fieldReadOnlyCheckbox.disabled = (schema && (schema.isReadOnly() || schema.isLocalized())) || false || !p.selectedGroup;
-    this.display(!c.fieldReadOnlyCheckbox.disabled);
+    
     if (p.selectedGroup) {
         var readonly = this.getConfigurationValue();
         c.fieldReadOnlyCheckbox.checked = readonly == "true";
