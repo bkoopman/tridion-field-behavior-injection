@@ -40,6 +40,10 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.setAreaId = funct
     
 };
 
+Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.onUpdateView = function BehaviourConfigurationBase$onUpdateView() {
+
+};
+
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getConfigurationValue = function BehaviourConfigurationBase$getConfigurationValue() {
     /// <summary>
     /// Gets the configuration value
@@ -139,6 +143,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.checkAndApplyVisi
     this.display(visible);
     return visible;
 };
+
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.logElapsedTime = function BehaviourConfigurationBase$logElapsedTime() {
     var p = this.properties;
     $log.info("{0}::: Time taken to initialize was {1}ms".format(this.getTypeName(), (Date.getTimer() - p.timer)));
