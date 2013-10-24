@@ -15,7 +15,7 @@ Tridion.Extensions.UI.FBI.Constants.METADATA_SCHEMA_DESIGN_TAB = "MetadataDesign
 Tridion.Extensions.UI.FBI.Constants.METADATA_DESIGN_FIELD_LIST = "MetadataDesignFieldsList";
 
 Tridion.Extensions.UI.FBI.Constants.XML_SCHEMA_METADATA = "Metadata";
-Tridion.Extensions.UI.FBI.Constants.XML_SCHEMA_CONTENT = "ContentSchemaDesignTab";
+Tridion.Extensions.UI.FBI.Constants.XML_SCHEMA_CONTENT = "Content";
 
 Tridion.Extensions.UI.FBI.Constants.CONTENT = "content";
 Tridion.Extensions.UI.FBI.Constants.METADATA = "metadata";

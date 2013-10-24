@@ -79,8 +79,38 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
+    var fieldType = $fbiConfig.getConfigurationHelper().getFieldType();
+    if (fieldType == $fbiConst.SINGLE_LINE_TEXT_FIELD) {
+        var fieldName = $xml.selectStringValue($fbiConfig.getFieldDeisgner().getFieldXml(), "tcm:Name");
+        var schemaXml = $xml.getNewXmlDocument($fbiConfig.getSchema().getXml());
+        var xpath = "//xsd:element[@name='{0}']//xsd:element[@name='{1}']/@type";
 
-    return true;
+        switch ($fbiConfig.getTab()) {
+            case $fbiConst.SCHEMA_DESIGN_TAB:
+                xpath = xpath.format($fbiConst.XML_SCHEMA_CONTENT, fieldName);
+                break;
+            case $fbiConst.METADATA_DESIGN_TAB:
+                xpath = xpath.format($fbiConst.XML_SCHEMA_METADATA, fieldName);
+                break;
+        }
+        var type = $xml.selectStringValue(schemaXml, xpath);
+
+        if (type.indexOf("category:") >= 0) {
+            fieldType = $fbiConst.KEYWORD_FIELD;
+        } else if (type.indexOf(":XHTML") >= 0) {
+            fieldType = $fbiConst.XHTML_FIELD;
+        } else if (type.indexOf(":MultiLineText") >= 0) {
+            fieldType = $fbiConst.MULTILINE_TEXT_FIELD;
+        }
+    }
+
+    var fieldValue = $fbiEditorConfig.getFieldTypeValue(fieldType);
+    var allowedTypes = $fbiEditorConfig.getBehaviourConfig(this.key).allowedTypes;
+    var allowed = false;
+    if (allowedTypes & fieldValue) {
+        allowed = true;
+    }
+    return allowed;
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getElement = function BehaviourConfigurationBase$getElement() {
@@ -95,29 +125,6 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getWrapperElement
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = function BehaviourConfigurationBase$display(display) {
     var p = this.properties;
-    
-    
-    
-    var fieldType = $fbiConfig.getConfigurationHelper().getFieldType();
-
-    if (fieldType == $fbiConst.SINGLE_LINE_TEXT_FIELD) {
-        var fieldName = $xml.selectStringValue($fbiConfig.getFieldDeisgner().getFieldXml(), "tcm:Name");
-        var schemaXml = $xml.getNewXmlDocument($fbiConfig.getSchema().getXml());
-        var xpath = "//xsd:element[@name='{0}']//xsd:element[@name='{1}']";
-        
-
-    }
-
-
-    
-
-
-
-    console.debug($xml.selectSingleNode(schemaXml, "//xsd:element[@name='" + fieldName + "']"));
-    $ifc = $fbiConfig.getFieldDeisgner().properties.controls.inputFieldControl;
-    console.debug("[{0}] [{1}] Display: {2} [{3}]".format(this.key, fieldName, display, fieldType));
-    var ns = $const.Namespaces;
-    
     if (display) {
         $css.display(p.element);
         $css.display(p.fbiWrapperElement);
