@@ -238,8 +238,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourHelper.prototype.getFieldType = fu
     var c = p.controls;
     if (c.fieldDesigner) {
         var fieldXml = c.fieldDesigner.getFieldXml();
-        return fieldXml;
-        $dom.getLocalName(fieldXml);
+        return $dom.getLocalName(fieldXml);
     } else {
         console.warn("This method is meant to be called on the 'SchemaView' only.");
     }
