@@ -19,7 +19,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviour.prototype.initialize = function S
             if (behaviour.enabled && behaviour.areaHandler) {
                 Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
                 Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, eval(behaviour.areaHandler));
-            } 
+            }
         }
     } else {
         $fbiConfig.hidePanel();
