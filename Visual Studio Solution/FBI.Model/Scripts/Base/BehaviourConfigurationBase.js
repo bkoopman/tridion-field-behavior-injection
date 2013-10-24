@@ -79,6 +79,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.initTimer = funct
 };
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = function BehaviourConfigurationBase$isAllowedField() {
+
     return true;
 };
 
@@ -94,10 +95,10 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.getWrapperElement
 
 Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.display = function BehaviourConfigurationBase$display(display) {
     var p = this.properties;
+    
     if (display) {
         $css.display(p.element);
         $css.display(p.fbiWrapperElement);
-        console.debug(p.fbiWrapperElement);
     } else {
         $css.undisplay(p.element);
         $css.undisplay(p.fbiWrapperElement);
