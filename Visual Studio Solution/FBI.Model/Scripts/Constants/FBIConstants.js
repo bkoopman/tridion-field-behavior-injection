@@ -1,4 +1,4 @@
-﻿SchemaDesignTabTridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
+﻿Tridion.Type.registerNamespace("Tridion.Extensions.UI.FBI.Constants");
 
 Tridion.Extensions.UI.FBI.Constants.FBI_NODE_NAME = "fbi";
 Tridion.Extensions.UI.FBI.Constants.BEHAVIOUR_NODE_NAME = "behaviour";
