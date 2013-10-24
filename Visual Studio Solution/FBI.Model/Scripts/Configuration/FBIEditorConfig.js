@@ -29,6 +29,7 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
             name: $xml.selectStringValue(behaviourNode, "@name", ns),
             key: $xml.selectStringValue(behaviourNode, "@name", ns), //key is the name
             handler: $xml.selectStringValue(behaviourNode, "@handler", ns),
+            areaHandler: $xml.selectStringValue(behaviourNode, "@areaHandler", ns),
             allowedTypes: parseInt($xml.selectStringValue(behaviourNode, "cfg:allowedFieldTypes/@value", ns)),
             
         };
@@ -87,11 +88,27 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getBehaviourConfig = functio
     return p.behaviours[key];
 };
 
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getAllBehaviours = function BehaviourConfigurationBase$getAllBehaviours() {
+    var p = this.properties;
+    return p.behaviours;
+};
+
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.isEnabled = function BehaviourConfigurationBase$isEnabled() {
+    var p = this.properties;
+    return p.enabled;
+};
+
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.isBehaviourEnabled = function BehaviourConfigurationBase$isBehaviourEnabled(key) {
+    var p = this.properties;
+    return p.behaviours[key].enabled;
+};
 
 Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getFieldTypeValue = function BehaviourConfigurationBase$getFieldTypeValue(type) {
     var p = this.properties;
     return p.fieldTypes[type];
 };
+
+
 
 
 
