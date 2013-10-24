@@ -99,8 +99,3 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.setLanguageValue 
     }
 };
 
-if ($fbiConfig.isEnabled()) {
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight);
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight);
-}
-
