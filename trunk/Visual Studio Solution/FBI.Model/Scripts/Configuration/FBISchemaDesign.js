@@ -299,6 +299,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
         var id = entry.attributes["ID"].value;
 
         // ToDo: determine if id has behaviors configured
+        // use schema.getXml(), and check for <group xlink:href="tcm:0-1-65568"> elements 
+        // see which behaviors are in there (<readonly>true</readonly>) and check if they are enabled (in enabledBehaviours)
         var value = "";
         entry.setAttribute("BehaviorsEnabled", value);
     }
