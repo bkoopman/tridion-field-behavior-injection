@@ -56,7 +56,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {
-    .isAllowedField();
+    if (!this.checkAndApplyVisiblity()) {
+        return;
+    }
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();

@@ -72,6 +72,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onSelectionChange
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldSyntaxHighlight.prototype.onUpdateView = function SchemaFieldSyntaxHighlight$onUpdateView() {
+    if (!this.checkAndApplyVisiblity()) {
+        return;
+    }
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();

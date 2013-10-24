@@ -72,6 +72,9 @@ Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onSelectionChange = fun
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldMaxLength.prototype.onUpdateView = function SchemaFieldMaxLength$onUpdateView() {
+    if (!this.checkAndApplyVisiblity()) {
+        return;
+    }
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
