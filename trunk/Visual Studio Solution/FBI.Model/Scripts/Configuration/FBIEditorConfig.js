@@ -1,4 +1,4 @@
-﻿/// <reference path="../Costants/FBIConstants.js" />
+﻿/// <reference path="../Constants/FBIConstants.js" />
 /// <reference path="../Helper/FBIHelper.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
 Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
@@ -65,6 +65,21 @@ Tridion.Extensions.UI.FBI.FBIEditorConfig = function FBIEditorConfig() {
     p.EmbeddedSchemaField = 1024;
 };
 
+Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getEnabledBehaviourKeys = function BehaviourConfigurationBase$getEnabledBehaviourKeys() {
+    var p = this.properties;
+
+    var enabledBehaviourKeys = new Array();
+
+    for (var i = 0; i < p.behaviours.length; i++) {
+        var key = p.behaviours[i];
+        var behaviour = p.behaviours[key];
+        if (behaviour.enabled) {
+            enabledBehaviourKeys.push(key);
+        }
+    }
+
+    return enabledBehaviourKeys;
+};
 
 
 Tridion.Extensions.UI.FBI.FBIEditorConfig.prototype.getBehaviourConfig = function BehaviourConfigurationBase$getBehaviourConfig(key) {

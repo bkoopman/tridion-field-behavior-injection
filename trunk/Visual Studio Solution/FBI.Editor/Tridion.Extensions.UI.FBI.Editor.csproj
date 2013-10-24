@@ -132,6 +132,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Xml\Custom-TrusteesList-head.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\SchemaFieldMaxLength\SchemaFieldMaxLength.cs">

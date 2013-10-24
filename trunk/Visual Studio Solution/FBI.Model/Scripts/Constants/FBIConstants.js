@@ -49,7 +49,9 @@ Tridion.Extensions.UI.FBI.Constants.VALIDATION = "validation";
 Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
 Tridion.Extensions.UI.FBI.Constants.HIDDEN = "hidden";
 
-Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/ListDefinitions/TrusteesList-head.xml";
+//Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/ListDefinitions/TrusteesList-head.xml";
+// located in FBI.Editor project as we access it via the editors path
+Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/Custom-TrusteesList-head.xml";
 Tridion.Extensions.UI.FBI.Constants.ERROR_COLOR = "#FBE3E4";
 Tridion.Extensions.UI.FBI.Constants.ERROR_BORDER_COLOR = "solid 1px red";
 Tridion.Extensions.UI.FBI.Constants.DEFAULT_INPUT_COLOR = "#FFF";

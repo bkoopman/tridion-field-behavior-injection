@@ -1,4 +1,4 @@
-﻿/// <reference path="../Costants/FBIConstants.js" />
+﻿/// <reference path="../Constants/FBIConstants.js" />
 Type.registerNamespace("Tridion.Extensions.UI.FBI");
 
 Tridion.Extensions.UI.FBI.BehaviourBase = function BehaviourBase() {

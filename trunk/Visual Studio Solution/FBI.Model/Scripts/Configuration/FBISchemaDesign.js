@@ -290,7 +290,20 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     var control = this.getUsersAndGroupsList();
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
-    // ToDo: add behavior flag to XML
+    // add behavior flag to XML
+    var schema = this.getSchema();
+    var enabledBehaviours = $fbiEditorConfig.getEnabledBehaviourKeys();
+    console.debug("enabled behaviours: " + enabledBehaviours);
+
+    var entries = xmlDoc.documentElement.children;
+    for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        var id = entry.attributes["ID"].value;
+
+        // determine if id has behaviors configured
+        var value = "";
+        entry.setAttribute("BehaviorsEnabled", value);
+    }
 
 
     function FieldBehaviour$_drawControl(definitionDocument) {
@@ -309,7 +322,8 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
             $log.error("Unable to load head xml file for list.");
         }
         
-        var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $const.CMEEditorName);
+        //var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $const.CMEEditorName);
+        var xmlPath = $config.expandEditorPath($fbiConst.LISTTRUSTEES_HEAD_PATH, $fbiConst.EDITOR_NAME);
         $xml.loadXmlDocument(xmlPath + "?forView=" + Tridion.Core.Configuration.CurrentView + "&forControl=" + control.getId(), FieldBehaviour$_headDocumentLoaded, FieldBehaviour$_headDocumentLoadFailed);
         
     } else {
