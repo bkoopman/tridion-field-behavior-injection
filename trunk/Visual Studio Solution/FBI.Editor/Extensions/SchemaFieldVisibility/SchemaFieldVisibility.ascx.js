@@ -68,8 +68,3 @@ Tridion.Extensions.UI.FBI.SchemaFieldVisibility.prototype.onUpdateView = functio
         c.fieldHiddenCheckbox.checked = false;
     }
 };
-
-if ($fbiConfig.isEnabled()) {
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldVisibility);
-}

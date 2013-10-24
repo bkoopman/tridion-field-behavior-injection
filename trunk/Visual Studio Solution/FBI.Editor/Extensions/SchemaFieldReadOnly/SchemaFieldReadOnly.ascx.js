@@ -9,11 +9,13 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly = function SchemaFieldReadOnly()
     this.key = "readonly";
     this.areaId = "SchemaFieldReadOnly";
 	var p = this.properties;
-    p.controls = {};
-    
+	p.controls = {};
+    this.display(false);
+
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.initialize = function SchemaFieldReadOnly$initialize(deckPage) {
+    
     this.callBase("Tridion.Extensions.UI.FBI.BehaviourConfigurationBase", "initialize", [deckPage, this.key, this.areaId]);
     var p = this.properties;
     var c = p.controls;
@@ -57,6 +59,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onSelectionChange = func
 };
 
 Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function SchemaFieldReadOnly$onUpdateView() {
+    this.isAllowedField();
     var p = this.properties;
     var c = p.controls;
     var schema = $fbiConfig.getSchema();
@@ -70,8 +73,5 @@ Tridion.Extensions.UI.FBI.SchemaFieldReadOnly.prototype.onUpdateView = function 
     }
 };
 
-if ($fbiConfig.isEnabled()) {
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
-    Tridion.Controls.Deck.registerInitializeExtender($fbiConst.METADATA_SCHEMA_DESIGN_TAB, Tridion.Extensions.UI.FBI.SchemaFieldReadOnly);
-}
+
 
