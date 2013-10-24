@@ -114,7 +114,7 @@ Tridion.Extensions.UI.FBI.BehaviourConfigurationBase.prototype.isAllowedField = 
         allowed = true;
     }
 
-    //console.debug("Field {0} of type {1} on Behaviour {2} is Allowed: {3}".format(fieldName, fieldType, this.key, allowed));
+    console.debug("Field {0} of type {1} on Behaviour {2} is Allowed: {3}".format(fieldName, fieldType, this.key, allowed));
     return allowed;
 };
 

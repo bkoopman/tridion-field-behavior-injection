@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Behaviours\ImageEditorBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\MaxLengthBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\ReadOnlyBehaviourHandler.js" />
     <Content Include="Scripts\Behaviours\SyntaxHighlightBehaviourHandler.js" />

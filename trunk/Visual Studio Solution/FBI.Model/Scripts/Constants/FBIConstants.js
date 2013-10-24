@@ -55,6 +55,7 @@ Tridion.Extensions.UI.FBI.Constants.MAXLENGTH = "maxlength";
 Tridion.Extensions.UI.FBI.Constants.VALIDATION = "validation";
 Tridion.Extensions.UI.FBI.Constants.READONLY = "readonly";
 Tridion.Extensions.UI.FBI.Constants.HIDDEN = "hidden";
+Tridion.Extensions.UI.FBI.Constants.IMAGE_EDIT = "imageedit";
 
 //Tridion.Extensions.UI.FBI.Constants.LISTTRUSTEES_HEAD_PATH = "Xml/ListDefinitions/TrusteesList-head.xml";
 // located in FBI.Editor project as we access it via the editors path
