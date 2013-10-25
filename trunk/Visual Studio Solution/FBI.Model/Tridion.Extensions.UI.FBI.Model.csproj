@@ -79,6 +79,8 @@
     <Content Include="Scripts\External\jQuery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\External\jQuery\ui\css\Readme.txt" />
     <Content Include="Scripts\External\jQuery\ui\jquery-ui.min.js" />
+    <Content Include="Scripts\External\SchemaFieldImageEditor\caman.full.min.js" />
+    <Content Include="Scripts\External\SchemaFieldImageEditor\Readme.txt" />
     <Content Include="Scripts\External\SchemaFieldValidation\Readme.txt" />
     <Content Include="Scripts\External\SchemaFieldValidation\xregexp-min.js" />
     <Content Include="Scripts\Handler\FBIHandler.js" />

@@ -38,16 +38,48 @@ Tridion.Extensions.UI.FBI.Behaviours.ImageEditBehaviour.prototype.isImageEdit = 
 };
 
 Tridion.Extensions.UI.FBI.Behaviours.ImageEditBehaviour.prototype.enableImageEditor = function ImageEditBehaviour$enableImageEditor(context, field) {
-    console.debug("Enable Image Editor!");
+    
     var f = this.getField(context, field.fieldName);
     var divTitle = $("#MultimediaLinkImageName", f.getElement());
-    var fileName = divTitle.innerText;
-    $jquery(divTitle).empty();
-    $jquery("<a href='#'>{0}</a>".format(fileName)).appendTo(divTitle).click(function () {
-        alert('Need to open the popup!');
-    });
+    
+    var a = document.createElement("a");
+    var br = document.createElement("br");
+    a.id = "ImageEditorLink";
+    a.href = "#";
+    a.innerText = "Open Editor";
+    divTitle.appendChild(br);
+    divTitle.appendChild(a);
+    $f = f;
+    var itemId = f.getValues()[0];
+    var title = $models.getItem(itemId).getStaticTitle();
+    
+    $evt.addEventHandler($("#ImageEditorLink"), "click", Function.getDelegate(this, this.openEditor, [itemId, title]));
+    
+
 
 };
 
 
+Tridion.Extensions.UI.FBI.Behaviours.ImageEditBehaviour.prototype.openEditor = function ImageEditBehaviour$openEditor(itemId, title) {
+    var p = this.properties;
+    var url = "/WebUI/Editors/FBI/Views/Popups/SchemaFieldImageEditor/FBIImageEditor.aspx";
+    var features = { width: 500, height: 600 };
+    
+    var args = { contentTitle: title, itemId: itemId};
+    
+    p.popup = $popup.create(url, features, args);
+    var onPopupClosed = function ImageEditorBehaviour$openEditor$onPopupClosed(e) {
+        if (p.popup) {
+            $evt.removeAllEventHandlers(p.popup);
+            p.popup.dispose();
+            p.popup = null;
+        }
+    };
+    
+    
 
+    $evt.addEventHandler(p.popup, "cancel", onPopupClosed);
+    $evt.addEventHandler(p.popup, "unload", onPopupClosed);
+    
+    p.popup.open();
+};

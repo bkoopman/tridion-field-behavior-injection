@@ -1,2 +1,48 @@
-﻿body {
+﻿#FBIImageEditorView .line {
+    padding: 5px 20px;
+}
+
+#FBIImageEditorView #DialogTitle {
+    color: #2969CB;
+    font-size: 1.4em;
+    height: 18px;
+    padding: 15px 0 10px 20px;
+}
+
+#FBIImageEditorView .line.buttons {
+    height: 46px;
+    padding-bottom: 15px;
+}
+
+    #FBIImageEditorView .line.buttons .button {
+        float: right;
+        margin-left: 5px;
+    }
+
+
+#ButtonStackLeft {
+    width: 50%;
+    float: left;
+}
+
+#Filters {
+    display: none;
+    position: absolute;
+    left: 10px;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+#Filters .Filter > div {
+    padding-right: 5px;
+}
+
+#Filters .Filter .FilterSetting input[type="range"] {
+    -webkit-appearance: none!important;
+    width: 150px;
+    background-color: #434341;
+    height: 1px;
+    vertical-align: 1px;
 }
