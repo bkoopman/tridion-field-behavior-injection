@@ -292,19 +292,30 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     var control = this.getUsersAndGroupsList();
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
-    // add behavior flag to XML
-    var schema = this.getSchema();
+    // add BehavioursSet to XML
+    var ns = {};
+    ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
+    ns["xlink"] = "http://www.w3.org/1999/xlink";
+    var schemaXmlDoc = this.getSchema().getXmlDocument();
     var enabledBehaviours = $fbiEditorConfig.getEnabledBehaviourKeys();
     var entries = xmlDoc.documentElement.children;
     for (var i = 0; i < entries.length; i++) {
         var entry = entries[i];
         var id = entry.attributes["ID"].value;
 
-        // ToDo: determine if id has behaviors set
-        // use schema.getXml(), and check for <group xlink:href="tcm:0-1-65568"> elements 
-        // see which behaviors are in there (<readonly>true</readonly>) and check if they are enabled (in enabledBehaviours)
-        var value = "";
-        entry.setAttribute("BehavioursSet", value);
+        // list all set behaviors for given group
+        var behaviours = $xml.selectNodes(schemaXmlDoc, "//fbi:group[@xlink:href='" + id + "']/*[.='true']", ns);
+        var behavioursSet = [];
+        // loop over all set behaviours to get their name (if they are enabled) and store in a unique list
+        for (var x = 0; x < behaviours.length; x++) {
+            var name = behaviours[x].nodeName;
+            if (!behavioursSet.contains(name) && enabledBehaviours.contains(name)) {
+                behavioursSet.push(name);
+            }
+        }
+        //var flag = behavioursSet.length;
+        var flag = behavioursSet.toString();
+        entry.setAttribute("BehavioursSet", flag);
     }
 
 
