@@ -292,8 +292,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     var control = this.getUsersAndGroupsList();
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
-    // add BehavioursSet to XML
-   
+    // add BehavioursSet to XML   
     var schemaXmlDoc = this.getSchema().getXmlDocument();
     var enabledBehaviours = $fbiEditorConfig.getEnabledBehaviourKeys();
     var entries = xmlDoc.documentElement.children;
