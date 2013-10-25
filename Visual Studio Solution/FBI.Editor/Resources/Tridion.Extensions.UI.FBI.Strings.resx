@@ -183,4 +183,22 @@
   <data name="EditImageLabel" xml:space="preserve">
     <value>Image Editor</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Crop</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="Resize" xml:space="preserve">
+    <value>Resize</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="SaveAndClose" xml:space="preserve">
+    <value>Save and Close</value>
+  </data>
 </root>

@@ -189,6 +189,7 @@
     </Compile>
     <Compile Include="Views\Popups\SchemaFieldImageEditor\FBIImageEditor.aspx.cs">
       <DependentUpon>FBIImageEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
