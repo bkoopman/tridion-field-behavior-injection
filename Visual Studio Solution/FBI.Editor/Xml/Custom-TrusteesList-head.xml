@@ -14,6 +14,6 @@
   <list:columns>
     <list:column id="IconColum" type="icon" title="" width="20" enableresizing="false" enablesorting="false" enablefiltering="false" selector="concat('T', @*[name()='ItemType' or name()='Type'])" />
     <list:column id="NameColumn" type="data" title="{Resources: Tridion.Web.UI.Strings, Name}" selector="@*[name()='xlink:title' or name()='Title']"/>
-    <list:column id="BehavioursColumn" type="data" title="{Resources: Tridion.Extensions.UI.FBI.Strings, BehaviorsSetLabel}" selector="@*[name()='BehavioursSet']"/>
+    <list:column id="BehavioursColumn" type="data" title="{Resources: Tridion.Extensions.UI.FBI.Strings, BehaviorsSetLabel}" width="60%" selector="@*[name()='BehavioursSet']"/>
   </list:columns>
 </list:listDefinition>
