@@ -293,9 +293,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
     var xmlDoc = $xml.getNewXmlDocument(bodyXml);
 
     // add BehavioursSet to XML
-    var ns = {};
-    ns[$fbiConst.NAMESPACE_PREFIX] = $fbiConst.NAMESPACE_URL;
-    ns["xlink"] = "http://www.w3.org/1999/xlink";
+   
     var schemaXmlDoc = this.getSchema().getXmlDocument();
     var enabledBehaviours = $fbiEditorConfig.getEnabledBehaviourKeys();
     var entries = xmlDoc.documentElement.children;
@@ -304,7 +302,7 @@ Tridion.Extensions.UI.FBI.SchemaFieldBehaviourConfig.prototype._renderList = fun
         var id = entry.attributes["ID"].value;
 
         // list all set behaviors for given group
-        var behaviours = $xml.selectNodes(schemaXmlDoc, "//fbi:group[@xlink:href='" + id + "']/*[.!='false' and .!='']", ns);
+        var behaviours = $xml.selectNodes(schemaXmlDoc, "//fbi:group[@xlink:href='" + id + "']/*[.!='false' and .!='']", $const.Namespaces);
         var behavioursSet = [];
         // loop over all set behaviours to get their name (if they are enabled) and store in a unique list
         for (var x = 0; x < behaviours.length; x++) {
