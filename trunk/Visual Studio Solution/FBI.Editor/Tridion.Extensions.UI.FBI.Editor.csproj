@@ -129,8 +129,8 @@
     <Content Include="Themes\Carbon\FBICommands.css" />
     <Content Include="Themes\Carbon\Icons\DisableFBI16x16.png" />
     <Content Include="Themes\Carbon\Icons\DisableFBI32x32.png" />
-    <Content Include="Views\SchemaFieldImageEditor\FBIImageEditor.ascx" />
-    <Content Include="Views\SchemaFieldImageEditor\FBIImageEditor.ascx.js">
+    <Content Include="Views\Popups\SchemaFieldImageEditor\FBIImageEditor.ascx" />
+    <Content Include="Views\Popups\SchemaFieldImageEditor\FBIImageEditor.ascx.js">
       <DependentUpon>FBIImageEditor.ascx</DependentUpon>
     </Content>
     <Content Include="Web.config" />
@@ -184,7 +184,7 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>SchemaFieldValidation.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Views\SchemaFieldImageEditor\FBIImageEditor.ascx.cs">
+    <Compile Include="Views\Popups\SchemaFieldImageEditor\FBIImageEditor.ascx.cs">
       <DependentUpon>FBIImageEditor.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
