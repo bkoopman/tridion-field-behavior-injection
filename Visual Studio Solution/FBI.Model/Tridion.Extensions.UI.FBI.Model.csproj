@@ -76,9 +76,11 @@
     <Content Include="Scripts\Configuration\FBIEditorConfig.js" />
     <Content Include="Scripts\Configuration\FBISchemaDesign.js" />
     <Content Include="Scripts\Constants\FBIConstants.js" />
+    <Content Include="Scripts\External\jQuery\JCrop\jquery.Jcrop.min.js" />
     <Content Include="Scripts\External\jQuery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\External\jQuery\ui\css\Readme.txt" />
     <Content Include="Scripts\External\jQuery\ui\jquery-ui.min.js" />
+    <Content Include="Scripts\External\Raphael\raphael-min.js" />
     <Content Include="Scripts\External\SchemaFieldImageEditor\caman.full.min.js" />
     <Content Include="Scripts\External\SchemaFieldImageEditor\Readme.txt" />
     <Content Include="Scripts\External\SchemaFieldValidation\Readme.txt" />
