@@ -110,6 +110,8 @@
     </Content>
     <Content Include="Extensions\SchemaFieldVisibility\SchemaFieldVisibility.ascx" />
     <Content Include="Scripts\FBICommands.js" />
+    <Content Include="Themes\Carbon\jcrop\Jcrop.gif" />
+    <Content Include="Themes\Carbon\jcrop\jquery.Jcrop.min.css" />
     <Content Include="Themes\Carbon\jquery-ui\smoothness\images\animated-overlay.gif" />
     <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Themes\Carbon\jquery-ui\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
