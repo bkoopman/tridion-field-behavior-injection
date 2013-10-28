@@ -14,10 +14,10 @@
     padding-bottom: 15px;
 }
 
-    #FBIImageEditorView .line.buttons .button {
-        float: right;
-        margin-left: 5px;
-    }
+#FBIImageEditorView .line.buttons .button {
+    float: right;
+    margin-left: 5px;
+}
 
 
 #ButtonStackLeft {
@@ -31,6 +31,7 @@
     left: 10px;
     background-color: white;
     background-color: rgba(255, 255, 255, 0.9);
+    z-index: 5;
 }
 
 
@@ -46,3 +47,10 @@
     height: 1px;
     vertical-align: 1px;
 }
+
+
+#image-replica {
+    display: none;
+}
+
+.ui-resizable-helper { border: 2px dotted #4682b4; }

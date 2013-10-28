@@ -4,8 +4,8 @@
 <html class="tridion" id="FBIImageEditorView" xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://www.sdltridion.com/web/ui/controls">
 <head>
     <title>
-        <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: Tridion.Web.UI.Strings, Metadata %>" /></title>
-    <cc:tridionmanager runat="server" editor="SiteEdit" isstandaloneview="false">
+        <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: Tridion.Extensions.UI.FBI.Strings, EditImageLabel %>" /></title>
+        <cc:tridionmanager runat="server" editor="SiteEdit" isstandaloneview="false">
 			<dependencies runat="server">		
 				<dependency runat="server">Tridion.Web.UI.Editors.SiteEdit</dependency>
 				<dependency runat="server">Tridion.Web.UI.Editors.CME</dependency>
@@ -151,7 +151,14 @@
 
             <div class="Clear"></div>
         </div>
-        <canvas id="editor-image" />
+        <div id="holder">
+            
+        </div>
+        <div id="canvas-holder">
+            <canvas id="image" />
+        </div>
+        
+        
     </div>
     <div id="ButtonStackLeft">
         
