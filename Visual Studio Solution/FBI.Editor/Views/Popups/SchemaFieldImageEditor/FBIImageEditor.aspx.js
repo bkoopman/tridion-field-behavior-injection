@@ -7,13 +7,16 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView = function ImageEditorView()
     this.addInterface("Tridion.Cme.View");
     var p = this.properties;
     p.isMetadataChanged = false;
+    p.isModified = false;
+    p.inputs = [];
+    
     $v = this;
 
 };
 
+//View Initialization
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.initialize = function ImageEditorView$initialize() {
     this.callBase("Tridion.Cme.View", "initialize");
-    
     var p = this.properties;
     var c = p.controls;
     p.features = [];
@@ -53,7 +56,7 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.initialize = function 
             removeSchemaHandlers(e);
         }
         //TODO: MIGHT NEED TO SHOW FIELD BUIDLER FOR METADATA
-        var readOnly = item.isReadOnly() || item.isShared() || false;
+        var readOnly = item.isReadOnly() || item.isShared() || false || !p.isModifified;
         c.BtnSaveAndClose.setDisabled(readOnly);  
     };
 
@@ -112,101 +115,87 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.initialize = function 
     this._initializeFeatures();
 };
 
+//View Actions
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._close = function ImageEditorView$_close(e) {
+    var isCanceled = false;
+    if (e && e.source == this.properties.controls.BtnCancel) {
+        isCanceled = true;
+    }
+
+    this.fireEvent("cancel", { canceled: isCanceled });
+};
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._onSaveAndCloseClick = function ImageEditorView$_onSaveAndCloseClick(e) {
+    var p = this.properties;
+    var item = $models.getItem(p.itemId);
+    this._close(e);
+};
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.enableSave = function ImageEditorView$enableSave() {
+    var p = this.properties;
+    var c = p.controls;
+    c.BtnSaveAndClose.enabled = true;
+};
+
+//Layout
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.displayCanvas = function ImageEditorView$displayCanvas(visible) {
     var p = this.properties;
     var c = p.controls;
     if (visible) {
-        console.debug("showing canvas!");
         $jquery(c.Image).show();
     } else {
         $jquery(c.Image).hide();
-        console.debug("hiding canvas!");
     }
 };
 
+
+//Features  
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeFeatures = function ImageEditorView$_initializeFeatures() {
     var p = this.properties;
     var c = p.controls;
+
     
-    this._addNewFeature("Crop", c.BtnCrop, Function.getDelegate(this, this._initializeCrop, []), Function.getDelegate(this, this._destroyCrop, []), false);
-    this._addNewFeature("Filters", c.BtnFilters, Function.getDelegate(this, this._initializeFilters, []), Function.getDelegate(this, this._destroyFilters, []), true);
-    this._addNewFeature("Rotate", c.BtnRotate, Function.getDelegate(this, this._initializeRotate, []), Function.getDelegate(this, this._destroyRotate, []), false);
-    this._addNewFeature("Resize", c.BtnResize, Function.getDelegate(this, this._initializeResize, []), Function.getDelegate(this, this._destroyResize, []), false);
+    this._addNewFeature(
+        "Crop",
+        c.BtnCrop,
+        Function.getDelegate(this, this._initializeCrop, []),
+        Function.getDelegate(this, this._destroyCrop, []),
+        Function.getDelegate(this, this._getCropInput, []),
+        false
+    );
+    
+
+    this._addNewFeature(
+        "Filters", c.BtnFilters,
+        Function.getDelegate(this, this._initializeFilters, []),
+        Function.getDelegate(this, this._destroyFilters, []),
+        Function.getDelegate(this, this._getFiltersInput, []),
+        true
+    );
+    
+
+    this._addNewFeature(
+        "Rotate",
+        c.BtnRotate,
+        Function.getDelegate(this, this._initializeRotate, []),
+        Function.getDelegate(this, this._destroyRotate, []),
+        Function.getDelegate(this, this._getRotateInput, []),
+        false
+    );
+    
+    this._addNewFeature(
+        "Resize",
+        c.BtnResize,
+        Function.getDelegate(this, this._initializeResize, []),
+        Function.getDelegate(this, this._destroyResize, []),
+        Function.getDelegate(this, this._getResizeInput, []),
+        false
+    );
 };
 
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.getFeature = function ImageEditorView$getFeature(id) {
     var p = this.properties;
     return p.features[id];
-};
-
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._addNewFeature = function ImageEditorView$_addNewFeature(id, button, start, stop, displayCanvas) {
-    var p = this.properties;
-    var f = p.features;
-    var newFeature;
-    if (!(typeof f[id] === "undefined")) {
-        newFeature = f[id];
-    } else {
-        f.push(id);
-    }
-    newFeature = {
-        id: id,
-        isActive: false,
-        displayCanvas: displayCanvas,
-        b: button,
-        start: start,
-        stop: stop,
-        save: alert,
-
-    };
-    
-    f[id] = newFeature;
-    console.debug(id + " - Added!");
-    console.debug(newFeature);
-};
-
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyFilters = function ImageEditorView$_destroyFilters() {
-    var p = this.properties;
-    var c = p.controls;
-    $css.undisplay(c.Filters);
-    
-};
-
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.getImageElement = function ImageEditorView$getImageElement() {
-    var p = this.properties;
-    $jquery('.temp-img').remove();
-    return $jquery("<img id='{0}' src='{1}' class='temp-img' />".format("img_" + Date.now(), p.imgSrc)).appendTo("#holder");
-};
-
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeFilters = function ImageEditorView$_initializeFilters() {
-    var p = this.properties;
-    var c = p.controls;
-    
-    
-    function debounce(fn, delay) {
-        var timer = null;
-        return function() {
-            var context = this, args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                fn.apply(context, args);
-            }, delay);
-        };
-    }
-
-    if (typeof p.filtersInitialized === "undefined") {
-        $jquery("div.FilterSetting > input[type=range]").on('change', debounce(function(event) {
-            var filter = $jquery(this).attr('data-filter');
-            var value = $jquery(this).val();
-            var span = $jquery(this).next();
-            span.html(value);
-            p.caman.revert(false);
-            p.caman[filter](value).render();
-
-        }, 200));
-        p.filtersInitialized = true;
-    }
-    
-    $css.display(c.Filters);
 };
 
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._onFeatureClick = function ImageEditorView$_onFeatureClick(feature) {
@@ -239,6 +228,96 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._onFeatureClick = func
     }
 };
 
+//Filters Feature 
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._addNewFeature = function ImageEditorView$_addNewFeature(id, button, start, stop, input, displayCanvas) {
+    var p = this.properties;
+    var f = p.features;
+    var newFeature;
+    if (!(typeof f[id] === "undefined")) {
+        newFeature = f[id];
+    } else {
+        f.push(id);
+    }
+    newFeature = {
+        id: id,
+        isActive: false,
+        displayCanvas: displayCanvas,
+        b: button,
+        start: start,
+        stop: stop,
+        save: alert,
+        getInput: input
+
+    };
+    
+    f[id] = newFeature;
+    
+};
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyFilters = function ImageEditorView$_destroyFilters() {
+    var p = this.properties;
+    var c = p.controls;
+    $css.undisplay(c.Filters);
+    
+};
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._getFiltersInput = function ImageEditorView$_getFiltersInput() {
+    //Tridion.Extensions.UI.FBI.Model.Services.FBI.SchemaFieldImageEditor.Data.FiltersImageEditorInput
+    var input = this.getInput("Filters");
+    if (typeof input === "undefined") {
+        input = {
+            
+        };
+    }
+    return input;
+};
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeFilters = function ImageEditorView$_initializeFilters() {
+    var p = this.properties;
+    var c = p.controls;
+    
+    function debounce(fn, delay) {
+        var timer = null;
+        return function() {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
+
+    if (typeof p.filtersInitialized === "undefined") {
+        $jquery("div.FilterSetting > input[type=range]").on('change', debounce(function(event) {
+            var filter = $jquery(this).attr('data-filter');
+            var value = $jquery(this).val();
+            var span = $jquery(this).next();
+            span.html(value);
+            p.caman.revert(false);
+            p.caman[filter](value).render();
+            p.isModified = true;
+        }, 200));
+        p.filtersInitialized = true;
+    }
+    
+    $css.display(c.Filters);
+};
+
+//Crop Feature
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._getCropInput = function ImageEditorView$_getCropInput() {
+    //Tridion.Extensions.UI.FBI.Model.Services.FBI.SchemaFieldImageEditor.Data.CropImageEditorInput
+    var input = this.getInput("Crop");
+    if (typeof input === "undefined") {
+        input = {
+            X: -1,
+            Y: -1,
+            Height: -1,
+            Width: -1
+        };
+    }
+    return input;
+};
+
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyCrop = function ImageEditorView$_destroyCrop() {
     var p = this.properties;
     
@@ -251,8 +330,22 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyCrop = functio
 
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeCrop = function ImageEditorView$_initializeCrop() {
     var p = this.properties;
+    var self = this;
     
+    function updateCropInput(c) {
+        var input = this.getInput("Crop");
+        input.X = Math.round(c.x);
+        input.Y = Math.round(c.y);
+        input.Width = Math.round(a.x2);
+        input.Height = Math.round(a.y2);
+        p.inputs["Crop"] = input;
+        self.enableSave();
+    }
+
     p.crop = $jquery.Jcrop(this.getImageElement());
+    p.crop.onChange = updateCropInput;
+    p.crop.onSelect = updateCropInput;
+    
     var dim = p.crop.getBounds();
     p.crop.animateTo([ //x,y,x2,y2 
             Math.round(0),
@@ -263,6 +356,7 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeCrop = func
     
 };
 
+//Resize Feature
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyResize = function ImageEditorView$_destroyResize() {
     var p = this.properties;
     if (!(typeof p.resizable === "undefined")) {
@@ -280,6 +374,20 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeResize = fu
     });
 };
 
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._getResizeInput = function ImageEditorView$_getResizeInput() {
+    //Tridion.Extensions.UI.FBI.Model.Services.FBI.SchemaFieldImageEditor.Data.ResizeImageEditorInput
+    var input = this.getInput("Resize");
+    if (typeof input === "undefined") {
+        input = {
+            Height: -1,
+            Width: -1
+        };
+    }
+    return input;
+};
+
+
+//Rotate Feature
 Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._destroyRotate = function ImageEditorView$_destroyRotate() {
     var p = this.properties;
     if (!(typeof p.raphael === "undefined")) {
@@ -336,24 +444,29 @@ Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._initializeRotate = fu
 
 };
 
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._close = function ImageEditorView$_close(e) {
-    var isCanceled = false;
-    if (e && e.source == this.properties.controls.BtnCancel) {
-        isCanceled = true;
+
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._getRotateInput = function ImageEditorView$_getRotateInput() {
+    //Tridion.Extensions.UI.FBI.Model.Services.FBI.SchemaFieldImageEditor.Data.RotateImageEditorInput
+    var input = this.getInput("Rotate");
+    if (typeof input === "undefined") {
+        input = {
+            Angle: 0
+        };
     }
-
-    this.fireEvent("cancel", { canceled: isCanceled });
+    
+    return input;
 };
 
-
-Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype._onSaveAndCloseClick = function ImageEditorView$_onSaveAndCloseClick(e) {
+//Utils -------------------------------
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.getImageElement = function ImageEditorView$getImageElement() {
     var p = this.properties;
-    var item = $models.getItem(p.itemId);
-    alert('Closing image!');
-
-    this._close(e);
+    $jquery('.temp-img').remove();
+    return $jquery("<img id='{0}' src='{1}' class='temp-img' />".format("img_" + Date.now(), p.imgSrc)).appendTo("#holder");
 };
 
-
+Tridion.Extensions.UI.FBI.Views.ImageEditorView.prototype.getInput = function ImageEditorView$getInput(action) {
+    var p = this.properties;
+    return p.inputs[action];
+};
 
 $display.registerView(Tridion.Extensions.UI.FBI.Views.ImageEditorView);

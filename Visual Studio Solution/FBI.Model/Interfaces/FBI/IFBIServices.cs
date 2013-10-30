@@ -21,10 +21,6 @@ namespace Tridion.Extensions.FBI.Services.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         String Echo(String input);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        String PrepareImage(String itemId);
-
     }
 
 
