@@ -19,15 +19,5 @@ namespace Tridion.Extensions.Services.FBI
         {
             return input;
         }
-
-        /// <summary>
-        /// Prepares the image for edition. This is meant to be used with the ImageEditor Behaviour
-        /// </summary>
-        /// <param name="itemId">The multimedia item URI</param>
-        /// <returns>Path to temporary location of the image</returns>
-        public string PrepareImage(string itemId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
