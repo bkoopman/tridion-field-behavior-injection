@@ -7,7 +7,7 @@
    * Tridion.Web.UI.Core.dll
    * Tridion.Web.UI.Editors.CME.dll
    * The first two are optional on a CMS (they'll be in the GAC)
- 1. *Install extension using the PowerShellScript*.
+ 1.  [https://gist.github.com/rcurlette/7906029 *Install extension using the PowerShellScript*.]
 
 = Create New Functionality =
  1. First decide if your tool fits into an existing .ascx control. Based on this do the following.
