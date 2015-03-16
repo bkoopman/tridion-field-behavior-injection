@@ -1,0 +1,21 @@
+# Framework Requirements #
+
+  * No **custom** changes to Tridion-installed files--this implementation must be an extension (and optionally extendable itself)
+  * Final implementation should be "Content Porter-friendly"
+  * No licensed files in the project (reference dlls with instructions as needed)
+  * Label fields will localizable (via resource files)
+
+# Use Cases and Wishlist #
+
+Field-level behavior "injection" such as:
+
+  * Read-only fields
+  * Show/hide functionality and field grouping
+  * Field-level validation
+  * Configuring non-Tridion controls (e.g. slider, color picker, image map creator, etc)
+  * "Theme" or otherwise change field styling
+
+
+# Known Issues #
+
+  * None
